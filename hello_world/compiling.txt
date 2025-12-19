@@ -1,0 +1,37 @@
+avr-gcc -g -Os -mmcu=atmega328p hello_world.c -o hello_world.o
+avr-gcc -g -mmcu=atmega328p -o hello_world.elf hello_world.o 
+
+avr-gcc -g -Os hello_world.c -o hello_world.o
+avr-gcc -g -o hello_world.elf hello_world.o 
+avr-objdump -h -S hello_world.elf > hello_world.lst
+avr-gcc -g -Wl,-Map,hello_world.map -o hello_world.elf hello_world.o
+avr-objcopy -j .text -j .data -O ihex hello_world.elf hello_world.hex
+avr-objcopy -j .eeprom --change-section-lma .eeprom=0 -O ihex hello_world.elf hello_world_eeprom.hex
+avrdude -p m328p -c arduinoisp -e -U 
+avrdude -p m328p -c arduino -P /dev/ttyUSB1 -b19200
+
+sudo usermod -a -G dialout simonque
+
+
+compile: 
+	avr-gcc -g -Os hello_world.c -o hello_world.o
+link: 
+	avr-gcc -g -o hello_world.elf hello_world.o 
+objdump:
+	avr-objdump -h -S hello_world.elf > hello_world.lst
+linker_map:
+	avr-gcc -g -Wl,-Map,hello_world.map -o hello_world.elf hello_world.o
+hex:
+	avr-objcopy -j .text -j .data -O ihex hello_world.elf hello_world.hex
+	avr-objcopy -j .eeprom --change-section-lma .eeprom=0 -O ihex hello_world.elf hello_world_eeprom.hex
+avrdude -p m328p -c arduinoisp -e -U 
+avrdude -p m328p -c arduino -P /dev/ttyUSB1 -b19200 -F
+avrdude -p m328pb -c arduino -P /dev/ttyUSB1 -b19200 -U flash:w:hello_world.hex -F
+
+avr-gcc -g -Os hello_world.c -o hello_world.o
+avr-gcc -g -o hello_world.elf hello_world.o 
+avr-objcopy -j .text -j .data -O ihex hello_world.elf hello_world.hex
+
+avr-gcc -g -mmcu=atmega328p -Os hello_world.c -o hello_world.o
+avr-gcc -g -o hello_world.elf hello_world.o 
+avr-objcopy -j .text -j .data -O ihex hello_world.elf hello_world.hex
