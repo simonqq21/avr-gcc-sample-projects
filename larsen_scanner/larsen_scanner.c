@@ -34,14 +34,14 @@ int main()
     {
         for (int i = 0; i < nLeds; i++)
         {
-            if (!i)
-            {
-                *leds[nLeds - 1].port = 0;
-            }
-            else
-            {
-                *leds[i - 1].port = 0;
-            }
+
+            *leds[i - 1].port = 0;
+            *leds[i].port = _BV(leds[i].pin);
+            _delay_ms(speed_val);
+        }
+        for (int i = nLeds - 2; i > 0; i--)
+        {
+            *leds[i + 1].port = 0;
             *leds[i].port = _BV(leds[i].pin);
             _delay_ms(speed_val);
         }
