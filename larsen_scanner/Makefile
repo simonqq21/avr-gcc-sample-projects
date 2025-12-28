@@ -1,6 +1,5 @@
 # set program name and object file name
-PRG			= hello_world
-OBJ			= hello_world.o
+PRG			= larsen_scanner
 #MCU_TARGET	 = at90s2313
 #MCU_TARGET	 = at90s2333
 #MCU_TARGET	 = at90s4414
@@ -70,7 +69,7 @@ OBJCOPY		= avr-objcopy
 OBJDUMP		= avr-objdump
 
 all: $(PRG).elf lst text eeprom
-$(PRG).elf: $(OBJ)
+$(PRG).elf: $(PRG).o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 # dependency:
 # demo.o: demo.c iocompat.h
@@ -123,6 +122,6 @@ pdf: $(PRG).pdf
 
 flash: $(PRG).hex
 	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:$(PRG).hex -F
-
+# avrdude -p m328pb -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:digital_input.hex -F
 
 

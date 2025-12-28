@@ -1,0 +1,324 @@
+
+button_debounce.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000004  00800100  000001d0  00000264  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000001d0  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000006  00800104  00800104  00000268  2**0
+                  ALLOC
+  3 .stab         00000654  00000000  00000000  00000268  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000d69  00000000  00000000  000008bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      00000011  00000000  00000000  00001625  2**0
+                  CONTENTS, READONLY
+  6 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001638  2**2
+                  CONTENTS, READONLY
+  7 .debug_info   000005f4  00000000  00000000  00001678  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000005a2  00000000  00000000  00001c6c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000001a  00000000  00000000  0000220e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000208  00000000  00000000  00002228  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e0 ed       	ldi	r30, 0xD0	; 208
+  7c:	f1 e0       	ldi	r31, 0x01	; 1
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a4 30       	cpi	r26, 0x04	; 4
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a4 e0       	ldi	r26, 0x04	; 4
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	aa 30       	cpi	r26, 0x0A	; 10
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
+  9e:	0c 94 e6 00 	jmp	0x1cc	; 0x1cc <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <main>:
+uint8_t led_state;
+
+int main()
+{
+    // enable pull down interrupts in MCUCR
+    MCUCR &= ~_BV(PUD);
+  a6:	85 b7       	in	r24, 0x35	; 53
+  a8:	8f 7e       	andi	r24, 0xEF	; 239
+  aa:	85 bf       	out	0x35, r24	; 53
+    // set btn1 as a digital input
+    DDRD &= ~_BV(btn1);
+  ac:	4a b1       	in	r20, 0x0a	; 10
+  ae:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  b2:	81 e0       	ldi	r24, 0x01	; 1
+  b4:	90 e0       	ldi	r25, 0x00	; 0
+  b6:	bc 01       	movw	r22, r24
+  b8:	02 c0       	rjmp	.+4      	; 0xbe <main+0x18>
+  ba:	66 0f       	add	r22, r22
+  bc:	77 1f       	adc	r23, r23
+  be:	2a 95       	dec	r18
+  c0:	e2 f7       	brpl	.-8      	; 0xba <main+0x14>
+  c2:	9b 01       	movw	r18, r22
+  c4:	20 95       	com	r18
+  c6:	24 23       	and	r18, r20
+  c8:	2a b9       	out	0x0a, r18	; 10
+    // set pullup resistor on btn1
+    PORTD |= _BV(btn1);
+  ca:	2b b1       	in	r18, 0x0b	; 11
+  cc:	30 91 00 01 	lds	r19, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  d0:	ac 01       	movw	r20, r24
+  d2:	01 c0       	rjmp	.+2      	; 0xd6 <main+0x30>
+  d4:	44 0f       	add	r20, r20
+  d6:	3a 95       	dec	r19
+  d8:	ea f7       	brpl	.-6      	; 0xd4 <main+0x2e>
+  da:	24 2b       	or	r18, r20
+  dc:	2b b9       	out	0x0b, r18	; 11
+    // set led1 as a digital output
+    DDRD |= _BV(led1);
+  de:	2a b1       	in	r18, 0x0a	; 10
+  e0:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <led1>
+  e4:	01 c0       	rjmp	.+2      	; 0xe8 <main+0x42>
+  e6:	88 0f       	add	r24, r24
+  e8:	3a 95       	dec	r19
+  ea:	ea f7       	brpl	.-6      	; 0xe6 <main+0x40>
+  ec:	82 2b       	or	r24, r18
+  ee:	8a b9       	out	0x0a, r24	; 10
+  f0:	51 e0       	ldi	r21, 0x01	; 1
+                    else
+                    {
+                        led_state = 0;
+                    }
+                    // set btn_pressed latch to 1
+                    btn_pressed = 1;
+  f2:	61 e0       	ldi	r22, 0x01	; 1
+
+    while (1)
+    {
+        // read btn1
+        // if button is pressed
+        if (!(PIND & _BV(btn1)))
+  f4:	89 b1       	in	r24, 0x09	; 9
+  f6:	20 91 04 01 	lds	r18, 0x0104	; 0x800104 <__data_end>
+  fa:	40 91 07 01 	lds	r20, 0x0107	; 0x800107 <led_state>
+  fe:	90 e0       	ldi	r25, 0x00	; 0
+ 100:	30 91 00 01 	lds	r19, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 104:	02 c0       	rjmp	.+4      	; 0x10a <main+0x64>
+ 106:	95 95       	asr	r25
+ 108:	87 95       	ror	r24
+ 10a:	3a 95       	dec	r19
+ 10c:	e2 f7       	brpl	.-8      	; 0x106 <main+0x60>
+ 10e:	80 fd       	sbrc	r24, 0
+ 110:	24 c0       	rjmp	.+72     	; 0x15a <main+0xb4>
+        {
+            // if button pressed latch is still false,
+            if (!btn_pressed)
+ 112:	21 11       	cpse	r18, r1
+ 114:	45 c0       	rjmp	.+138    	; 0x1a0 <main+0xfa>
+            {
+                // increment the button pressed confidence
+                btn_pressed_confidence++;
+ 116:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <btn_pressed_confidence>
+ 11a:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <btn_pressed_confidence+0x1>
+ 11e:	01 96       	adiw	r24, 0x01	; 1
+ 120:	90 93 06 01 	sts	0x0106, r25	; 0x800106 <btn_pressed_confidence+0x1>
+ 124:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <btn_pressed_confidence>
+
+                // if button pressed confidence exceeds threshold, perform action.
+                if (btn_pressed_confidence > btn_press_confidence_threshold)
+ 128:	89 3e       	cpi	r24, 0xE9	; 233
+ 12a:	93 40       	sbci	r25, 0x03	; 3
+ 12c:	c8 f1       	brcs	.+114    	; 0x1a0 <main+0xfa>
+                {
+                    // toggle the led_state
+                    if (!led_state)
+ 12e:	41 11       	cpse	r20, r1
+ 130:	3c c0       	rjmp	.+120    	; 0x1aa <main+0x104>
+                    {
+                        led_state = 1;
+ 132:	60 93 07 01 	sts	0x0107, r22	; 0x800107 <led_state>
+                    else
+                    {
+                        led_state = 0;
+                    }
+                    // set btn_pressed latch to 1
+                    btn_pressed = 1;
+ 136:	60 93 04 01 	sts	0x0104, r22	; 0x800104 <__data_end>
+                }
+            }
+            // reset the button released confidence.
+            btn_released_confidence = 0;
+ 13a:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <btn_released_confidence+0x1>
+ 13e:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <btn_released_confidence>
+ 142:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <led1>
+ 146:	95 2f       	mov	r25, r21
+ 148:	01 c0       	rjmp	.+2      	; 0x14c <main+0xa6>
+ 14a:	99 0f       	add	r25, r25
+ 14c:	8a 95       	dec	r24
+ 14e:	ea f7       	brpl	.-6      	; 0x14a <main+0xa4>
+ 150:	89 2f       	mov	r24, r25
+        }
+
+        // set the LED state
+        if (led_state)
+        {
+            PORTD |= _BV(led1);
+ 152:	9b b1       	in	r25, 0x0b	; 11
+ 154:	89 2b       	or	r24, r25
+ 156:	8b b9       	out	0x0b, r24	; 11
+ 158:	cd cf       	rjmp	.-102    	; 0xf4 <main+0x4e>
+            btn_released_confidence = 0;
+        }
+        else
+        {
+            // if button pressed latch is still true,
+            if (btn_pressed)
+ 15a:	22 23       	and	r18, r18
+ 15c:	71 f0       	breq	.+28     	; 0x17a <main+0xd4>
+            {
+                // increment the button released confidence
+                btn_released_confidence++;
+ 15e:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <btn_released_confidence>
+ 162:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <btn_released_confidence+0x1>
+ 166:	01 96       	adiw	r24, 0x01	; 1
+ 168:	90 93 09 01 	sts	0x0109, r25	; 0x800109 <btn_released_confidence+0x1>
+ 16c:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <btn_released_confidence>
+
+                // if button pressed confidence exceeds threshold,
+                if (btn_released_confidence > btn_press_confidence_threshold)
+ 170:	89 3e       	cpi	r24, 0xE9	; 233
+ 172:	93 40       	sbci	r25, 0x03	; 3
+ 174:	10 f0       	brcs	.+4      	; 0x17a <main+0xd4>
+                {
+                    // reset btn_pressed latch to 0
+                    btn_pressed = 0;
+ 176:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <__data_end>
+                }
+            }
+            // reset the button pressed confidence.
+            btn_pressed_confidence = 0;
+ 17a:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <btn_pressed_confidence+0x1>
+ 17e:	10 92 05 01 	sts	0x0105, r1	; 0x800105 <btn_pressed_confidence>
+ 182:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <led1>
+ 186:	95 2f       	mov	r25, r21
+ 188:	01 c0       	rjmp	.+2      	; 0x18c <main+0xe6>
+ 18a:	99 0f       	add	r25, r25
+ 18c:	8a 95       	dec	r24
+ 18e:	ea f7       	brpl	.-6      	; 0x18a <main+0xe4>
+ 190:	89 2f       	mov	r24, r25
+        }
+
+        // set the LED state
+        if (led_state)
+ 192:	41 11       	cpse	r20, r1
+ 194:	de cf       	rjmp	.-68     	; 0x152 <main+0xac>
+        {
+            PORTD |= _BV(led1);
+        }
+        else
+        {
+            PORTD &= ~_BV(led1);
+ 196:	9b b1       	in	r25, 0x0b	; 11
+ 198:	80 95       	com	r24
+ 19a:	89 23       	and	r24, r25
+ 19c:	8b b9       	out	0x0b, r24	; 11
+ 19e:	aa cf       	rjmp	.-172    	; 0xf4 <main+0x4e>
+                    // set btn_pressed latch to 1
+                    btn_pressed = 1;
+                }
+            }
+            // reset the button released confidence.
+            btn_released_confidence = 0;
+ 1a0:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <btn_released_confidence+0x1>
+ 1a4:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <btn_released_confidence>
+ 1a8:	ec cf       	rjmp	.-40     	; 0x182 <main+0xdc>
+                    {
+                        led_state = 1;
+                    }
+                    else
+                    {
+                        led_state = 0;
+ 1aa:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <led_state>
+                    }
+                    // set btn_pressed latch to 1
+                    btn_pressed = 1;
+ 1ae:	60 93 04 01 	sts	0x0104, r22	; 0x800104 <__data_end>
+                }
+            }
+            // reset the button released confidence.
+            btn_released_confidence = 0;
+ 1b2:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <btn_released_confidence+0x1>
+ 1b6:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <btn_released_confidence>
+ 1ba:	80 91 01 01 	lds	r24, 0x0101	; 0x800101 <led1>
+ 1be:	25 2f       	mov	r18, r21
+ 1c0:	01 c0       	rjmp	.+2      	; 0x1c4 <main+0x11e>
+ 1c2:	22 0f       	add	r18, r18
+ 1c4:	8a 95       	dec	r24
+ 1c6:	ea f7       	brpl	.-6      	; 0x1c2 <main+0x11c>
+ 1c8:	82 2f       	mov	r24, r18
+ 1ca:	e5 cf       	rjmp	.-54     	; 0x196 <main+0xf0>
+
+000001cc <_exit>:
+ 1cc:	f8 94       	cli
+
+000001ce <__stop_program>:
+ 1ce:	ff cf       	rjmp	.-2      	; 0x1ce <__stop_program>

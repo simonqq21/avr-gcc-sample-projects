@@ -3,7 +3,7 @@ Archive member included to satisfy reference by file (symbol)
 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
                               /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o (exit)
 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
-                              hello_world.o (__do_copy_data)
+                              larsen_scanner.o (__do_copy_data)
 
 Memory Configuration
 
@@ -21,7 +21,7 @@ Linker script and memory map
 
 Address of section .data set to 0x800100
 LOAD /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o
-LOAD hello_world.o
+LOAD larsen_scanner.o
 START GROUP
 LOAD /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a
 LOAD /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/libm.a
@@ -128,7 +128,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x108
+.text           0x0000000000000000      0x15a
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o
                 0x0000000000000000                __vectors
@@ -211,44 +211,44 @@ END GROUP
                 0x0000000000000092                __vector_16
                 0x0000000000000092                __vector_18
                 0x0000000000000092                __vector_20
- .text          0x0000000000000096        0x0 hello_world.o
+ .text          0x0000000000000096        0x0 larsen_scanner.o
  .text          0x0000000000000096        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text          0x0000000000000096        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
                 0x0000000000000096                . = ALIGN (0x2)
  *(.text.*)
- .text.startup  0x0000000000000096       0x6e hello_world.o
+ .text.startup  0x0000000000000096       0xc0 larsen_scanner.o
                 0x0000000000000096                main
  .text.libgcc.mul
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
- .text.libgcc   0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
-                0x0000000000000104                . = ALIGN (0x2)
+                0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000156                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000104        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
-                0x0000000000000104                exit
-                0x0000000000000104                _exit
+ .fini9         0x0000000000000156        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+                0x0000000000000156                exit
+                0x0000000000000156                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -267,46 +267,48 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000104        0x4 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000000000000156        0x4 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000000108                _etext = .
+                0x000000000000015a                _etext = .
 
-.data           0x0000000000800100        0x2 load address 0x0000000000000108
+.data           0x0000000000800100       0x26 load address 0x000000000000015a
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o
- .data          0x0000000000800100        0x1 hello_world.o
-                0x0000000000800100                led1
- .data          0x0000000000800101        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
- .data          0x0000000000800101        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+ .data          0x0000000000800100       0x24 larsen_scanner.o
+                0x0000000000800100                nLeds
+                0x0000000000800101                leds
+ .data          0x0000000000800124        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+ .data          0x0000000000800124        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  *(.data*)
  *(.gnu.linkonce.d*)
  *(.rodata)
+ .rodata        0x0000000000800124        0x2 larsen_scanner.o
+                0x0000000000800124                speed_val
  *(.rodata*)
  *(.gnu.linkonce.r*)
-                0x0000000000800102                . = ALIGN (0x2)
- *fill*         0x0000000000800101        0x1 
-                0x0000000000800102                _edata = .
-                0x0000000000800102                PROVIDE (__data_end, .)
+                0x0000000000800126                . = ALIGN (0x2)
+                0x0000000000800126                _edata = .
+                0x0000000000800126                PROVIDE (__data_end, .)
 
-.bss            0x0000000000800102        0x0
+.bss            0x0000000000800126        0x0
                 [!provide]                        PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0000000000800102        0x0 /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o
- .bss           0x0000000000800102        0x0 hello_world.o
- .bss           0x0000000000800102        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
- .bss           0x0000000000800102        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
+ .bss           0x0000000000800126        0x0 /usr/lib/gcc/avr/7.3.0/../../../avr/lib/avr5/crtatmega328p.o
+ .bss           0x0000000000800126        0x0 larsen_scanner.o
+ .bss           0x0000000000800126        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_exit.o)
+ .bss           0x0000000000800126        0x0 /usr/lib/gcc/avr/7.3.0/avr5/libgcc.a(_copy_data.o)
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x0000000000000108                __data_load_start = LOADADDR (.data)
-                0x000000000000010a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000000000000015a                __data_load_start = LOADADDR (.data)
+                0x0000000000000180                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800102        0x0
+.noinit         0x0000000000800126        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                        PROVIDE (__noinit_end, .)
-                0x0000000000800102                _end = .
+                0x0000000000800126                _end = .
                 [!provide]                        PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
@@ -328,13 +330,13 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000      0x54c
+.stab           0x0000000000000000      0x5f4
  *(.stab)
- .stab          0x0000000000000000      0x54c hello_world.o
+ .stab          0x0000000000000000      0x5f4 larsen_scanner.o
 
-.stabstr        0x0000000000000000      0xce8
+.stabstr        0x0000000000000000      0xda2
  *(.stabstr)
- .stabstr       0x0000000000000000      0xce8 hello_world.o
+ .stabstr       0x0000000000000000      0xda2 larsen_scanner.o
 
 .stab.excl
  *(.stab.excl)
@@ -350,7 +352,7 @@ END GROUP
 
 .comment        0x0000000000000000       0x11
  *(.comment)
- .comment       0x0000000000000000       0x11 hello_world.o
+ .comment       0x0000000000000000       0x11 larsen_scanner.o
                                          0x12 (size before relaxing)
 
 .note.gnu.avr.deviceinfo
@@ -424,5 +426,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(hello_world.elf elf32-avr)
+OUTPUT(larsen_scanner.elf elf32-avr)
 LOAD linker stubs

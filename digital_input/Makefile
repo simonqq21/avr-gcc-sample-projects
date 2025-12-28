@@ -1,6 +1,6 @@
 # set program name and object file name
-PRG			= hello_world
-OBJ			= hello_world.o
+PRG			= digital_input
+OBJ			= digital_input.o
 #MCU_TARGET	 = at90s2313
 #MCU_TARGET	 = at90s2333
 #MCU_TARGET	 = at90s4414
@@ -123,6 +123,6 @@ pdf: $(PRG).pdf
 
 flash: $(PRG).hex
 	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:$(PRG).hex -F
-
+# avrdude -p m328pb -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:digital_input.hex -F
 
 
