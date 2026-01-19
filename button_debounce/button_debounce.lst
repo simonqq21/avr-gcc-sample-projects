@@ -101,7 +101,7 @@ uint8_t led_state;
 
 int main()
 {
-    // enable pull down interrupts in MCUCR
+    // enable pull down resistors in MCUCR
     MCUCR &= ~_BV(PUD);
   a6:	85 b7       	in	r24, 0x35	; 53
   a8:	8f 7e       	andi	r24, 0xEF	; 239

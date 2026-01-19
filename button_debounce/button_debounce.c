@@ -17,7 +17,7 @@ uint8_t led_state;
 
 int main()
 {
-    // enable pull down interrupts in MCUCR
+    // enable pull down resistors in MCUCR
     MCUCR &= ~_BV(PUD);
     // set btn1 as a digital input
     DDRD &= ~_BV(btn1);

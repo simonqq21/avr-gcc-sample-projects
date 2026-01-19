@@ -1,9 +1,10 @@
-// #define __AVR_ATmega328P__ // comment this out before building
-#define F_CPU 16000000UL // 1 MHz
+#ifndef __AVR_ATmega328P__
+#define __AVR_ATmega328P__
+#endif
+#define F_CPU 16000000UL // 16 MHz
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include <stdint.h>
 
 typedef struct
 {

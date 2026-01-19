@@ -1,0 +1,2382 @@
+
+demo.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000002c  00800100  00000912  000009a6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000912  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000069f  0080012c  0080012c  000009d2  2**0
+                  ALLOC
+  3 .stab         00001a64  00000000  00000000  000009d4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      0000133f  00000000  00000000  00002438  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      00000011  00000000  00000000  00003777  2**0
+                  CONTENTS, READONLY
+  6 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00003788  2**2
+                  CONTENTS, READONLY
+  7 .debug_info   000005f4  00000000  00000000  000037c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000005a2  00000000  00000000  00003dbc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   0000001a  00000000  00000000  0000435e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000208  00000000  00000000  00004378  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 53 00 	jmp	0xa6	; 0xa6 <__vector_16>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e2 e1       	ldi	r30, 0x12	; 18
+  7c:	f9 e0       	ldi	r31, 0x09	; 9
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	ac 32       	cpi	r26, 0x2C	; 44
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	27 e0       	ldi	r18, 0x07	; 7
+  8c:	ac e2       	ldi	r26, 0x2C	; 44
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	ab 3c       	cpi	r26, 0xCB	; 203
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 42 01 	call	0x284	; 0x284 <main>
+  9e:	0c 94 87 04 	jmp	0x90e	; 0x90e <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <__vector_16>:
+1ms has elapsed every counter0 overflow.
+As for the fractional part, accumulate the 0.024 ms by incrementing a variable by 24.
+Every time that variable exceeds 1000, add one millisecond to the millis variable.
+*/
+ISR(TIMER0_OVF_vect)
+{
+  a6:	1f 92       	push	r1
+  a8:	0f 92       	push	r0
+  aa:	0f b6       	in	r0, 0x3f	; 63
+  ac:	0f 92       	push	r0
+  ae:	11 24       	eor	r1, r1
+  b0:	8f 93       	push	r24
+  b2:	9f 93       	push	r25
+    millis += 2;
+  b4:	80 91 c9 07 	lds	r24, 0x07C9	; 0x8007c9 <millis>
+  b8:	90 91 ca 07 	lds	r25, 0x07CA	; 0x8007ca <millis+0x1>
+  bc:	02 96       	adiw	r24, 0x02	; 2
+  be:	90 93 ca 07 	sts	0x07CA, r25	; 0x8007ca <millis+0x1>
+  c2:	80 93 c9 07 	sts	0x07C9, r24	; 0x8007c9 <millis>
+    millis_fract += MILLIS_FRACT_INT * 2;
+  c6:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <millis_fract>
+  ca:	80 93 35 01 	sts	0x0135, r24	; 0x800135 <millis_fract>
+    if (millis_fract >= MILLIS_FRACT_MAX)
+  ce:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <millis_fract>
+  d2:	8d 37       	cpi	r24, 0x7D	; 125
+  d4:	70 f0       	brcs	.+28     	; 0xf2 <__vector_16+0x4c>
+    {
+        millis_fract -= MILLIS_FRACT_MAX;
+  d6:	80 91 35 01 	lds	r24, 0x0135	; 0x800135 <millis_fract>
+  da:	8d 57       	subi	r24, 0x7D	; 125
+  dc:	80 93 35 01 	sts	0x0135, r24	; 0x800135 <millis_fract>
+        millis++;
+  e0:	80 91 c9 07 	lds	r24, 0x07C9	; 0x8007c9 <millis>
+  e4:	90 91 ca 07 	lds	r25, 0x07CA	; 0x8007ca <millis+0x1>
+  e8:	01 96       	adiw	r24, 0x01	; 1
+  ea:	90 93 ca 07 	sts	0x07CA, r25	; 0x8007ca <millis+0x1>
+  ee:	80 93 c9 07 	sts	0x07C9, r24	; 0x8007c9 <millis>
+    }
+}
+  f2:	9f 91       	pop	r25
+  f4:	8f 91       	pop	r24
+  f6:	0f 90       	pop	r0
+  f8:	0f be       	out	0x3f, r0	; 63
+  fa:	0f 90       	pop	r0
+  fc:	1f 90       	pop	r1
+  fe:	18 95       	reti
+
+00000100 <LCDInit>:
+*/
+void LCDInit()
+{
+    // _delay_ms(30);
+    // set entire port D as output
+    LCD_D_DDR = 0b11111111;
+ 100:	8f ef       	ldi	r24, 0xFF	; 255
+ 102:	8a b9       	out	0x0a, r24	; 10
+    // E, RS, and RW' DDR
+    LCD_SIG_DDR |= 0b111;
+ 104:	84 b1       	in	r24, 0x04	; 4
+ 106:	87 60       	ori	r24, 0x07	; 7
+ 108:	84 b9       	out	0x04, r24	; 4
+}
+ 10a:	08 95       	ret
+
+0000010c <LCDSetEnable>:
+/*
+set enable value
+*/
+void LCDSetEnable(uint8_t en)
+{
+    if (en)
+ 10c:	81 11       	cpse	r24, r1
+ 10e:	02 c0       	rjmp	.+4      	; 0x114 <LCDSetEnable+0x8>
+    {
+        LCD_SIG_PORT |= _BV(E);
+    }
+    else
+    {
+        LCD_SIG_PORT &= ~_BV(E);
+ 110:	2a 98       	cbi	0x05, 2	; 5
+    }
+}
+ 112:	08 95       	ret
+*/
+void LCDSetEnable(uint8_t en)
+{
+    if (en)
+    {
+        LCD_SIG_PORT |= _BV(E);
+ 114:	2a 9a       	sbi	0x05, 2	; 5
+ 116:	08 95       	ret
+
+00000118 <LCDSetRSRW>:
+/*
+set RS and RW value
+*/
+void LCDSetRSRW(uint8_t rs, uint8_t rw)
+{
+    if (rs)
+ 118:	88 23       	and	r24, r24
+ 11a:	29 f0       	breq	.+10     	; 0x126 <LCDSetRSRW+0xe>
+    {
+        LCD_SIG_PORT |= _BV(RS);
+ 11c:	28 9a       	sbi	0x05, 0	; 5
+    }
+    else
+    {
+        LCD_SIG_PORT &= ~_BV(RS);
+    }
+    if (rw)
+ 11e:	61 11       	cpse	r22, r1
+ 120:	05 c0       	rjmp	.+10     	; 0x12c <LCDSetRSRW+0x14>
+    {
+        LCD_SIG_PORT |= _BV(RW);
+    }
+    else
+    {
+        LCD_SIG_PORT &= ~_BV(RW);
+ 122:	29 98       	cbi	0x05, 1	; 5
+    }
+}
+ 124:	08 95       	ret
+    {
+        LCD_SIG_PORT |= _BV(RS);
+    }
+    else
+    {
+        LCD_SIG_PORT &= ~_BV(RS);
+ 126:	28 98       	cbi	0x05, 0	; 5
+    }
+    if (rw)
+ 128:	66 23       	and	r22, r22
+ 12a:	d9 f3       	breq	.-10     	; 0x122 <LCDSetRSRW+0xa>
+    {
+        LCD_SIG_PORT |= _BV(RW);
+ 12c:	29 9a       	sbi	0x05, 1	; 5
+ 12e:	08 95       	ret
+
+00000130 <LCDWriteData>:
+
+/*
+write data to the LCD data bus */
+void LCDWriteData(uint8_t data)
+{
+    LCD_D_PORT = data;
+ 130:	8b b9       	out	0x0b, r24	; 11
+}
+ 132:	08 95       	ret
+
+00000134 <incrementLCDBuffHead>:
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 134:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 138:	8f 5f       	subi	r24, 0xFF	; 255
+ 13a:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+}
+ 13e:	08 95       	ret
+
+00000140 <LCDSetFunction>:
+@param length 0 if 4 bit, 1 if 8 bit
+@param lines 0 if 1 line, 1 if 2 lines
+@param font 0 if 5x8 font, 1 if 5x10
+*/
+void LCDSetFunction(LCDAction *lcdaction, uint8_t length, uint8_t lines, uint8_t font)
+{
+ 140:	fc 01       	movw	r30, r24
+
+    // set to 8-bit operation, 2-line display, 5x8 dot character font
+    lcdaction->lcd_ctrl = 0b00;
+ 142:	10 82       	st	Z, r1
+    // 0 0 1 DL N F - -
+    lcdaction->lcd_data = 0b00100000;
+    if (length)
+ 144:	61 11       	cpse	r22, r1
+ 146:	12 c0       	rjmp	.+36     	; 0x16c <LCDSetFunction+0x2c>
+{
+
+    // set to 8-bit operation, 2-line display, 5x8 dot character font
+    lcdaction->lcd_ctrl = 0b00;
+    // 0 0 1 DL N F - -
+    lcdaction->lcd_data = 0b00100000;
+ 148:	80 e2       	ldi	r24, 0x20	; 32
+ 14a:	81 83       	std	Z+1, r24	; 0x01
+    if (length)
+    {
+        lcdaction->lcd_data |= _BV(4);
+    }
+    if (lines)
+ 14c:	44 23       	and	r20, r20
+ 14e:	19 f0       	breq	.+6      	; 0x156 <LCDSetFunction+0x16>
+    {
+        lcdaction->lcd_data |= _BV(3);
+ 150:	81 81       	ldd	r24, Z+1	; 0x01
+ 152:	88 60       	ori	r24, 0x08	; 8
+ 154:	81 83       	std	Z+1, r24	; 0x01
+    }
+    if (font)
+ 156:	22 23       	and	r18, r18
+ 158:	19 f0       	breq	.+6      	; 0x160 <LCDSetFunction+0x20>
+    {
+        lcdaction->lcd_data |= _BV(2);
+ 15a:	81 81       	ldd	r24, Z+1	; 0x01
+ 15c:	84 60       	ori	r24, 0x04	; 4
+ 15e:	81 83       	std	Z+1, r24	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 160:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 164:	8f 5f       	subi	r24, 0xFF	; 255
+ 166:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+    if (font)
+    {
+        lcdaction->lcd_data |= _BV(2);
+    }
+    incrementLCDBuffHead();
+}
+ 16a:	08 95       	ret
+    lcdaction->lcd_ctrl = 0b00;
+    // 0 0 1 DL N F - -
+    lcdaction->lcd_data = 0b00100000;
+    if (length)
+    {
+        lcdaction->lcd_data |= _BV(4);
+ 16c:	80 e3       	ldi	r24, 0x30	; 48
+ 16e:	81 83       	std	Z+1, r24	; 0x01
+ 170:	ed cf       	rjmp	.-38     	; 0x14c <LCDSetFunction+0xc>
+
+00000172 <LCDOn>:
+    incrementLCDBuffHead();
+}
+
+// turn on display and cursor
+void LCDOn(LCDAction *lcdaction, uint8_t display, uint8_t cursor, uint8_t blinking)
+{
+ 172:	fc 01       	movw	r30, r24
+    lcdaction->lcd_ctrl = 0b00;
+ 174:	10 82       	st	Z, r1
+    // 0 0 0 0 0 0 1 D C B
+    lcdaction->lcd_data = 0b00001000;
+    if (display)
+ 176:	61 11       	cpse	r22, r1
+ 178:	12 c0       	rjmp	.+36     	; 0x19e <LCDOn+0x2c>
+// turn on display and cursor
+void LCDOn(LCDAction *lcdaction, uint8_t display, uint8_t cursor, uint8_t blinking)
+{
+    lcdaction->lcd_ctrl = 0b00;
+    // 0 0 0 0 0 0 1 D C B
+    lcdaction->lcd_data = 0b00001000;
+ 17a:	88 e0       	ldi	r24, 0x08	; 8
+ 17c:	81 83       	std	Z+1, r24	; 0x01
+    if (display)
+    {
+        lcdaction->lcd_data |= _BV(2);
+    }
+    if (cursor)
+ 17e:	44 23       	and	r20, r20
+ 180:	19 f0       	breq	.+6      	; 0x188 <LCDOn+0x16>
+    {
+        lcdaction->lcd_data |= _BV(1);
+ 182:	81 81       	ldd	r24, Z+1	; 0x01
+ 184:	82 60       	ori	r24, 0x02	; 2
+ 186:	81 83       	std	Z+1, r24	; 0x01
+    }
+    if (blinking)
+ 188:	22 23       	and	r18, r18
+ 18a:	19 f0       	breq	.+6      	; 0x192 <LCDOn+0x20>
+    {
+        lcdaction->lcd_data |= _BV(0);
+ 18c:	81 81       	ldd	r24, Z+1	; 0x01
+ 18e:	81 60       	ori	r24, 0x01	; 1
+ 190:	81 83       	std	Z+1, r24	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 192:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 196:	8f 5f       	subi	r24, 0xFF	; 255
+ 198:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+    if (blinking)
+    {
+        lcdaction->lcd_data |= _BV(0);
+    }
+    incrementLCDBuffHead();
+}
+ 19c:	08 95       	ret
+    lcdaction->lcd_ctrl = 0b00;
+    // 0 0 0 0 0 0 1 D C B
+    lcdaction->lcd_data = 0b00001000;
+    if (display)
+    {
+        lcdaction->lcd_data |= _BV(2);
+ 19e:	8c e0       	ldi	r24, 0x0C	; 12
+ 1a0:	81 83       	std	Z+1, r24	; 0x01
+ 1a2:	ed cf       	rjmp	.-38     	; 0x17e <LCDOn+0xc>
+
+000001a4 <LCDSetEntryMode>:
+
+/*
+set LCD entry mode
+*/
+void LCDSetEntryMode(LCDAction *lcdaction, uint8_t increment, uint8_t shift)
+{
+ 1a4:	fc 01       	movw	r30, r24
+    lcdaction->lcd_ctrl = 0b00;
+ 1a6:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000100;
+    if (increment)
+ 1a8:	61 11       	cpse	r22, r1
+ 1aa:	0d c0       	rjmp	.+26     	; 0x1c6 <LCDSetEntryMode+0x22>
+set LCD entry mode
+*/
+void LCDSetEntryMode(LCDAction *lcdaction, uint8_t increment, uint8_t shift)
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00000100;
+ 1ac:	84 e0       	ldi	r24, 0x04	; 4
+ 1ae:	81 83       	std	Z+1, r24	; 0x01
+    if (increment)
+    {
+        lcdaction->lcd_data |= _BV(1);
+    }
+    if (shift)
+ 1b0:	44 23       	and	r20, r20
+ 1b2:	19 f0       	breq	.+6      	; 0x1ba <LCDSetEntryMode+0x16>
+    {
+        lcdaction->lcd_data |= _BV(0);
+ 1b4:	81 81       	ldd	r24, Z+1	; 0x01
+ 1b6:	81 60       	ori	r24, 0x01	; 1
+ 1b8:	81 83       	std	Z+1, r24	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 1ba:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 1be:	8f 5f       	subi	r24, 0xFF	; 255
+ 1c0:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+    if (shift)
+    {
+        lcdaction->lcd_data |= _BV(0);
+    }
+    incrementLCDBuffHead();
+}
+ 1c4:	08 95       	ret
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00000100;
+    if (increment)
+    {
+        lcdaction->lcd_data |= _BV(1);
+ 1c6:	86 e0       	ldi	r24, 0x06	; 6
+ 1c8:	81 83       	std	Z+1, r24	; 0x01
+ 1ca:	f2 cf       	rjmp	.-28     	; 0x1b0 <LCDSetEntryMode+0xc>
+
+000001cc <LCDClear>:
+/*
+clear the LCD
+*/
+void LCDClear(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 1cc:	fc 01       	movw	r30, r24
+ 1ce:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000001;
+ 1d0:	21 e0       	ldi	r18, 0x01	; 1
+ 1d2:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 1d4:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 1d8:	8f 5f       	subi	r24, 0xFF	; 255
+ 1da:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+void LCDClear(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00000001;
+    incrementLCDBuffHead();
+}
+ 1de:	08 95       	ret
+
+000001e0 <LCDShiftCursor>:
+
+/*
+shift cursor
+*/
+void LCDShiftCursor(LCDAction *lcdaction, uint8_t mode, uint8_t dir)
+{
+ 1e0:	fc 01       	movw	r30, r24
+
+    lcdaction->lcd_ctrl = 0b00;
+ 1e2:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00010000;
+    if (mode)
+ 1e4:	61 11       	cpse	r22, r1
+ 1e6:	0d c0       	rjmp	.+26     	; 0x202 <LCDShiftCursor+0x22>
+*/
+void LCDShiftCursor(LCDAction *lcdaction, uint8_t mode, uint8_t dir)
+{
+
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00010000;
+ 1e8:	80 e1       	ldi	r24, 0x10	; 16
+ 1ea:	81 83       	std	Z+1, r24	; 0x01
+    if (mode)
+    {
+        lcdaction->lcd_data |= _BV(3);
+    }
+    if (dir)
+ 1ec:	44 23       	and	r20, r20
+ 1ee:	19 f0       	breq	.+6      	; 0x1f6 <LCDShiftCursor+0x16>
+    {
+        lcdaction->lcd_data |= _BV(2);
+ 1f0:	81 81       	ldd	r24, Z+1	; 0x01
+ 1f2:	84 60       	ori	r24, 0x04	; 4
+ 1f4:	81 83       	std	Z+1, r24	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 1f6:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 1fa:	8f 5f       	subi	r24, 0xFF	; 255
+ 1fc:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+    if (dir)
+    {
+        lcdaction->lcd_data |= _BV(2);
+    }
+    incrementLCDBuffHead();
+}
+ 200:	08 95       	ret
+
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00010000;
+    if (mode)
+    {
+        lcdaction->lcd_data |= _BV(3);
+ 202:	88 e1       	ldi	r24, 0x18	; 24
+ 204:	81 83       	std	Z+1, r24	; 0x01
+ 206:	f2 cf       	rjmp	.-28     	; 0x1ec <LCDShiftCursor+0xc>
+
+00000208 <LCDGoHome>:
+/*
+move cursor to home
+*/
+void LCDGoHome(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 208:	fc 01       	movw	r30, r24
+ 20a:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000010;
+ 20c:	22 e0       	ldi	r18, 0x02	; 2
+ 20e:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 210:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 214:	8f 5f       	subi	r24, 0xFF	; 255
+ 216:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+void LCDGoHome(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b00000010;
+    incrementLCDBuffHead();
+}
+ 21a:	08 95       	ret
+
+0000021c <LCDWriteRAM>:
+
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+ 21c:	fc 01       	movw	r30, r24
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 21e:	8a e0       	ldi	r24, 0x0A	; 10
+ 220:	90 e0       	ldi	r25, 0x00	; 0
+ 222:	93 83       	std	Z+3, r25	; 0x03
+ 224:	82 83       	std	Z+2, r24	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 226:	82 e0       	ldi	r24, 0x02	; 2
+ 228:	80 83       	st	Z, r24
+    lcdaction->lcd_data = data;
+ 22a:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 22c:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 230:	8f 5f       	subi	r24, 0xFF	; 255
+ 232:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+    lcdaction->lcd_ctrl = 0b10;
+    lcdaction->lcd_data = data;
+    incrementLCDBuffHead();
+}
+ 236:	08 95       	ret
+
+00000238 <LCDSetCGRAMAddr>:
+/*
+set CGRAM address
+*/
+void LCDSetCGRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 238:	fc 01       	movw	r30, r24
+ 23a:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b01000000;
+    lcdaction->lcd_data |= addr;
+ 23c:	60 64       	ori	r22, 0x40	; 64
+ 23e:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 240:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 244:	8f 5f       	subi	r24, 0xFF	; 255
+ 246:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b01000000;
+    lcdaction->lcd_data |= addr;
+    incrementLCDBuffHead();
+}
+ 24a:	08 95       	ret
+
+0000024c <LCDSetDDRAMAddr>:
+/*
+set DDRAM address
+*/
+void LCDSetDDRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 24c:	fc 01       	movw	r30, r24
+ 24e:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+ 250:	60 68       	ori	r22, 0x80	; 128
+ 252:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 254:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 258:	8f 5f       	subi	r24, 0xFF	; 255
+ 25a:	80 93 c7 07 	sts	0x07C7, r24	; 0x8007c7 <lcdbufferHead>
+{
+    lcdaction->lcd_ctrl = 0b00;
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+    incrementLCDBuffHead();
+}
+ 25e:	08 95       	ret
+
+00000260 <ioinit>:
+*/
+void LCDInit()
+{
+    // _delay_ms(30);
+    // set entire port D as output
+    LCD_D_DDR = 0b11111111;
+ 260:	8f ef       	ldi	r24, 0xFF	; 255
+ 262:	8a b9       	out	0x0a, r24	; 10
+    // E, RS, and RW' DDR
+    LCD_SIG_DDR |= 0b111;
+ 264:	84 b1       	in	r24, 0x04	; 4
+ 266:	87 60       	ori	r24, 0x07	; 7
+ 268:	84 b9       	out	0x04, r24	; 4
+    Clear OC0A on compare match when up-counting. Set OC0A on compare match
+    when down-counting.
+    */
+    // TCCR0A |= (_BV(COM0A1) | _BV(COM0B1));
+    // /* PWM, phase correct */
+    TCCR0A |= (_BV(WGM00));
+ 26a:	84 b5       	in	r24, 0x24	; 36
+ 26c:	81 60       	ori	r24, 0x01	; 1
+ 26e:	84 bd       	out	0x24, r24	; 36
+    // /* /64 prescaling */
+    TCCR0B |= (_BV(CS01) | _BV(CS00));
+ 270:	85 b5       	in	r24, 0x25	; 37
+ 272:	83 60       	ori	r24, 0x03	; 3
+ 274:	85 bd       	out	0x25, r24	; 37
+    /* timer 0 overflow interrupt enable */
+    TIMSK0 |= _BV(TOIE0);
+ 276:	ee e6       	ldi	r30, 0x6E	; 110
+ 278:	f0 e0       	ldi	r31, 0x00	; 0
+ 27a:	80 81       	ld	r24, Z
+ 27c:	81 60       	ori	r24, 0x01	; 1
+ 27e:	80 83       	st	Z, r24
+
+    /* set interrupts enable */
+    sei();
+ 280:	78 94       	sei
+}
+ 282:	08 95       	ret
+
+00000284 <main>:
+*/
+void LCDInit()
+{
+    // _delay_ms(30);
+    // set entire port D as output
+    LCD_D_DDR = 0b11111111;
+ 284:	8f ef       	ldi	r24, 0xFF	; 255
+ 286:	8a b9       	out	0x0a, r24	; 10
+    // E, RS, and RW' DDR
+    LCD_SIG_DDR |= 0b111;
+ 288:	84 b1       	in	r24, 0x04	; 4
+ 28a:	87 60       	ori	r24, 0x07	; 7
+ 28c:	84 b9       	out	0x04, r24	; 4
+    Clear OC0A on compare match when up-counting. Set OC0A on compare match
+    when down-counting.
+    */
+    // TCCR0A |= (_BV(COM0A1) | _BV(COM0B1));
+    // /* PWM, phase correct */
+    TCCR0A |= (_BV(WGM00));
+ 28e:	84 b5       	in	r24, 0x24	; 36
+ 290:	81 60       	ori	r24, 0x01	; 1
+ 292:	84 bd       	out	0x24, r24	; 36
+    // /* /64 prescaling */
+    TCCR0B |= (_BV(CS01) | _BV(CS00));
+ 294:	85 b5       	in	r24, 0x25	; 37
+ 296:	83 60       	ori	r24, 0x03	; 3
+ 298:	85 bd       	out	0x25, r24	; 37
+    /* timer 0 overflow interrupt enable */
+    TIMSK0 |= _BV(TOIE0);
+ 29a:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <__TEXT_REGION_LENGTH__+0x7f806e>
+ 29e:	81 60       	ori	r24, 0x01	; 1
+ 2a0:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7f806e>
+
+    /* set interrupts enable */
+    sei();
+ 2a4:	78 94       	sei
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2a6:	2f ef       	ldi	r18, 0xFF	; 255
+ 2a8:	40 e7       	ldi	r20, 0x70	; 112
+ 2aa:	52 e0       	ldi	r21, 0x02	; 2
+ 2ac:	21 50       	subi	r18, 0x01	; 1
+ 2ae:	40 40       	sbci	r20, 0x00	; 0
+ 2b0:	50 40       	sbci	r21, 0x00	; 0
+ 2b2:	e1 f7       	brne	.-8      	; 0x2ac <main+0x28>
+ 2b4:	00 c0       	rjmp	.+0      	; 0x2b6 <main+0x32>
+ 2b6:	00 00       	nop
+
+int main()
+{
+    ioinit();
+    _delay_ms(50);
+    LCDOn(&lcdbuffer[lcdbufferHead], 1, 1, 0);
+ 2b8:	80 91 c7 07 	lds	r24, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+}
+
+// turn on display and cursor
+void LCDOn(LCDAction *lcdaction, uint8_t display, uint8_t cursor, uint8_t blinking)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 2be:	fc 01       	movw	r30, r24
+ 2c0:	ee 0f       	add	r30, r30
+ 2c2:	ff 1f       	adc	r31, r31
+ 2c4:	ee 0f       	add	r30, r30
+ 2c6:	ff 1f       	adc	r31, r31
+ 2c8:	e9 5c       	subi	r30, 0xC9	; 201
+ 2ca:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2cc:	10 82       	st	Z, r1
+    {
+        lcdaction->lcd_data |= _BV(2);
+    }
+    if (cursor)
+    {
+        lcdaction->lcd_data |= _BV(1);
+ 2ce:	2e e0       	ldi	r18, 0x0E	; 14
+ 2d0:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 2d2:	01 96       	adiw	r24, 0x01	; 1
+ 2d4:	99 27       	eor	r25, r25
+*/
+void LCDSetFunction(LCDAction *lcdaction, uint8_t length, uint8_t lines, uint8_t font)
+{
+
+    // set to 8-bit operation, 2-line display, 5x8 dot character font
+    lcdaction->lcd_ctrl = 0b00;
+ 2d6:	fc 01       	movw	r30, r24
+ 2d8:	ee 0f       	add	r30, r30
+ 2da:	ff 1f       	adc	r31, r31
+ 2dc:	ee 0f       	add	r30, r30
+ 2de:	ff 1f       	adc	r31, r31
+ 2e0:	e9 5c       	subi	r30, 0xC9	; 201
+ 2e2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2e4:	10 82       	st	Z, r1
+    {
+        lcdaction->lcd_data |= _BV(4);
+    }
+    if (lines)
+    {
+        lcdaction->lcd_data |= _BV(3);
+ 2e6:	28 e3       	ldi	r18, 0x38	; 56
+ 2e8:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 2ea:	01 96       	adiw	r24, 0x01	; 1
+ 2ec:	99 27       	eor	r25, r25
+/*
+set LCD entry mode
+*/
+void LCDSetEntryMode(LCDAction *lcdaction, uint8_t increment, uint8_t shift)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 2ee:	fc 01       	movw	r30, r24
+ 2f0:	ee 0f       	add	r30, r30
+ 2f2:	ff 1f       	adc	r31, r31
+ 2f4:	ee 0f       	add	r30, r30
+ 2f6:	ff 1f       	adc	r31, r31
+ 2f8:	e9 5c       	subi	r30, 0xC9	; 201
+ 2fa:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2fc:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000100;
+    if (increment)
+    {
+        lcdaction->lcd_data |= _BV(1);
+ 2fe:	26 e0       	ldi	r18, 0x06	; 6
+ 300:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 302:	01 96       	adiw	r24, 0x01	; 1
+ 304:	99 27       	eor	r25, r25
+/*
+clear the LCD
+*/
+void LCDClear(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 306:	fc 01       	movw	r30, r24
+ 308:	ee 0f       	add	r30, r30
+ 30a:	ff 1f       	adc	r31, r31
+ 30c:	ee 0f       	add	r30, r30
+ 30e:	ff 1f       	adc	r31, r31
+ 310:	e9 5c       	subi	r30, 0xC9	; 201
+ 312:	fe 4f       	sbci	r31, 0xFE	; 254
+ 314:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000001;
+ 316:	91 e0       	ldi	r25, 0x01	; 1
+ 318:	91 83       	std	Z+1, r25	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 31a:	51 e0       	ldi	r21, 0x01	; 1
+ 31c:	58 0f       	add	r21, r24
+
+    // LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 2);
+
+    // LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0b01000001);
+
+    strcpy(str, "0Simon Que");
+ 31e:	8b e0       	ldi	r24, 0x0B	; 11
+ 320:	e0 e0       	ldi	r30, 0x00	; 0
+ 322:	f1 e0       	ldi	r31, 0x01	; 1
+ 324:	a7 e7       	ldi	r26, 0x77	; 119
+ 326:	b7 e0       	ldi	r27, 0x07	; 7
+ 328:	01 90       	ld	r0, Z+
+ 32a:	0d 92       	st	X+, r0
+ 32c:	8a 95       	dec	r24
+ 32e:	e1 f7       	brne	.-8      	; 0x328 <main+0xa4>
+    for (int i = 0; i < strlen(str); ++i)
+ 330:	a7 e7       	ldi	r26, 0x77	; 119
+ 332:	b7 e0       	ldi	r27, 0x07	; 7
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 334:	6a e0       	ldi	r22, 0x0A	; 10
+ 336:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 338:	22 e0       	ldi	r18, 0x02	; 2
+    // LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 2);
+
+    // LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0b01000001);
+
+    strcpy(str, "0Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 33a:	0c c0       	rjmp	.+24     	; 0x354 <main+0xd0>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+ 33c:	3d 91       	ld	r19, X+
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 33e:	88 0f       	add	r24, r24
+ 340:	99 1f       	adc	r25, r25
+ 342:	88 0f       	add	r24, r24
+ 344:	99 1f       	adc	r25, r25
+ 346:	fc 01       	movw	r30, r24
+ 348:	e9 5c       	subi	r30, 0xC9	; 201
+ 34a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 34c:	73 83       	std	Z+3, r23	; 0x03
+ 34e:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 350:	20 83       	st	Z, r18
+    lcdaction->lcd_data = data;
+ 352:	31 83       	std	Z+1, r19	; 0x01
+ 354:	85 2f       	mov	r24, r21
+ 356:	90 e0       	ldi	r25, 0x00	; 0
+ 358:	5f 5f       	subi	r21, 0xFF	; 255
+    // LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 2);
+
+    // LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0b01000001);
+
+    strcpy(str, "0Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 35a:	fd 01       	movw	r30, r26
+ 35c:	e7 57       	subi	r30, 0x77	; 119
+ 35e:	f7 40       	sbci	r31, 0x07	; 7
+ 360:	3a 97       	sbiw	r30, 0x0a	; 10
+ 362:	60 f3       	brcs	.-40     	; 0x33c <main+0xb8>
+/*
+set DDRAM address
+*/
+void LCDSetDDRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 364:	88 0f       	add	r24, r24
+ 366:	99 1f       	adc	r25, r25
+ 368:	88 0f       	add	r24, r24
+ 36a:	99 1f       	adc	r25, r25
+ 36c:	fc 01       	movw	r30, r24
+ 36e:	e9 5c       	subi	r30, 0xC9	; 201
+ 370:	fe 4f       	sbci	r31, 0xFE	; 254
+ 372:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+ 374:	80 ec       	ldi	r24, 0xC0	; 192
+ 376:	81 83       	std	Z+1, r24	; 0x01
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 64);
+    strcpy(str, "1Simon Que");
+ 378:	8b e0       	ldi	r24, 0x0B	; 11
+ 37a:	eb e0       	ldi	r30, 0x0B	; 11
+ 37c:	f1 e0       	ldi	r31, 0x01	; 1
+ 37e:	a7 e7       	ldi	r26, 0x77	; 119
+ 380:	b7 e0       	ldi	r27, 0x07	; 7
+ 382:	01 90       	ld	r0, Z+
+ 384:	0d 92       	st	X+, r0
+ 386:	8a 95       	dec	r24
+ 388:	e1 f7       	brne	.-8      	; 0x382 <main+0xfe>
+    for (int i = 0; i < strlen(str); ++i)
+ 38a:	a7 e7       	ldi	r26, 0x77	; 119
+ 38c:	b7 e0       	ldi	r27, 0x07	; 7
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 38e:	6a e0       	ldi	r22, 0x0A	; 10
+ 390:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 392:	22 e0       	ldi	r18, 0x02	; 2
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 64);
+    strcpy(str, "1Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 394:	0c c0       	rjmp	.+24     	; 0x3ae <main+0x12a>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+ 396:	3d 91       	ld	r19, X+
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 398:	88 0f       	add	r24, r24
+ 39a:	99 1f       	adc	r25, r25
+ 39c:	88 0f       	add	r24, r24
+ 39e:	99 1f       	adc	r25, r25
+ 3a0:	fc 01       	movw	r30, r24
+ 3a2:	e9 5c       	subi	r30, 0xC9	; 201
+ 3a4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 3a6:	73 83       	std	Z+3, r23	; 0x03
+ 3a8:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 3aa:	20 83       	st	Z, r18
+    lcdaction->lcd_data = data;
+ 3ac:	31 83       	std	Z+1, r19	; 0x01
+ 3ae:	85 2f       	mov	r24, r21
+ 3b0:	90 e0       	ldi	r25, 0x00	; 0
+ 3b2:	5f 5f       	subi	r21, 0xFF	; 255
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 64);
+    strcpy(str, "1Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 3b4:	fd 01       	movw	r30, r26
+ 3b6:	e7 57       	subi	r30, 0x77	; 119
+ 3b8:	f7 40       	sbci	r31, 0x07	; 7
+ 3ba:	3a 97       	sbiw	r30, 0x0a	; 10
+ 3bc:	60 f3       	brcs	.-40     	; 0x396 <main+0x112>
+/*
+set DDRAM address
+*/
+void LCDSetDDRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 3be:	88 0f       	add	r24, r24
+ 3c0:	99 1f       	adc	r25, r25
+ 3c2:	88 0f       	add	r24, r24
+ 3c4:	99 1f       	adc	r25, r25
+ 3c6:	fc 01       	movw	r30, r24
+ 3c8:	e9 5c       	subi	r30, 0xC9	; 201
+ 3ca:	fe 4f       	sbci	r31, 0xFE	; 254
+ 3cc:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+ 3ce:	84 e9       	ldi	r24, 0x94	; 148
+ 3d0:	81 83       	std	Z+1, r24	; 0x01
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 20);
+    strcpy(str, "2Simon Que");
+ 3d2:	8b e0       	ldi	r24, 0x0B	; 11
+ 3d4:	e6 e1       	ldi	r30, 0x16	; 22
+ 3d6:	f1 e0       	ldi	r31, 0x01	; 1
+ 3d8:	a7 e7       	ldi	r26, 0x77	; 119
+ 3da:	b7 e0       	ldi	r27, 0x07	; 7
+ 3dc:	01 90       	ld	r0, Z+
+ 3de:	0d 92       	st	X+, r0
+ 3e0:	8a 95       	dec	r24
+ 3e2:	e1 f7       	brne	.-8      	; 0x3dc <main+0x158>
+    for (int i = 0; i < strlen(str); ++i)
+ 3e4:	a7 e7       	ldi	r26, 0x77	; 119
+ 3e6:	b7 e0       	ldi	r27, 0x07	; 7
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 3e8:	6a e0       	ldi	r22, 0x0A	; 10
+ 3ea:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 3ec:	22 e0       	ldi	r18, 0x02	; 2
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 20);
+    strcpy(str, "2Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 3ee:	0c c0       	rjmp	.+24     	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+ 3f0:	3d 91       	ld	r19, X+
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 3f2:	88 0f       	add	r24, r24
+ 3f4:	99 1f       	adc	r25, r25
+ 3f6:	88 0f       	add	r24, r24
+ 3f8:	99 1f       	adc	r25, r25
+ 3fa:	fc 01       	movw	r30, r24
+ 3fc:	e9 5c       	subi	r30, 0xC9	; 201
+ 3fe:	fe 4f       	sbci	r31, 0xFE	; 254
+ 400:	73 83       	std	Z+3, r23	; 0x03
+ 402:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 404:	20 83       	st	Z, r18
+    lcdaction->lcd_data = data;
+ 406:	31 83       	std	Z+1, r19	; 0x01
+ 408:	85 2f       	mov	r24, r21
+ 40a:	90 e0       	ldi	r25, 0x00	; 0
+ 40c:	5f 5f       	subi	r21, 0xFF	; 255
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 20);
+    strcpy(str, "2Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 40e:	fd 01       	movw	r30, r26
+ 410:	e7 57       	subi	r30, 0x77	; 119
+ 412:	f7 40       	sbci	r31, 0x07	; 7
+ 414:	3a 97       	sbiw	r30, 0x0a	; 10
+ 416:	60 f3       	brcs	.-40     	; 0x3f0 <main+0x16c>
+/*
+set DDRAM address
+*/
+void LCDSetDDRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 418:	88 0f       	add	r24, r24
+ 41a:	99 1f       	adc	r25, r25
+ 41c:	88 0f       	add	r24, r24
+ 41e:	99 1f       	adc	r25, r25
+ 420:	fc 01       	movw	r30, r24
+ 422:	e9 5c       	subi	r30, 0xC9	; 201
+ 424:	fe 4f       	sbci	r31, 0xFE	; 254
+ 426:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+ 428:	84 ed       	ldi	r24, 0xD4	; 212
+ 42a:	81 83       	std	Z+1, r24	; 0x01
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 84);
+    strcpy(str, "3Simon Que");
+ 42c:	8b e0       	ldi	r24, 0x0B	; 11
+ 42e:	e1 e2       	ldi	r30, 0x21	; 33
+ 430:	f1 e0       	ldi	r31, 0x01	; 1
+ 432:	a7 e7       	ldi	r26, 0x77	; 119
+ 434:	b7 e0       	ldi	r27, 0x07	; 7
+ 436:	01 90       	ld	r0, Z+
+ 438:	0d 92       	st	X+, r0
+ 43a:	8a 95       	dec	r24
+ 43c:	e1 f7       	brne	.-8      	; 0x436 <__EEPROM_REGION_LENGTH__+0x36>
+    for (int i = 0; i < strlen(str); ++i)
+ 43e:	a7 e7       	ldi	r26, 0x77	; 119
+ 440:	b7 e0       	ldi	r27, 0x07	; 7
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 442:	6a e0       	ldi	r22, 0x0A	; 10
+ 444:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 446:	92 e0       	ldi	r25, 0x02	; 2
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 84);
+    strcpy(str, "3Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 448:	0d c0       	rjmp	.+26     	; 0x464 <__EEPROM_REGION_LENGTH__+0x64>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+ 44a:	4d 91       	ld	r20, X+
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 44c:	22 0f       	add	r18, r18
+ 44e:	33 1f       	adc	r19, r19
+ 450:	22 0f       	add	r18, r18
+ 452:	33 1f       	adc	r19, r19
+ 454:	f9 01       	movw	r30, r18
+ 456:	e9 5c       	subi	r30, 0xC9	; 201
+ 458:	fe 4f       	sbci	r31, 0xFE	; 254
+ 45a:	73 83       	std	Z+3, r23	; 0x03
+ 45c:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 45e:	90 83       	st	Z, r25
+    lcdaction->lcd_data = data;
+ 460:	41 83       	std	Z+1, r20	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 462:	58 2f       	mov	r21, r24
+ 464:	25 2f       	mov	r18, r21
+ 466:	30 e0       	ldi	r19, 0x00	; 0
+ 468:	81 e0       	ldi	r24, 0x01	; 1
+ 46a:	85 0f       	add	r24, r21
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 84);
+    strcpy(str, "3Simon Que");
+    for (int i = 0; i < strlen(str); ++i)
+ 46c:	fd 01       	movw	r30, r26
+ 46e:	e7 57       	subi	r30, 0x77	; 119
+ 470:	f7 40       	sbci	r31, 0x07	; 7
+ 472:	3a 97       	sbiw	r30, 0x0a	; 10
+ 474:	50 f3       	brcs	.-44     	; 0x44a <__EEPROM_REGION_LENGTH__+0x4a>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], str[i]);
+    }
+    lcdbuffer[lcdbufferHead - 1].delay_ms = 3000;
+ 476:	f9 01       	movw	r30, r18
+ 478:	ee 0f       	add	r30, r30
+ 47a:	ff 1f       	adc	r31, r31
+ 47c:	ee 0f       	add	r30, r30
+ 47e:	ff 1f       	adc	r31, r31
+ 480:	ed 5c       	subi	r30, 0xCD	; 205
+ 482:	fe 4f       	sbci	r31, 0xFE	; 254
+ 484:	68 eb       	ldi	r22, 0xB8	; 184
+ 486:	7b e0       	ldi	r23, 0x0B	; 11
+ 488:	73 83       	std	Z+3, r23	; 0x03
+ 48a:	62 83       	std	Z+2, r22	; 0x02
+/*
+clear the LCD
+*/
+void LCDClear(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 48c:	22 0f       	add	r18, r18
+ 48e:	33 1f       	adc	r19, r19
+ 490:	22 0f       	add	r18, r18
+ 492:	33 1f       	adc	r19, r19
+ 494:	f9 01       	movw	r30, r18
+ 496:	e9 5c       	subi	r30, 0xC9	; 201
+ 498:	fe 4f       	sbci	r31, 0xFE	; 254
+ 49a:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000001;
+ 49c:	91 e0       	ldi	r25, 0x01	; 1
+ 49e:	91 83       	std	Z+1, r25	; 0x01
+ 4a0:	45 e1       	ldi	r20, 0x15	; 21
+ 4a2:	45 0f       	add	r20, r21
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 4a4:	6a e0       	ldi	r22, 0x0A	; 10
+ 4a6:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 4a8:	32 e0       	ldi	r19, 0x02	; 2
+    lcdaction->lcd_data = data;
+ 4aa:	20 e3       	ldi	r18, 0x30	; 48
+ 4ac:	01 c0       	rjmp	.+2      	; 0x4b0 <__EEPROM_REGION_LENGTH__+0xb0>
+ 4ae:	89 2f       	mov	r24, r25
+
+    LCDClear(&lcdbuffer[lcdbufferHead]);
+
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '0');
+ 4b0:	e8 2f       	mov	r30, r24
+ 4b2:	f0 e0       	ldi	r31, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 4b4:	ee 0f       	add	r30, r30
+ 4b6:	ff 1f       	adc	r31, r31
+ 4b8:	ee 0f       	add	r30, r30
+ 4ba:	ff 1f       	adc	r31, r31
+ 4bc:	e9 5c       	subi	r30, 0xC9	; 201
+ 4be:	fe 4f       	sbci	r31, 0xFE	; 254
+ 4c0:	73 83       	std	Z+3, r23	; 0x03
+ 4c2:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 4c4:	30 83       	st	Z, r19
+    lcdaction->lcd_data = data;
+ 4c6:	21 83       	std	Z+1, r18	; 0x01
+ 4c8:	91 e0       	ldi	r25, 0x01	; 1
+ 4ca:	98 0f       	add	r25, r24
+    }
+    lcdbuffer[lcdbufferHead - 1].delay_ms = 3000;
+
+    LCDClear(&lcdbuffer[lcdbufferHead]);
+
+    for (int i = 0; i < 20; i++)
+ 4cc:	49 13       	cpse	r20, r25
+ 4ce:	ef cf       	rjmp	.-34     	; 0x4ae <__EEPROM_REGION_LENGTH__+0xae>
+ 4d0:	49 e2       	ldi	r20, 0x29	; 41
+ 4d2:	45 0f       	add	r20, r21
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 4d4:	6a e0       	ldi	r22, 0x0A	; 10
+ 4d6:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 4d8:	32 e0       	ldi	r19, 0x02	; 2
+    lcdaction->lcd_data = data;
+ 4da:	21 e3       	ldi	r18, 0x31	; 49
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '0');
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '1');
+ 4dc:	e9 2f       	mov	r30, r25
+ 4de:	f0 e0       	ldi	r31, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 4e0:	ee 0f       	add	r30, r30
+ 4e2:	ff 1f       	adc	r31, r31
+ 4e4:	ee 0f       	add	r30, r30
+ 4e6:	ff 1f       	adc	r31, r31
+ 4e8:	e9 5c       	subi	r30, 0xC9	; 201
+ 4ea:	fe 4f       	sbci	r31, 0xFE	; 254
+ 4ec:	73 83       	std	Z+3, r23	; 0x03
+ 4ee:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 4f0:	30 83       	st	Z, r19
+    lcdaction->lcd_data = data;
+ 4f2:	21 83       	std	Z+1, r18	; 0x01
+ 4f4:	9f 5f       	subi	r25, 0xFF	; 255
+
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '0');
+    }
+    for (int i = 0; i < 20; i++)
+ 4f6:	49 13       	cpse	r20, r25
+ 4f8:	f1 cf       	rjmp	.-30     	; 0x4dc <__EEPROM_REGION_LENGTH__+0xdc>
+ 4fa:	4d e3       	ldi	r20, 0x3D	; 61
+ 4fc:	45 0f       	add	r20, r21
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 4fe:	6a e0       	ldi	r22, 0x0A	; 10
+ 500:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 502:	32 e0       	ldi	r19, 0x02	; 2
+    lcdaction->lcd_data = data;
+ 504:	22 e3       	ldi	r18, 0x32	; 50
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '1');
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '2');
+ 506:	e9 2f       	mov	r30, r25
+ 508:	f0 e0       	ldi	r31, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 50a:	ee 0f       	add	r30, r30
+ 50c:	ff 1f       	adc	r31, r31
+ 50e:	ee 0f       	add	r30, r30
+ 510:	ff 1f       	adc	r31, r31
+ 512:	e9 5c       	subi	r30, 0xC9	; 201
+ 514:	fe 4f       	sbci	r31, 0xFE	; 254
+ 516:	73 83       	std	Z+3, r23	; 0x03
+ 518:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 51a:	30 83       	st	Z, r19
+    lcdaction->lcd_data = data;
+ 51c:	21 83       	std	Z+1, r18	; 0x01
+ 51e:	9f 5f       	subi	r25, 0xFF	; 255
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '1');
+    }
+    for (int i = 0; i < 20; i++)
+ 520:	49 13       	cpse	r20, r25
+ 522:	f1 cf       	rjmp	.-30     	; 0x506 <__EEPROM_REGION_LENGTH__+0x106>
+ 524:	5f 5a       	subi	r21, 0xAF	; 175
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 526:	2a e0       	ldi	r18, 0x0A	; 10
+ 528:	30 e0       	ldi	r19, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 52a:	42 e0       	ldi	r20, 0x02	; 2
+    lcdaction->lcd_data = data;
+ 52c:	63 e3       	ldi	r22, 0x33	; 51
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '2');
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '3');
+ 52e:	e9 2f       	mov	r30, r25
+ 530:	f0 e0       	ldi	r31, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 532:	ee 0f       	add	r30, r30
+ 534:	ff 1f       	adc	r31, r31
+ 536:	ee 0f       	add	r30, r30
+ 538:	ff 1f       	adc	r31, r31
+ 53a:	e9 5c       	subi	r30, 0xC9	; 201
+ 53c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 53e:	33 83       	std	Z+3, r19	; 0x03
+ 540:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 542:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 544:	61 83       	std	Z+1, r22	; 0x01
+ 546:	9f 5f       	subi	r25, 0xFF	; 255
+    }
+    for (int i = 0; i < 20; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '2');
+    }
+    for (int i = 0; i < 20; i++)
+ 548:	59 13       	cpse	r21, r25
+ 54a:	f1 cf       	rjmp	.-30     	; 0x52e <__EEPROM_REGION_LENGTH__+0x12e>
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], '3');
+    }
+    lcdbuffer[lcdbufferHead - 1].delay_ms = 3000;
+ 54c:	83 5c       	subi	r24, 0xC3	; 195
+ 54e:	90 e0       	ldi	r25, 0x00	; 0
+ 550:	fc 01       	movw	r30, r24
+ 552:	ee 0f       	add	r30, r30
+ 554:	ff 1f       	adc	r31, r31
+ 556:	ee 0f       	add	r30, r30
+ 558:	ff 1f       	adc	r31, r31
+ 55a:	ed 5c       	subi	r30, 0xCD	; 205
+ 55c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 55e:	68 eb       	ldi	r22, 0xB8	; 184
+ 560:	7b e0       	ldi	r23, 0x0B	; 11
+ 562:	73 83       	std	Z+3, r23	; 0x03
+ 564:	62 83       	std	Z+2, r22	; 0x02
+}
+
+// turn on display and cursor
+void LCDOn(LCDAction *lcdaction, uint8_t display, uint8_t cursor, uint8_t blinking)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 566:	fc 01       	movw	r30, r24
+ 568:	ee 0f       	add	r30, r30
+ 56a:	ff 1f       	adc	r31, r31
+ 56c:	ee 0f       	add	r30, r30
+ 56e:	ff 1f       	adc	r31, r31
+ 570:	e9 5c       	subi	r30, 0xC9	; 201
+ 572:	fe 4f       	sbci	r31, 0xFE	; 254
+ 574:	10 82       	st	Z, r1
+    // 0 0 0 0 0 0 1 D C B
+    lcdaction->lcd_data = 0b00001000;
+    if (display)
+    {
+        lcdaction->lcd_data |= _BV(2);
+ 576:	5c e0       	ldi	r21, 0x0C	; 12
+ 578:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 57a:	01 96       	adiw	r24, 0x01	; 1
+ 57c:	99 27       	eor	r25, r25
+/*
+set CGRAM address
+*/
+void LCDSetCGRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 57e:	fc 01       	movw	r30, r24
+ 580:	ee 0f       	add	r30, r30
+ 582:	ff 1f       	adc	r31, r31
+ 584:	ee 0f       	add	r30, r30
+ 586:	ff 1f       	adc	r31, r31
+ 588:	e9 5c       	subi	r30, 0xC9	; 201
+ 58a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 58c:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b01000000;
+    lcdaction->lcd_data |= addr;
+ 58e:	50 e4       	ldi	r21, 0x40	; 64
+ 590:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 592:	01 96       	adiw	r24, 0x01	; 1
+ 594:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 596:	fc 01       	movw	r30, r24
+ 598:	ee 0f       	add	r30, r30
+ 59a:	ff 1f       	adc	r31, r31
+ 59c:	ee 0f       	add	r30, r30
+ 59e:	ff 1f       	adc	r31, r31
+ 5a0:	e9 5c       	subi	r30, 0xC9	; 201
+ 5a2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 5a4:	33 83       	std	Z+3, r19	; 0x03
+ 5a6:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 5a8:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 5aa:	55 e1       	ldi	r21, 0x15	; 21
+ 5ac:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 5ae:	01 96       	adiw	r24, 0x01	; 1
+ 5b0:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 5b2:	fc 01       	movw	r30, r24
+ 5b4:	ee 0f       	add	r30, r30
+ 5b6:	ff 1f       	adc	r31, r31
+ 5b8:	ee 0f       	add	r30, r30
+ 5ba:	ff 1f       	adc	r31, r31
+ 5bc:	e9 5c       	subi	r30, 0xC9	; 201
+ 5be:	fe 4f       	sbci	r31, 0xFE	; 254
+ 5c0:	33 83       	std	Z+3, r19	; 0x03
+ 5c2:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 5c4:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 5c6:	6a e8       	ldi	r22, 0x8A	; 138
+ 5c8:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 5ca:	01 96       	adiw	r24, 0x01	; 1
+ 5cc:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 5ce:	fc 01       	movw	r30, r24
+ 5d0:	ee 0f       	add	r30, r30
+ 5d2:	ff 1f       	adc	r31, r31
+ 5d4:	ee 0f       	add	r30, r30
+ 5d6:	ff 1f       	adc	r31, r31
+ 5d8:	e9 5c       	subi	r30, 0xC9	; 201
+ 5da:	fe 4f       	sbci	r31, 0xFE	; 254
+ 5dc:	33 83       	std	Z+3, r19	; 0x03
+ 5de:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 5e0:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 5e2:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 5e4:	01 96       	adiw	r24, 0x01	; 1
+ 5e6:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 5e8:	fc 01       	movw	r30, r24
+ 5ea:	ee 0f       	add	r30, r30
+ 5ec:	ff 1f       	adc	r31, r31
+ 5ee:	ee 0f       	add	r30, r30
+ 5f0:	ff 1f       	adc	r31, r31
+ 5f2:	e9 5c       	subi	r30, 0xC9	; 201
+ 5f4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 5f6:	33 83       	std	Z+3, r19	; 0x03
+ 5f8:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 5fa:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 5fc:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 5fe:	01 96       	adiw	r24, 0x01	; 1
+ 600:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 602:	fc 01       	movw	r30, r24
+ 604:	ee 0f       	add	r30, r30
+ 606:	ff 1f       	adc	r31, r31
+ 608:	ee 0f       	add	r30, r30
+ 60a:	ff 1f       	adc	r31, r31
+ 60c:	e9 5c       	subi	r30, 0xC9	; 201
+ 60e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 610:	33 83       	std	Z+3, r19	; 0x03
+ 612:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 614:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 616:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 618:	01 96       	adiw	r24, 0x01	; 1
+ 61a:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 61c:	fc 01       	movw	r30, r24
+ 61e:	ee 0f       	add	r30, r30
+ 620:	ff 1f       	adc	r31, r31
+ 622:	ee 0f       	add	r30, r30
+ 624:	ff 1f       	adc	r31, r31
+ 626:	e9 5c       	subi	r30, 0xC9	; 201
+ 628:	fe 4f       	sbci	r31, 0xFE	; 254
+ 62a:	33 83       	std	Z+3, r19	; 0x03
+ 62c:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 62e:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 630:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 632:	01 96       	adiw	r24, 0x01	; 1
+ 634:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 636:	fc 01       	movw	r30, r24
+ 638:	ee 0f       	add	r30, r30
+ 63a:	ff 1f       	adc	r31, r31
+ 63c:	ee 0f       	add	r30, r30
+ 63e:	ff 1f       	adc	r31, r31
+ 640:	e9 5c       	subi	r30, 0xC9	; 201
+ 642:	fe 4f       	sbci	r31, 0xFE	; 254
+ 644:	33 83       	std	Z+3, r19	; 0x03
+ 646:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 648:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 64a:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 64c:	01 96       	adiw	r24, 0x01	; 1
+ 64e:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 650:	fc 01       	movw	r30, r24
+ 652:	ee 0f       	add	r30, r30
+ 654:	ff 1f       	adc	r31, r31
+ 656:	ee 0f       	add	r30, r30
+ 658:	ff 1f       	adc	r31, r31
+ 65a:	e9 5c       	subi	r30, 0xC9	; 201
+ 65c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 65e:	33 83       	std	Z+3, r19	; 0x03
+ 660:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 662:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 664:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 666:	01 96       	adiw	r24, 0x01	; 1
+ 668:	99 27       	eor	r25, r25
+/*
+set CGRAM address
+*/
+void LCDSetCGRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 66a:	fc 01       	movw	r30, r24
+ 66c:	ee 0f       	add	r30, r30
+ 66e:	ff 1f       	adc	r31, r31
+ 670:	ee 0f       	add	r30, r30
+ 672:	ff 1f       	adc	r31, r31
+ 674:	e9 5c       	subi	r30, 0xC9	; 201
+ 676:	fe 4f       	sbci	r31, 0xFE	; 254
+ 678:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b01000000;
+    lcdaction->lcd_data |= addr;
+ 67a:	78 e4       	ldi	r23, 0x48	; 72
+ 67c:	71 83       	std	Z+1, r23	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 67e:	01 96       	adiw	r24, 0x01	; 1
+ 680:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 682:	fc 01       	movw	r30, r24
+ 684:	ee 0f       	add	r30, r30
+ 686:	ff 1f       	adc	r31, r31
+ 688:	ee 0f       	add	r30, r30
+ 68a:	ff 1f       	adc	r31, r31
+ 68c:	e9 5c       	subi	r30, 0xC9	; 201
+ 68e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 690:	33 83       	std	Z+3, r19	; 0x03
+ 692:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 694:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 696:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 698:	01 96       	adiw	r24, 0x01	; 1
+ 69a:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 69c:	fc 01       	movw	r30, r24
+ 69e:	ee 0f       	add	r30, r30
+ 6a0:	ff 1f       	adc	r31, r31
+ 6a2:	ee 0f       	add	r30, r30
+ 6a4:	ff 1f       	adc	r31, r31
+ 6a6:	e9 5c       	subi	r30, 0xC9	; 201
+ 6a8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6aa:	33 83       	std	Z+3, r19	; 0x03
+ 6ac:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 6ae:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 6b0:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 6b2:	01 96       	adiw	r24, 0x01	; 1
+ 6b4:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 6b6:	fc 01       	movw	r30, r24
+ 6b8:	ee 0f       	add	r30, r30
+ 6ba:	ff 1f       	adc	r31, r31
+ 6bc:	ee 0f       	add	r30, r30
+ 6be:	ff 1f       	adc	r31, r31
+ 6c0:	e9 5c       	subi	r30, 0xC9	; 201
+ 6c2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6c4:	33 83       	std	Z+3, r19	; 0x03
+ 6c6:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 6c8:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 6ca:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 6cc:	01 96       	adiw	r24, 0x01	; 1
+ 6ce:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 6d0:	fc 01       	movw	r30, r24
+ 6d2:	ee 0f       	add	r30, r30
+ 6d4:	ff 1f       	adc	r31, r31
+ 6d6:	ee 0f       	add	r30, r30
+ 6d8:	ff 1f       	adc	r31, r31
+ 6da:	e9 5c       	subi	r30, 0xC9	; 201
+ 6dc:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6de:	33 83       	std	Z+3, r19	; 0x03
+ 6e0:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 6e2:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 6e4:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 6e6:	01 96       	adiw	r24, 0x01	; 1
+ 6e8:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 6ea:	fc 01       	movw	r30, r24
+ 6ec:	ee 0f       	add	r30, r30
+ 6ee:	ff 1f       	adc	r31, r31
+ 6f0:	ee 0f       	add	r30, r30
+ 6f2:	ff 1f       	adc	r31, r31
+ 6f4:	e9 5c       	subi	r30, 0xC9	; 201
+ 6f6:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6f8:	33 83       	std	Z+3, r19	; 0x03
+ 6fa:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 6fc:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 6fe:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 700:	01 96       	adiw	r24, 0x01	; 1
+ 702:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 704:	fc 01       	movw	r30, r24
+ 706:	ee 0f       	add	r30, r30
+ 708:	ff 1f       	adc	r31, r31
+ 70a:	ee 0f       	add	r30, r30
+ 70c:	ff 1f       	adc	r31, r31
+ 70e:	e9 5c       	subi	r30, 0xC9	; 201
+ 710:	fe 4f       	sbci	r31, 0xFE	; 254
+ 712:	33 83       	std	Z+3, r19	; 0x03
+ 714:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 716:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 718:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 71a:	01 96       	adiw	r24, 0x01	; 1
+ 71c:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 71e:	fc 01       	movw	r30, r24
+ 720:	ee 0f       	add	r30, r30
+ 722:	ff 1f       	adc	r31, r31
+ 724:	ee 0f       	add	r30, r30
+ 726:	ff 1f       	adc	r31, r31
+ 728:	e9 5c       	subi	r30, 0xC9	; 201
+ 72a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 72c:	33 83       	std	Z+3, r19	; 0x03
+ 72e:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 730:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 732:	61 83       	std	Z+1, r22	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 734:	01 96       	adiw	r24, 0x01	; 1
+ 736:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 738:	fc 01       	movw	r30, r24
+ 73a:	ee 0f       	add	r30, r30
+ 73c:	ff 1f       	adc	r31, r31
+ 73e:	ee 0f       	add	r30, r30
+ 740:	ff 1f       	adc	r31, r31
+ 742:	e9 5c       	subi	r30, 0xC9	; 201
+ 744:	fe 4f       	sbci	r31, 0xFE	; 254
+ 746:	33 83       	std	Z+3, r19	; 0x03
+ 748:	22 83       	std	Z+2, r18	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 74a:	40 83       	st	Z, r20
+    lcdaction->lcd_data = data;
+ 74c:	51 83       	std	Z+1, r21	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 74e:	01 96       	adiw	r24, 0x01	; 1
+ 750:	99 27       	eor	r25, r25
+/*
+clear the LCD
+*/
+void LCDClear(LCDAction *lcdaction)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 752:	fc 01       	movw	r30, r24
+ 754:	ee 0f       	add	r30, r30
+ 756:	ff 1f       	adc	r31, r31
+ 758:	ee 0f       	add	r30, r30
+ 75a:	ff 1f       	adc	r31, r31
+ 75c:	e9 5c       	subi	r30, 0xC9	; 201
+ 75e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 760:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b00000001;
+ 762:	21 e0       	ldi	r18, 0x01	; 1
+ 764:	21 83       	std	Z+1, r18	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 766:	01 96       	adiw	r24, 0x01	; 1
+ 768:	99 27       	eor	r25, r25
+/*
+set DDRAM address
+*/
+void LCDSetDDRAMAddr(LCDAction *lcdaction, uint8_t addr)
+{
+    lcdaction->lcd_ctrl = 0b00;
+ 76a:	fc 01       	movw	r30, r24
+ 76c:	ee 0f       	add	r30, r30
+ 76e:	ff 1f       	adc	r31, r31
+ 770:	ee 0f       	add	r30, r30
+ 772:	ff 1f       	adc	r31, r31
+ 774:	e9 5c       	subi	r30, 0xC9	; 201
+ 776:	fe 4f       	sbci	r31, 0xFE	; 254
+ 778:	10 82       	st	Z, r1
+    lcdaction->lcd_data = 0b10000000;
+    lcdaction->lcd_data |= addr;
+ 77a:	90 e8       	ldi	r25, 0x80	; 128
+ 77c:	91 83       	std	Z+1, r25	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 77e:	8f 5f       	subi	r24, 0xFF	; 255
+ 780:	48 e2       	ldi	r20, 0x28	; 40
+ 782:	50 e0       	ldi	r21, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 784:	6a e0       	ldi	r22, 0x0A	; 10
+ 786:	70 e0       	ldi	r23, 0x00	; 0
+    lcdaction->lcd_ctrl = 0b10;
+ 788:	a2 e0       	ldi	r26, 0x02	; 2
+    lcdaction->lcd_data = data;
+ 78a:	b1 e0       	ldi	r27, 0x01	; 1
+
+    LCDClear(&lcdbuffer[lcdbufferHead]);
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 0);
+    for (int i = 0; i < 40; i++)
+    {
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0);
+ 78c:	90 e0       	ldi	r25, 0x00	; 0
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 78e:	fc 01       	movw	r30, r24
+ 790:	ee 0f       	add	r30, r30
+ 792:	ff 1f       	adc	r31, r31
+ 794:	ee 0f       	add	r30, r30
+ 796:	ff 1f       	adc	r31, r31
+ 798:	e9 5c       	subi	r30, 0xC9	; 201
+ 79a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 79c:	73 83       	std	Z+3, r23	; 0x03
+ 79e:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 7a0:	a0 83       	st	Z, r26
+    lcdaction->lcd_data = data;
+ 7a2:	11 82       	std	Z+1, r1	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 7a4:	01 96       	adiw	r24, 0x01	; 1
+ 7a6:	99 27       	eor	r25, r25
+/*
+Write data to the CGRAM/DDRAM
+*/
+void LCDWriteRAM(LCDAction *lcdaction, uint8_t data)
+{
+    lcdaction->delay_ms = CHAR_DELAY_MS;
+ 7a8:	fc 01       	movw	r30, r24
+ 7aa:	ee 0f       	add	r30, r30
+ 7ac:	ff 1f       	adc	r31, r31
+ 7ae:	ee 0f       	add	r30, r30
+ 7b0:	ff 1f       	adc	r31, r31
+ 7b2:	e9 5c       	subi	r30, 0xC9	; 201
+ 7b4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 7b6:	73 83       	std	Z+3, r23	; 0x03
+ 7b8:	62 83       	std	Z+2, r22	; 0x02
+    lcdaction->lcd_ctrl = 0b10;
+ 7ba:	a0 83       	st	Z, r26
+    lcdaction->lcd_data = data;
+ 7bc:	b1 83       	std	Z+1, r27	; 0x01
+    LCD_D_PORT = data;
+}
+
+void incrementLCDBuffHead()
+{
+    lcdbufferHead = (lcdbufferHead + 1) % LCD_BUFF_SIZE;
+ 7be:	9c 01       	movw	r18, r24
+ 7c0:	2f 5f       	subi	r18, 0xFF	; 255
+ 7c2:	3f 4f       	sbci	r19, 0xFF	; 255
+ 7c4:	82 2f       	mov	r24, r18
+ 7c6:	41 50       	subi	r20, 0x01	; 1
+ 7c8:	51 09       	sbc	r21, r1
+    LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0b10001010);
+    LCDWriteRAM(&lcdbuffer[lcdbufferHead], 0b00010101);
+
+    LCDClear(&lcdbuffer[lcdbufferHead]);
+    LCDSetDDRAMAddr(&lcdbuffer[lcdbufferHead], 0);
+    for (int i = 0; i < 40; i++)
+ 7ca:	01 f7       	brne	.-64     	; 0x78c <__EEPROM_REGION_LENGTH__+0x38c>
+ 7cc:	20 93 c7 07 	sts	0x07C7, r18	; 0x8007c7 <lcdbufferHead>
+                lcdActState = 1;
+                break;
+            case 1:
+                e = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(2);
+                LCDSetEnable(1);
+                lcdActState = 2;
+ 7d0:	12 e0       	ldi	r17, 0x02	; 2
+                // {
+                //     LCD_D_DDR = 0b11111111;
+                //     LCD_D_PORT = 0;
+                // }
+                LCDSetRSRW(rs, rw);
+                lcdActState = 1;
+ 7d2:	c1 e0       	ldi	r28, 0x01	; 1
+                lcdActState = 2;
+                break;
+            case 2:
+                data = lcdbuffer[lcdbufferTail].lcd_data;
+                LCDWriteData(data);
+                lcdActState = 3;
+ 7d4:	d3 e0       	ldi	r29, 0x03	; 3
+ 7d6:	5a c0       	rjmp	.+180    	; 0x88c <__DATA_REGION_LENGTH__+0x8c>
+    }
+
+    while (1)
+    {
+        wdt_reset();
+        if (next == 0 && lcdbufferHead != lcdbufferTail && millis - lcdBuffLastMillis > lcdbuffer[lcdbufferTail - 1].delay_ms)
+ 7d8:	80 91 2d 01 	lds	r24, 0x012D	; 0x80012d <lcdbufferTail>
+ 7dc:	90 91 c7 07 	lds	r25, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 7e0:	98 17       	cp	r25, r24
+ 7e2:	09 f4       	brne	.+2      	; 0x7e6 <__EEPROM_REGION_LENGTH__+0x3e6>
+ 7e4:	4c c0       	rjmp	.+152    	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+ 7e6:	20 91 c9 07 	lds	r18, 0x07C9	; 0x8007c9 <millis>
+ 7ea:	30 91 ca 07 	lds	r19, 0x07CA	; 0x8007ca <millis+0x1>
+ 7ee:	40 91 32 01 	lds	r20, 0x0132	; 0x800132 <lcdBuffLastMillis>
+ 7f2:	50 91 33 01 	lds	r21, 0x0133	; 0x800133 <lcdBuffLastMillis+0x1>
+ 7f6:	24 1b       	sub	r18, r20
+ 7f8:	35 0b       	sbc	r19, r21
+ 7fa:	48 2f       	mov	r20, r24
+ 7fc:	41 50       	subi	r20, 0x01	; 1
+ 7fe:	55 0b       	sbc	r21, r21
+ 800:	fa 01       	movw	r30, r20
+ 802:	ee 0f       	add	r30, r30
+ 804:	ff 1f       	adc	r31, r31
+ 806:	ee 0f       	add	r30, r30
+ 808:	ff 1f       	adc	r31, r31
+ 80a:	e9 5c       	subi	r30, 0xC9	; 201
+ 80c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 80e:	42 81       	ldd	r20, Z+2	; 0x02
+ 810:	53 81       	ldd	r21, Z+3	; 0x03
+ 812:	42 17       	cp	r20, r18
+ 814:	53 07       	cpc	r21, r19
+ 816:	98 f5       	brcc	.+102    	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+        {
+            lcdBuffLastMillis = millis;
+ 818:	20 91 c9 07 	lds	r18, 0x07C9	; 0x8007c9 <millis>
+ 81c:	30 91 ca 07 	lds	r19, 0x07CA	; 0x8007ca <millis+0x1>
+ 820:	30 93 33 01 	sts	0x0133, r19	; 0x800133 <lcdBuffLastMillis+0x1>
+ 824:	20 93 32 01 	sts	0x0132, r18	; 0x800132 <lcdBuffLastMillis>
+            next = 1;
+ 828:	c0 93 36 01 	sts	0x0136, r28	; 0x800136 <next>
+        }
+        /*
+        Code to write the current buffer item to the LCD
+        */
+        if (next && lcdbufferHead != lcdbufferTail && millis - lcdActLastMillis > LCD_DELAY_MS)
+ 82c:	20 91 c9 07 	lds	r18, 0x07C9	; 0x8007c9 <millis>
+ 830:	30 91 ca 07 	lds	r19, 0x07CA	; 0x8007ca <millis+0x1>
+ 834:	40 91 2f 01 	lds	r20, 0x012F	; 0x80012f <lcdActLastMillis>
+ 838:	50 91 30 01 	lds	r21, 0x0130	; 0x800130 <lcdActLastMillis+0x1>
+ 83c:	24 1b       	sub	r18, r20
+ 83e:	35 0b       	sbc	r19, r21
+ 840:	22 30       	cpi	r18, 0x02	; 2
+ 842:	31 05       	cpc	r19, r1
+ 844:	e0 f0       	brcs	.+56     	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+        {
+            lcdActLastMillis = millis;
+ 846:	20 91 c9 07 	lds	r18, 0x07C9	; 0x8007c9 <millis>
+ 84a:	30 91 ca 07 	lds	r19, 0x07CA	; 0x8007ca <millis+0x1>
+ 84e:	30 93 30 01 	sts	0x0130, r19	; 0x800130 <lcdActLastMillis+0x1>
+ 852:	20 93 2f 01 	sts	0x012F, r18	; 0x80012f <lcdActLastMillis>
+            switch (lcdActState)
+ 856:	90 91 2c 01 	lds	r25, 0x012C	; 0x80012c <__data_end>
+ 85a:	91 30       	cpi	r25, 0x01	; 1
+ 85c:	09 f4       	brne	.+2      	; 0x860 <__DATA_REGION_LENGTH__+0x60>
+ 85e:	47 c0       	rjmp	.+142    	; 0x8ee <__DATA_REGION_LENGTH__+0xee>
+ 860:	88 f1       	brcs	.+98     	; 0x8c4 <__DATA_REGION_LENGTH__+0xc4>
+ 862:	92 30       	cpi	r25, 0x02	; 2
+ 864:	01 f1       	breq	.+64     	; 0x8a6 <__DATA_REGION_LENGTH__+0xa6>
+ 866:	93 30       	cpi	r25, 0x03	; 3
+ 868:	51 f4       	brne	.+20     	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+    {
+        LCD_SIG_PORT |= _BV(E);
+    }
+    else
+    {
+        LCD_SIG_PORT &= ~_BV(E);
+ 86a:	2a 98       	cbi	0x05, 2	; 5
+                lcdActState = 3;
+                // data = LCD_D_READ;
+                break;
+            case 3:
+                LCDSetEnable(0);
+                lcdActState = 0;
+ 86c:	10 92 2c 01 	sts	0x012C, r1	; 0x80012c <__data_end>
+                lcdbufferTail = (lcdbufferTail + 1) % LCD_BUFF_SIZE;
+ 870:	80 91 2d 01 	lds	r24, 0x012D	; 0x80012d <lcdbufferTail>
+ 874:	8f 5f       	subi	r24, 0xFF	; 255
+ 876:	80 93 2d 01 	sts	0x012D, r24	; 0x80012d <lcdbufferTail>
+                next = 0;
+ 87a:	10 92 36 01 	sts	0x0136, r1	; 0x800136 <next>
+                break;
+            }
+        }
+
+        sleep_mode();
+ 87e:	83 b7       	in	r24, 0x33	; 51
+ 880:	81 60       	ori	r24, 0x01	; 1
+ 882:	83 bf       	out	0x33, r24	; 51
+ 884:	88 95       	sleep
+ 886:	83 b7       	in	r24, 0x33	; 51
+ 888:	8e 7f       	andi	r24, 0xFE	; 254
+ 88a:	83 bf       	out	0x33, r24	; 51
+        LCDWriteRAM(&lcdbuffer[lcdbufferHead], 1);
+    }
+
+    while (1)
+    {
+        wdt_reset();
+ 88c:	a8 95       	wdr
+        if (next == 0 && lcdbufferHead != lcdbufferTail && millis - lcdBuffLastMillis > lcdbuffer[lcdbufferTail - 1].delay_ms)
+ 88e:	80 91 36 01 	lds	r24, 0x0136	; 0x800136 <next>
+ 892:	88 23       	and	r24, r24
+ 894:	09 f4       	brne	.+2      	; 0x898 <__DATA_REGION_LENGTH__+0x98>
+ 896:	a0 cf       	rjmp	.-192    	; 0x7d8 <__EEPROM_REGION_LENGTH__+0x3d8>
+ 898:	80 91 2d 01 	lds	r24, 0x012D	; 0x80012d <lcdbufferTail>
+            next = 1;
+        }
+        /*
+        Code to write the current buffer item to the LCD
+        */
+        if (next && lcdbufferHead != lcdbufferTail && millis - lcdActLastMillis > LCD_DELAY_MS)
+ 89c:	90 91 c7 07 	lds	r25, 0x07C7	; 0x8007c7 <lcdbufferHead>
+ 8a0:	98 13       	cpse	r25, r24
+ 8a2:	c4 cf       	rjmp	.-120    	; 0x82c <__DATA_REGION_LENGTH__+0x2c>
+ 8a4:	ec cf       	rjmp	.-40     	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+                e = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(2);
+                LCDSetEnable(1);
+                lcdActState = 2;
+                break;
+            case 2:
+                data = lcdbuffer[lcdbufferTail].lcd_data;
+ 8a6:	e8 2f       	mov	r30, r24
+ 8a8:	f0 e0       	ldi	r31, 0x00	; 0
+ 8aa:	ee 0f       	add	r30, r30
+ 8ac:	ff 1f       	adc	r31, r31
+ 8ae:	ee 0f       	add	r30, r30
+ 8b0:	ff 1f       	adc	r31, r31
+ 8b2:	e9 5c       	subi	r30, 0xC9	; 201
+ 8b4:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8b6:	81 81       	ldd	r24, Z+1	; 0x01
+ 8b8:	80 93 34 01 	sts	0x0134, r24	; 0x800134 <data>
+
+/*
+write data to the LCD data bus */
+void LCDWriteData(uint8_t data)
+{
+    LCD_D_PORT = data;
+ 8bc:	8b b9       	out	0x0b, r24	; 11
+                lcdActState = 2;
+                break;
+            case 2:
+                data = lcdbuffer[lcdbufferTail].lcd_data;
+                LCDWriteData(data);
+                lcdActState = 3;
+ 8be:	d0 93 2c 01 	sts	0x012C, r29	; 0x80012c <__data_end>
+                // data = LCD_D_READ;
+                break;
+ 8c2:	dd cf       	rjmp	.-70     	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+        {
+            lcdActLastMillis = millis;
+            switch (lcdActState)
+            {
+            case 0:
+                rs = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(1);
+ 8c4:	e8 2f       	mov	r30, r24
+ 8c6:	f0 e0       	ldi	r31, 0x00	; 0
+ 8c8:	ee 0f       	add	r30, r30
+ 8ca:	ff 1f       	adc	r31, r31
+ 8cc:	ee 0f       	add	r30, r30
+ 8ce:	ff 1f       	adc	r31, r31
+ 8d0:	e9 5c       	subi	r30, 0xC9	; 201
+ 8d2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8d4:	60 81       	ld	r22, Z
+ 8d6:	86 2f       	mov	r24, r22
+ 8d8:	82 70       	andi	r24, 0x02	; 2
+ 8da:	80 93 31 01 	sts	0x0131, r24	; 0x800131 <rs>
+                rw = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(0);
+ 8de:	61 70       	andi	r22, 0x01	; 1
+ 8e0:	60 93 2e 01 	sts	0x012E, r22	; 0x80012e <rw>
+                // else
+                // {
+                //     LCD_D_DDR = 0b11111111;
+                //     LCD_D_PORT = 0;
+                // }
+                LCDSetRSRW(rs, rw);
+ 8e4:	0e 94 8c 00 	call	0x118	; 0x118 <LCDSetRSRW>
+                lcdActState = 1;
+ 8e8:	c0 93 2c 01 	sts	0x012C, r28	; 0x80012c <__data_end>
+                break;
+ 8ec:	c8 cf       	rjmp	.-112    	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+            case 1:
+                e = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(2);
+ 8ee:	e8 2f       	mov	r30, r24
+ 8f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 8f2:	ee 0f       	add	r30, r30
+ 8f4:	ff 1f       	adc	r31, r31
+ 8f6:	ee 0f       	add	r30, r30
+ 8f8:	ff 1f       	adc	r31, r31
+ 8fa:	e9 5c       	subi	r30, 0xC9	; 201
+ 8fc:	fe 4f       	sbci	r31, 0xFE	; 254
+ 8fe:	80 81       	ld	r24, Z
+ 900:	84 70       	andi	r24, 0x04	; 4
+ 902:	80 93 c8 07 	sts	0x07C8, r24	; 0x8007c8 <e>
+*/
+void LCDSetEnable(uint8_t en)
+{
+    if (en)
+    {
+        LCD_SIG_PORT |= _BV(E);
+ 906:	2a 9a       	sbi	0x05, 2	; 5
+                lcdActState = 1;
+                break;
+            case 1:
+                e = lcdbuffer[lcdbufferTail].lcd_ctrl & _BV(2);
+                LCDSetEnable(1);
+                lcdActState = 2;
+ 908:	10 93 2c 01 	sts	0x012C, r17	; 0x80012c <__data_end>
+                break;
+ 90c:	b8 cf       	rjmp	.-144    	; 0x87e <__DATA_REGION_LENGTH__+0x7e>
+
+0000090e <_exit>:
+ 90e:	f8 94       	cli
+
+00000910 <__stop_program>:
+ 910:	ff cf       	rjmp	.-2      	; 0x910 <__stop_program>
