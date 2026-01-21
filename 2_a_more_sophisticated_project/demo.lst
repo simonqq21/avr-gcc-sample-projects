@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   5 .stab         00000e40  00000000  00000000  0000078c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  6 .stabstr      0000114e  00000000  00000000  000015cc  2**0
+  6 .stabstr      00001153  00000000  00000000  000015cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .comment      00000011  00000000  00000000  0000271a  2**0
+  7 .comment      00000011  00000000  00000000  0000271f  2**0
                   CONTENTS, READONLY
-  8 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000272c  2**2
+  8 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002730  2**2
                   CONTENTS, READONLY
-  9 .debug_info   000005f4  00000000  00000000  0000276c  2**0
+  9 .debug_info   000005f4  00000000  00000000  00002770  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 000005a2  00000000  00000000  00002d60  2**0
+ 10 .debug_abbrev 000005a2  00000000  00000000  00002d64  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   0000001a  00000000  00000000  00003302  2**0
+ 11 .debug_line   0000001a  00000000  00000000  00003306  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_str    00000208  00000000  00000000  0000331c  2**0
+ 12 .debug_str    00000208  00000000  00000000  00003320  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -421,7 +421,7 @@ ISR(TIMER1_OVF_vect)
  2ee:	90 e0       	ldi	r25, 0x00	; 0
  2f0:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
  2f4:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
-        intflags.tmr_int = 1;
+        intflags.tmr1_ovf_int = 1;
  2f8:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <intflags>
  2fc:	81 60       	ori	r24, 0x01	; 1
  2fe:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <intflags>
@@ -444,7 +444,7 @@ ISR(TIMER1_OVF_vect)
  314:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
     {
         scaler = TMR1_SCALE;
-        intflags.tmr_int = 1;
+        intflags.tmr1_ovf_int = 1;
     }
 }
  318:	9f 91       	pop	r25
@@ -597,8 +597,10 @@ ISR(USART_RX_vect)
      */
     ADCSRA = _BV(ADEN) | _BV(ADPS1) | _BV(ADPS0);
  3d4:	90 93 7a 00 	sts	0x007A, r25	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
-    /*
-    TIMSK1 - Timer/Counter1 Interrupt Mask Register
+    OCIE1B - Timer/Counter1, Output Compare B Match Interrupt Enable
+    OCIE1A - OCIE1A: Timer/Counter1, Output Compare A Match Interrupt Enable
+    TOIE1 - Timer/Counter1, Overflow Interrupt Enable
+
      */
     TIMSK1 = _BV(TOIE1);
  3d8:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__TEXT_REGION_LENGTH__+0x7f806f>
@@ -685,7 +687,7 @@ ISR(USART_RX_vect)
         wdt_reset();
  428:	a8 95       	wdr
         // if the timer int flag has been set by the counter1 OVF ISR
-        if (intflags.tmr_int)
+        if (intflags.tmr1_ovf_int)
  42a:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <intflags>
  42e:	80 ff       	sbrs	r24, 0
  430:	30 c0       	rjmp	.+96     	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
@@ -694,7 +696,7 @@ ISR(USART_RX_vect)
              * Our periodic 10 ms interrupt happened.  See what we can
              * do about it.
              */
-            intflags.tmr_int = 0; // reset timer int flag
+            intflags.tmr1_ovf_int = 0; // reset timer int flag
  432:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <intflags>
  436:	8e 7f       	andi	r24, 0xFE	; 254
  438:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <intflags>
@@ -879,11 +881,11 @@ ISR(USART_RX_vect)
  50e:	0e 94 0c 01 	call	0x218	; 0x218 <set_pwm>
                     break;
  512:	c2 e0       	ldi	r28, 0x02	; 2
-                    for (;;)
-                        ;
-                }
             }
         }
+        /*
+        Put the device into sleep mode, taking care of setting the SE bit before, and clearing it afterwards.
+        */
         sleep_mode();
  514:	83 b7       	in	r24, 0x33	; 51
  516:	81 60       	ori	r24, 0x01	; 1

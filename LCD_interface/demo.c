@@ -42,7 +42,7 @@ char str[80];
 /*
 software clock
 */
-volatile uint16_t millis;
+volatile uint16_t millis_val;
 volatile uint8_t millis_fract;
 
 /*
@@ -55,16 +55,16 @@ counter0 increments every 1/250000 seconds, or 4 us.
 counter0 overflows every 256 * 4us = 1.024 ms.
 1ms has elapsed every counter0 overflow.
 As for the fractional part, accumulate the 0.024 ms by incrementing a variable by 24.
-Every time that variable exceeds 1000, add one millisecond to the millis variable.
+Every time that variable exceeds 1000, add one millisecond to the millis_val variable.
 */
 ISR(TIMER0_OVF_vect)
 {
-    millis += 2;
+    millis_val += 2;
     millis_fract += MILLIS_FRACT_INT * 2;
     if (millis_fract >= MILLIS_FRACT_MAX)
     {
         millis_fract -= MILLIS_FRACT_MAX;
-        millis++;
+        millis_val++;
     }
 }
 
