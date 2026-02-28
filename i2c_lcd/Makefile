@@ -69,7 +69,7 @@ OBJCOPY		= avr-objcopy
 OBJDUMP		= avr-objdump
 
 all: $(PRG).elf lst text eeprom
-$(PRG).elf: $(PRG).o uart.o
+$(PRG).elf: $(PRG).o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 # dependency:
 # demo.o: demo.c iocompat.h
@@ -121,7 +121,7 @@ pdf: $(PRG).pdf
 	$(FIG2DEV) -L png $< $@
 
 flash: $(PRG).hex
-	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:$(PRG).hex -F
+	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyACM0 -b19200 -U flash:w:$(PRG).hex -F
 # avrdude -p m328pb -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:digital_input.hex -F
 
 

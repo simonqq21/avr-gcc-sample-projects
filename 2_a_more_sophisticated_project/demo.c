@@ -23,7 +23,6 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <avr/sleep.h>
-#include <avr/wdt.h>
 
 /* Part 1: Macro definitions */
 #define CONTROL_PORT PORTD

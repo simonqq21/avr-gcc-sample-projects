@@ -81,13 +81,13 @@ Disassembly of section .text:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000096 <main>:
-uint8_t led1 = PD5;
+uint8_t led1 = PB5;
 
 int main()
 {
     // led1 = PD5;
-    DDRD |= _BV(led1);
-  96:	8a b1       	in	r24, 0x0a	; 10
+    DDRB |= _BV(led1);
+  96:	84 b1       	in	r24, 0x04	; 4
   98:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   9c:	21 e0       	ldi	r18, 0x01	; 1
   9e:	30 e0       	ldi	r19, 0x00	; 0
@@ -96,13 +96,13 @@ int main()
   a4:	9a 95       	dec	r25
   a6:	ea f7       	brpl	.-6      	; 0xa2 <main+0xc>
   a8:	82 2b       	or	r24, r18
-  aa:	8a b9       	out	0x0a, r24	; 10
+  aa:	84 b9       	out	0x04, r24	; 4
     while (1)
     {
-        PORTD = PORTD | _BV(led1);
+        PORTB = PORTB | _BV(led1);
   ac:	21 e0       	ldi	r18, 0x01	; 1
   ae:	30 e0       	ldi	r19, 0x00	; 0
-  b0:	8b b1       	in	r24, 0x0b	; 11
+  b0:	85 b1       	in	r24, 0x05	; 5
   b2:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   b6:	a9 01       	movw	r20, r18
   b8:	01 c0       	rjmp	.+2      	; 0xbc <main+0x26>
@@ -110,7 +110,7 @@ int main()
   bc:	9a 95       	dec	r25
   be:	ea f7       	brpl	.-6      	; 0xba <main+0x24>
   c0:	84 2b       	or	r24, r20
-  c2:	8b b9       	out	0x0b, r24	; 11
+  c2:	85 b9       	out	0x05, r24	; 5
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
@@ -127,8 +127,8 @@ int main()
   d2:	00 c0       	rjmp	.+0      	; 0xd4 <main+0x3e>
   d4:	00 00       	nop
         _delay_ms(500);
-        PORTD = PORTD & ~_BV(led1);
-  d6:	4b b1       	in	r20, 0x0b	; 11
+        PORTB = PORTB & ~_BV(led1);
+  d6:	45 b1       	in	r20, 0x05	; 5
   d8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   dc:	b9 01       	movw	r22, r18
   de:	02 c0       	rjmp	.+4      	; 0xe4 <main+0x4e>
@@ -139,7 +139,7 @@ int main()
   e8:	cb 01       	movw	r24, r22
   ea:	80 95       	com	r24
   ec:	84 23       	and	r24, r20
-  ee:	8b b9       	out	0x0b, r24	; 11
+  ee:	85 b9       	out	0x05, r24	; 5
   f0:	7f ef       	ldi	r23, 0xFF	; 255
   f2:	83 ed       	ldi	r24, 0xD3	; 211
   f4:	90 e3       	ldi	r25, 0x30	; 48

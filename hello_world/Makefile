@@ -122,7 +122,7 @@ pdf: $(PRG).pdf
 	$(FIG2DEV) -L png $< $@
 
 flash: $(PRG).hex
-	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:$(PRG).hex -F
+	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyACM0 -b19200 -U flash:w:$(PRG).hex -F
 
 
 
