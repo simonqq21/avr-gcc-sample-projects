@@ -11,7 +11,9 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 #include <util/delay.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "src/i2c_master.h"
 
 // leds
@@ -92,6 +94,8 @@
 
 // ----------------------------------------------------------------
 // LCD E, RW, and RS bits on the PCF8974
+// PCF8574 to LCD pinout
+// D7 D6 D5 D4 BL E RW RS
 // ----------------------------------------------------------------
 #define LCD_E_PCF8974 0x04
 #define LCD_RW_PCF8974 0x02
@@ -134,7 +138,6 @@ void LCD_create_custom_char(LiquidCrystalDevice_t *device,
                             uint8_t slot,
                             uint8_t charmap[8]);
 void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command);
-void LCD_printChar(LiquidCrystalDevice_t *device, uint8_t c);
 void LCD_print(LiquidCrystalDevice_t *device, char *s);
 void LCD_write_byte(LiquidCrystalDevice_t *device, uint8_t value, uint8_t mode);
 void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value);
@@ -372,17 +375,16 @@ void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
 }
 
 /*
-function to write character to LCD
-*/
-void LCD_printChar(LiquidCrystalDevice_t *device, uint8_t c)
-{
-}
-
-/*
 function to write string to LCD
 */
 void LCD_print(LiquidCrystalDevice_t *device, char *s)
 {
+    uint8_t i = 0;
+    while (s[i] != 0x00)
+    {
+        LCD_write_byte(device, s[i], LCD_RS_PCF8974);
+        i++;
+    }
 }
 
 /*
@@ -406,11 +408,11 @@ The LCD operates in 4-bit mode with the PCF8974.
 void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value)
 {
     LCD_transmitI2C(device, value);
-    _delay_us(2);
+    _delay_us(200);
     LCD_transmitI2C(device, value | LCD_E_PCF8974);
-    _delay_us(2);
+    _delay_us(200);
     LCD_transmitI2C(device, value & ~LCD_E_PCF8974);
-    _delay_us(2);
+    _delay_us(200);
 }
 
 /*
@@ -436,19 +438,48 @@ void ioinit(void)
 int main(void)
 {
     ioinit();
-
+    char str[16];
     i2c_master_init(I2C_SCL_FREQUENCY_400K);
     // i2c_master_send_byte(PCF8574_ADDR, 0x08);
     // _delay_ms(5000);
     // i2c_master_send_byte(PCF8574_ADDR, 0);
     LiquidCrystalDevice_t lcd;
     lcd = LCD_init(PCF8574_ADDR, 16, 2, LCD_CHARACTER_FONT_5X8);
-    LCD_set_backlight(&lcd, LCD_BACKLIGHT_ON);
-    _delay_ms(2000);
+    _delay_ms(1000);
+    LCD_clear(&lcd);
+    _delay_ms(500);
     LCD_set_backlight(&lcd, LCD_BACKLIGHT_OFF);
-    _delay_ms(2000);
+    _delay_ms(500);
     LCD_set_backlight(&lcd, LCD_BACKLIGHT_ON);
+    _delay_ms(500);
+    LCD_set_display_state(&lcd, LCD_DISPLAY_ON);
+
+    LCD_return_home(&lcd);
+    LCD_set_cursor_state(&lcd, LCD_CURSOR_ON);
+    LCD_set_cursor_blink(&lcd, LCD_CURSOR_BLINK);
+    _delay_ms(500);
+    strncpy(str, "Hello world i2c0", 16);
+    LCD_print(&lcd, str);
+    _delay_ms(500);
+
+    LCD_set_cursor(&lcd, 1, 0);
+    strncpy(str, "Hello world i2c1", 16);
+    LCD_print(&lcd, str);
     while (1)
     {
+        // LCD_set_backlight(&lcd, LCD_BACKLIGHT_OFF);
+        // _delay_ms(500);
+        // LCD_set_backlight(&lcd, LCD_BACKLIGHT_ON);
+        // _delay_ms(500);
+        strncpy(str, "Hello world i2c0", 16);
+        LCD_print(&lcd, str);
+        _delay_ms(1000);
+
+        LCD_set_cursor(&lcd, 1, 0);
+        strncpy(str, "Hello world i2c1", 16);
+        LCD_print(&lcd, str);
+        _delay_ms(1000);
+        LCD_clear(&lcd);
+        _delay_ms(1000);
     }
 }
