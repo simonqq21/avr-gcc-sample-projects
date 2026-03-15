@@ -3,27 +3,27 @@ demo.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         0000011c  00800100  000008a8  0000093c  2**0
+  0 .data         00000126  00800100  000007f6  0000088a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000008a8  00000000  00000000  00000094  2**1
+  1 .text         000007f6  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000001  0080021c  0080021c  00000a58  2**0
+  2 .bss          00000001  00800226  00800226  000009b0  2**0
                   ALLOC
-  3 .stab         00002424  00000000  00000000  00000a58  2**2
+  3 .stab         000022bc  00000000  00000000  000009b0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00001531  00000000  00000000  00002e7c  2**0
+  4 .stabstr      00001562  00000000  00000000  00002c6c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .comment      00000011  00000000  00000000  000043ad  2**0
+  5 .comment      00000011  00000000  00000000  000041ce  2**0
                   CONTENTS, READONLY
-  6 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000043c0  2**2
+  6 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000041e0  2**2
                   CONTENTS, READONLY
-  7 .debug_info   000005f4  00000000  00000000  00004400  2**0
+  7 .debug_info   000005f4  00000000  00000000  00004220  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000005a2  00000000  00000000  000049f4  2**0
+  8 .debug_abbrev 000005a2  00000000  00000000  00004814  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   0000001a  00000000  00000000  00004f96  2**0
+  9 .debug_line   0000001a  00000000  00000000  00004db6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000208  00000000  00000000  00004fb0  2**0
+ 10 .debug_str    00000208  00000000  00000000  00004dd0  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -68,18 +68,18 @@ Disassembly of section .text:
   74:	12 e0       	ldi	r17, 0x02	; 2
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e8 ea       	ldi	r30, 0xA8	; 168
-  7c:	f8 e0       	ldi	r31, 0x08	; 8
+  7a:	e6 ef       	ldi	r30, 0xF6	; 246
+  7c:	f7 e0       	ldi	r31, 0x07	; 7
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	ac 31       	cpi	r26, 0x1C	; 28
+  84:	a6 32       	cpi	r26, 0x26	; 38
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
   8a:	22 e0       	ldi	r18, 0x02	; 2
-  8c:	ac e1       	ldi	r26, 0x1C	; 28
+  8c:	a6 e2       	ldi	r26, 0x26	; 38
   8e:	b2 e0       	ldi	r27, 0x02	; 2
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -87,1888 +87,1857 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	ad 31       	cpi	r26, 0x1D	; 29
+  94:	a7 32       	cpi	r26, 0x27	; 39
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 1a 03 	call	0x634	; 0x634 <main>
-  9e:	0c 94 52 04 	jmp	0x8a4	; 0x8a4 <_exit>
+  9a:	0e 94 0b 03 	call	0x616	; 0x616 <main>
+  9e:	0c 94 f9 03 	jmp	0x7f2	; 0x7f2 <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-000000a6 <LCD_set_backlight>:
-*/
-void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
-{
-    if (bl == LCD_BACKLIGHT_ON)
-    {
-        device->backlight = LCD_BACKLIGHT_ON;
-  a6:	fc 01       	movw	r30, r24
-/*
-function to set backlight of LCD
-*/
-void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
-{
-    if (bl == LCD_BACKLIGHT_ON)
-  a8:	68 30       	cpi	r22, 0x08	; 8
-  aa:	31 f0       	breq	.+12     	; 0xb8 <LCD_set_backlight+0x12>
-    {
-        device->backlight = LCD_BACKLIGHT_ON;
-    }
-    else
-    {
-        device->backlight = LCD_BACKLIGHT_OFF;
-  ac:	13 82       	std	Z+3, r1	; 0x03
-  ae:	60 e0       	ldi	r22, 0x00	; 0
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
-  b0:	fc 01       	movw	r30, r24
-  b2:	80 81       	ld	r24, Z
-  b4:	0c 94 88 02 	jmp	0x510	; 0x510 <i2c_master_send_byte>
-*/
-void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
-{
-    if (bl == LCD_BACKLIGHT_ON)
-    {
-        device->backlight = LCD_BACKLIGHT_ON;
-  b8:	63 83       	std	Z+3, r22	; 0x03
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
-  ba:	fc 01       	movw	r30, r24
-  bc:	80 81       	ld	r24, Z
-  be:	0c 94 88 02 	jmp	0x510	; 0x510 <i2c_master_send_byte>
-
-000000c2 <LCD_write_4bits>:
-/*
-function to write 4 bits of data to the LCD
-The LCD operates in 4-bit mode with the PCF8974.
-*/
-void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value)
-{
-  c2:	0f 93       	push	r16
-  c4:	1f 93       	push	r17
-  c6:	cf 93       	push	r28
-  c8:	8c 01       	movw	r16, r24
-  ca:	c6 2f       	mov	r28, r22
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
-  cc:	fc 01       	movw	r30, r24
-  ce:	63 81       	ldd	r22, Z+3	; 0x03
-  d0:	6c 2b       	or	r22, r28
-  d2:	80 81       	ld	r24, Z
-  d4:	0e 94 88 02 	call	0x510	; 0x510 <i2c_master_send_byte>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
-  d8:	8f e1       	ldi	r24, 0x1F	; 31
-  da:	93 e0       	ldi	r25, 0x03	; 3
-  dc:	01 97       	sbiw	r24, 0x01	; 1
-  de:	f1 f7       	brne	.-4      	; 0xdc <LCD_write_4bits+0x1a>
-  e0:	00 c0       	rjmp	.+0      	; 0xe2 <LCD_write_4bits+0x20>
-  e2:	00 00       	nop
-*/
-void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    LCD_transmitI2C(device, value);
-    _delay_us(200);
-    LCD_transmitI2C(device, value | LCD_E_PCF8974);
-  e4:	6c 2f       	mov	r22, r28
-  e6:	64 60       	ori	r22, 0x04	; 4
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
-  e8:	f8 01       	movw	r30, r16
-  ea:	83 81       	ldd	r24, Z+3	; 0x03
-  ec:	68 2b       	or	r22, r24
-  ee:	80 81       	ld	r24, Z
-  f0:	0e 94 88 02 	call	0x510	; 0x510 <i2c_master_send_byte>
-  f4:	8f e1       	ldi	r24, 0x1F	; 31
-  f6:	93 e0       	ldi	r25, 0x03	; 3
-  f8:	01 97       	sbiw	r24, 0x01	; 1
-  fa:	f1 f7       	brne	.-4      	; 0xf8 <LCD_write_4bits+0x36>
-  fc:	00 c0       	rjmp	.+0      	; 0xfe <LCD_write_4bits+0x3c>
-  fe:	00 00       	nop
-{
-    LCD_transmitI2C(device, value);
-    _delay_us(200);
-    LCD_transmitI2C(device, value | LCD_E_PCF8974);
-    _delay_us(200);
-    LCD_transmitI2C(device, value & ~LCD_E_PCF8974);
- 100:	cb 7f       	andi	r28, 0xFB	; 251
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
- 102:	f8 01       	movw	r30, r16
- 104:	63 81       	ldd	r22, Z+3	; 0x03
- 106:	6c 2b       	or	r22, r28
- 108:	80 81       	ld	r24, Z
- 10a:	0e 94 88 02 	call	0x510	; 0x510 <i2c_master_send_byte>
- 10e:	8f e1       	ldi	r24, 0x1F	; 31
- 110:	93 e0       	ldi	r25, 0x03	; 3
- 112:	01 97       	sbiw	r24, 0x01	; 1
- 114:	f1 f7       	brne	.-4      	; 0x112 <LCD_write_4bits+0x50>
- 116:	00 c0       	rjmp	.+0      	; 0x118 <LCD_write_4bits+0x56>
- 118:	00 00       	nop
-    _delay_us(200);
-    LCD_transmitI2C(device, value | LCD_E_PCF8974);
-    _delay_us(200);
-    LCD_transmitI2C(device, value & ~LCD_E_PCF8974);
-    _delay_us(200);
-}
- 11a:	cf 91       	pop	r28
- 11c:	1f 91       	pop	r17
- 11e:	0f 91       	pop	r16
- 120:	08 95       	ret
-
-00000122 <LCD_write_byte>:
-function to send byte to LCD
-PCF8574 to LCD pinout
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_write_byte(LiquidCrystalDevice_t *device, uint8_t value, uint8_t mode)
-{
- 122:	0f 93       	push	r16
- 124:	1f 93       	push	r17
- 126:	cf 93       	push	r28
- 128:	df 93       	push	r29
- 12a:	8c 01       	movw	r16, r24
- 12c:	d6 2f       	mov	r29, r22
- 12e:	c4 2f       	mov	r28, r20
-    uint8_t highnib = value & 0xf0;
- 130:	60 7f       	andi	r22, 0xF0	; 240
-    uint8_t lownib = (value << 4) & 0xf0;
-
-    LCD_write_4bits(device, highnib | mode);
- 132:	64 2b       	or	r22, r20
- 134:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write_4bits>
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_write_byte(LiquidCrystalDevice_t *device, uint8_t value, uint8_t mode)
-{
-    uint8_t highnib = value & 0xf0;
-    uint8_t lownib = (value << 4) & 0xf0;
- 138:	80 e1       	ldi	r24, 0x10	; 16
- 13a:	d8 9f       	mul	r29, r24
- 13c:	b0 01       	movw	r22, r0
- 13e:	11 24       	eor	r1, r1
-
-    LCD_write_4bits(device, highnib | mode);
-    LCD_write_4bits(device, lownib | mode);
- 140:	6c 2b       	or	r22, r28
- 142:	c8 01       	movw	r24, r16
-}
- 144:	df 91       	pop	r29
- 146:	cf 91       	pop	r28
- 148:	1f 91       	pop	r17
- 14a:	0f 91       	pop	r16
-{
-    uint8_t highnib = value & 0xf0;
-    uint8_t lownib = (value << 4) & 0xf0;
-
-    LCD_write_4bits(device, highnib | mode);
-    LCD_write_4bits(device, lownib | mode);
- 14c:	0c 94 61 00 	jmp	0xc2	; 0xc2 <LCD_write_4bits>
-
-00000150 <LCD_send_command>:
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 150:	40 e0       	ldi	r20, 0x00	; 0
- 152:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-00000156 <LCD_clear>:
- 156:	40 e0       	ldi	r20, 0x00	; 0
- 158:	61 e0       	ldi	r22, 0x01	; 1
- 15a:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 15e:	8f e3       	ldi	r24, 0x3F	; 63
- 160:	9f e1       	ldi	r25, 0x1F	; 31
- 162:	01 97       	sbiw	r24, 0x01	; 1
- 164:	f1 f7       	brne	.-4      	; 0x162 <LCD_clear+0xc>
- 166:	00 c0       	rjmp	.+0      	; 0x168 <LCD_clear+0x12>
- 168:	00 00       	nop
-*/
-void LCD_clear(LiquidCrystalDevice_t *device)
-{
-    LCD_send_command(device, LCD_CLEAR_DISPLAY);
-    _delay_us(2000);
-}
- 16a:	08 95       	ret
-
-0000016c <LCD_set_cursor>:
-
-/*
-function to set LCD cursor
-*/
-void LCD_set_cursor(LiquidCrystalDevice_t *device, uint8_t row, uint8_t column)
-{
- 16c:	cf 93       	push	r28
- 16e:	df 93       	push	r29
- 170:	00 d0       	rcall	.+0      	; 0x172 <LCD_set_cursor+0x6>
- 172:	00 d0       	rcall	.+0      	; 0x174 <LCD_set_cursor+0x8>
- 174:	cd b7       	in	r28, 0x3d	; 61
- 176:	de b7       	in	r29, 0x3e	; 62
-    // addresses of the start of each row on the HD44780
-    uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
- 178:	19 82       	std	Y+1, r1	; 0x01
- 17a:	20 e4       	ldi	r18, 0x40	; 64
- 17c:	2a 83       	std	Y+2, r18	; 0x02
- 17e:	24 e1       	ldi	r18, 0x14	; 20
- 180:	2b 83       	std	Y+3, r18	; 0x03
- 182:	24 e5       	ldi	r18, 0x54	; 84
- 184:	2c 83       	std	Y+4, r18	; 0x04
-    LCD_send_command(device, LCD_SETDDRAMADDR | (row_offsets[row] + column));
- 186:	fe 01       	movw	r30, r28
- 188:	e6 0f       	add	r30, r22
- 18a:	f1 1d       	adc	r31, r1
- 18c:	61 81       	ldd	r22, Z+1	; 0x01
- 18e:	64 0f       	add	r22, r20
- 190:	60 68       	ori	r22, 0x80	; 128
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 192:	40 e0       	ldi	r20, 0x00	; 0
-void LCD_set_cursor(LiquidCrystalDevice_t *device, uint8_t row, uint8_t column)
-{
-    // addresses of the start of each row on the HD44780
-    uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
-    LCD_send_command(device, LCD_SETDDRAMADDR | (row_offsets[row] + column));
-}
- 194:	0f 90       	pop	r0
- 196:	0f 90       	pop	r0
- 198:	0f 90       	pop	r0
- 19a:	0f 90       	pop	r0
- 19c:	df 91       	pop	r29
- 19e:	cf 91       	pop	r28
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 1a0:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-000001a4 <LCD_return_home>:
- 1a4:	40 e0       	ldi	r20, 0x00	; 0
- 1a6:	62 e0       	ldi	r22, 0x02	; 2
- 1a8:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 1ac:	8f e3       	ldi	r24, 0x3F	; 63
- 1ae:	9f e1       	ldi	r25, 0x1F	; 31
- 1b0:	01 97       	sbiw	r24, 0x01	; 1
- 1b2:	f1 f7       	brne	.-4      	; 0x1b0 <LCD_return_home+0xc>
- 1b4:	00 c0       	rjmp	.+0      	; 0x1b6 <LCD_return_home+0x12>
- 1b6:	00 00       	nop
-*/
-void LCD_return_home(LiquidCrystalDevice_t *device)
-{
-    LCD_send_command(device, LCD_RETURN_HOME);
-    _delay_us(2000);
-}
- 1b8:	08 95       	ret
-
-000001ba <LCD_set_display_state>:
-
-/*
-function to set LCD display on/off
-*/
-void LCD_set_display_state(LiquidCrystalDevice_t *device, uint8_t displayState)
-{
- 1ba:	fc 01       	movw	r30, r24
- 1bc:	95 81       	ldd	r25, Z+5	; 0x05
-    if (displayState == LCD_DISPLAY_ON)
- 1be:	64 30       	cpi	r22, 0x04	; 4
- 1c0:	41 f0       	breq	.+16     	; 0x1d2 <LCD_set_display_state+0x18>
-    {
-        device->displayControl |= LCD_DISPLAY_ON;
-    }
-    else
-    {
-        device->displayControl &= ~LCD_DISPLAY_ON;
- 1c2:	69 2f       	mov	r22, r25
- 1c4:	6b 7f       	andi	r22, 0xFB	; 251
- 1c6:	65 83       	std	Z+5, r22	; 0x05
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 1c8:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 1ca:	40 e0       	ldi	r20, 0x00	; 0
- 1cc:	cf 01       	movw	r24, r30
- 1ce:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-*/
-void LCD_set_display_state(LiquidCrystalDevice_t *device, uint8_t displayState)
-{
-    if (displayState == LCD_DISPLAY_ON)
-    {
-        device->displayControl |= LCD_DISPLAY_ON;
- 1d2:	69 2f       	mov	r22, r25
- 1d4:	64 60       	ori	r22, 0x04	; 4
- 1d6:	65 83       	std	Z+5, r22	; 0x05
-    }
-    else
-    {
-        device->displayControl &= ~LCD_DISPLAY_ON;
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 1d8:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 1da:	40 e0       	ldi	r20, 0x00	; 0
- 1dc:	cf 01       	movw	r24, r30
- 1de:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-000001e2 <LCD_set_cursor_state>:
-
-/*
-function to set LCD cursor on/off
-*/
-void LCD_set_cursor_state(LiquidCrystalDevice_t *device, uint8_t cursor)
-{
- 1e2:	fc 01       	movw	r30, r24
- 1e4:	95 81       	ldd	r25, Z+5	; 0x05
-    if (cursor == LCD_CURSOR_ON)
- 1e6:	62 30       	cpi	r22, 0x02	; 2
- 1e8:	41 f0       	breq	.+16     	; 0x1fa <LCD_set_cursor_state+0x18>
-    {
-        device->displayControl |= LCD_CURSOR_ON;
-    }
-    else
-    {
-        device->displayControl &= ~LCD_CURSOR_ON;
- 1ea:	69 2f       	mov	r22, r25
- 1ec:	6d 7f       	andi	r22, 0xFD	; 253
- 1ee:	65 83       	std	Z+5, r22	; 0x05
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 1f0:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 1f2:	40 e0       	ldi	r20, 0x00	; 0
- 1f4:	cf 01       	movw	r24, r30
- 1f6:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-*/
-void LCD_set_cursor_state(LiquidCrystalDevice_t *device, uint8_t cursor)
-{
-    if (cursor == LCD_CURSOR_ON)
-    {
-        device->displayControl |= LCD_CURSOR_ON;
- 1fa:	69 2f       	mov	r22, r25
- 1fc:	62 60       	ori	r22, 0x02	; 2
- 1fe:	65 83       	std	Z+5, r22	; 0x05
-    }
-    else
-    {
-        device->displayControl &= ~LCD_CURSOR_ON;
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 200:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 202:	40 e0       	ldi	r20, 0x00	; 0
- 204:	cf 01       	movw	r24, r30
- 206:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-0000020a <LCD_set_cursor_blink>:
-
-/*
-function to set LCD cursor blink on/off
-*/
-void LCD_set_cursor_blink(LiquidCrystalDevice_t *device, uint8_t blink)
-{
- 20a:	fc 01       	movw	r30, r24
- 20c:	95 81       	ldd	r25, Z+5	; 0x05
-    if (blink == LCD_CURSOR_BLINK)
- 20e:	61 30       	cpi	r22, 0x01	; 1
- 210:	41 f0       	breq	.+16     	; 0x222 <LCD_set_cursor_blink+0x18>
-    {
-        device->displayControl |= LCD_CURSOR_BLINK;
-    }
-    else
-    {
-        device->displayControl &= ~LCD_CURSOR_BLINK;
- 212:	69 2f       	mov	r22, r25
- 214:	6e 7f       	andi	r22, 0xFE	; 254
- 216:	65 83       	std	Z+5, r22	; 0x05
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 218:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 21a:	40 e0       	ldi	r20, 0x00	; 0
- 21c:	cf 01       	movw	r24, r30
- 21e:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-*/
-void LCD_set_cursor_blink(LiquidCrystalDevice_t *device, uint8_t blink)
-{
-    if (blink == LCD_CURSOR_BLINK)
-    {
-        device->displayControl |= LCD_CURSOR_BLINK;
- 222:	69 2f       	mov	r22, r25
- 224:	61 60       	ori	r22, 0x01	; 1
- 226:	65 83       	std	Z+5, r22	; 0x05
-    }
-    else
-    {
-        device->displayControl &= ~LCD_CURSOR_BLINK;
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 228:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 22a:	40 e0       	ldi	r20, 0x00	; 0
- 22c:	cf 01       	movw	r24, r30
- 22e:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-00000232 <LCD_scroll>:
-function to scroll LCD left/right
-direction is either LCD_SHIFT_LEFT or LCD_SHIFT_RIGHT.
-*/
-void LCD_scroll(LiquidCrystalDevice_t *device, uint8_t direction)
-{
-    LCD_send_command(device, LCD_CURSORSHIFT | LCD_DISPLAY_SHIFT | direction);
- 232:	68 61       	ori	r22, 0x18	; 24
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 234:	40 e0       	ldi	r20, 0x00	; 0
- 236:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-0000023a <LCD_set_scroll_dir>:
-
-/*
-function to set LCD scroll direction to either LTR or RTL
-*/
-void LCD_set_scroll_dir(LiquidCrystalDevice_t *device, uint8_t direction)
-{
- 23a:	fc 01       	movw	r30, r24
- 23c:	96 81       	ldd	r25, Z+6	; 0x06
-    if (direction == LCD_ENTRY_LEFT)
- 23e:	62 30       	cpi	r22, 0x02	; 2
- 240:	41 f0       	breq	.+16     	; 0x252 <LCD_set_scroll_dir+0x18>
-    {
-        device->displayMode |= LCD_ENTRY_LEFT;
-    }
-    else
-    {
-        device->displayMode &= ~LCD_ENTRY_LEFT;
- 242:	69 2f       	mov	r22, r25
- 244:	6d 7f       	andi	r22, 0xFD	; 253
- 246:	66 83       	std	Z+6, r22	; 0x06
-    }
-    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
- 248:	64 60       	ori	r22, 0x04	; 4
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 24a:	40 e0       	ldi	r20, 0x00	; 0
- 24c:	cf 01       	movw	r24, r30
- 24e:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-*/
-void LCD_set_scroll_dir(LiquidCrystalDevice_t *device, uint8_t direction)
-{
-    if (direction == LCD_ENTRY_LEFT)
-    {
-        device->displayMode |= LCD_ENTRY_LEFT;
- 252:	69 2f       	mov	r22, r25
- 254:	62 60       	ori	r22, 0x02	; 2
- 256:	66 83       	std	Z+6, r22	; 0x06
-    }
-    else
-    {
-        device->displayMode &= ~LCD_ENTRY_LEFT;
-    }
-    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
- 258:	64 60       	ori	r22, 0x04	; 4
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 25a:	40 e0       	ldi	r20, 0x00	; 0
- 25c:	cf 01       	movw	r24, r30
- 25e:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-00000262 <LCD_set_autoscroll>:
-
-/*
-function to set LCD autoscroll on/off
-*/
-void LCD_set_autoscroll(LiquidCrystalDevice_t *device, uint8_t autoscroll)
-{
- 262:	fc 01       	movw	r30, r24
- 264:	96 81       	ldd	r25, Z+6	; 0x06
-    if (autoscroll == LCD_ENTRY_SHIFT_INCREMENT)
- 266:	61 30       	cpi	r22, 0x01	; 1
- 268:	41 f0       	breq	.+16     	; 0x27a <LCD_set_autoscroll+0x18>
-    {
-        device->displayMode |= LCD_ENTRY_SHIFT_INCREMENT;
-    }
-    else
-    {
-        device->displayMode &= ~LCD_ENTRY_SHIFT_INCREMENT;
- 26a:	69 2f       	mov	r22, r25
- 26c:	6e 7f       	andi	r22, 0xFE	; 254
- 26e:	66 83       	std	Z+6, r22	; 0x06
-    }
-    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
- 270:	64 60       	ori	r22, 0x04	; 4
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 272:	40 e0       	ldi	r20, 0x00	; 0
- 274:	cf 01       	movw	r24, r30
- 276:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-*/
-void LCD_set_autoscroll(LiquidCrystalDevice_t *device, uint8_t autoscroll)
-{
-    if (autoscroll == LCD_ENTRY_SHIFT_INCREMENT)
-    {
-        device->displayMode |= LCD_ENTRY_SHIFT_INCREMENT;
- 27a:	69 2f       	mov	r22, r25
- 27c:	61 60       	ori	r22, 0x01	; 1
- 27e:	66 83       	std	Z+6, r22	; 0x06
-    }
-    else
-    {
-        device->displayMode &= ~LCD_ENTRY_SHIFT_INCREMENT;
-    }
-    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
- 280:	64 60       	ori	r22, 0x04	; 4
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 282:	40 e0       	ldi	r20, 0x00	; 0
- 284:	cf 01       	movw	r24, r30
- 286:	0c 94 91 00 	jmp	0x122	; 0x122 <LCD_write_byte>
-
-0000028a <LCD_create_custom_char>:
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_create_custom_char(LiquidCrystalDevice_t *device,
-                            uint8_t slot,
-                            uint8_t charmap[8])
-{
- 28a:	ef 92       	push	r14
- 28c:	ff 92       	push	r15
- 28e:	0f 93       	push	r16
- 290:	1f 93       	push	r17
- 292:	cf 93       	push	r28
- 294:	df 93       	push	r29
- 296:	8c 01       	movw	r16, r24
- 298:	7a 01       	movw	r14, r20
-    uint8_t i = 0;
-    // only 8 locations for custom characters 0-7
-    slot &= 0x7;
- 29a:	67 70       	andi	r22, 0x07	; 7
-    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
- 29c:	66 0f       	add	r22, r22
- 29e:	66 0f       	add	r22, r22
- 2a0:	66 0f       	add	r22, r22
- 2a2:	60 64       	ori	r22, 0x40	; 64
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 2a4:	40 e0       	ldi	r20, 0x00	; 0
- 2a6:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 2aa:	e7 01       	movw	r28, r14
- 2ac:	88 e0       	ldi	r24, 0x08	; 8
- 2ae:	e8 0e       	add	r14, r24
- 2b0:	f1 1c       	adc	r15, r1
-    slot &= 0x7;
-    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
-
-    for (i = 0; i < 8; i++)
-    {
-        LCD_write_byte(device, charmap[i], LCD_RS_PCF8974);
- 2b2:	69 91       	ld	r22, Y+
- 2b4:	41 e0       	ldi	r20, 0x01	; 1
- 2b6:	c8 01       	movw	r24, r16
- 2b8:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
-    uint8_t i = 0;
-    // only 8 locations for custom characters 0-7
-    slot &= 0x7;
-    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
-
-    for (i = 0; i < 8; i++)
- 2bc:	ce 15       	cp	r28, r14
- 2be:	df 05       	cpc	r29, r15
- 2c0:	c1 f7       	brne	.-16     	; 0x2b2 <LCD_create_custom_char+0x28>
-    {
-        LCD_write_byte(device, charmap[i], LCD_RS_PCF8974);
-    }
-}
- 2c2:	df 91       	pop	r29
- 2c4:	cf 91       	pop	r28
- 2c6:	1f 91       	pop	r17
- 2c8:	0f 91       	pop	r16
- 2ca:	ff 90       	pop	r15
- 2cc:	ef 90       	pop	r14
- 2ce:	08 95       	ret
-
-000002d0 <LCD_print>:
-
-/*
-function to write string to LCD
-*/
-void LCD_print(LiquidCrystalDevice_t *device, char *s)
-{
- 2d0:	ef 92       	push	r14
- 2d2:	ff 92       	push	r15
- 2d4:	0f 93       	push	r16
- 2d6:	1f 93       	push	r17
- 2d8:	cf 93       	push	r28
- 2da:	fb 01       	movw	r30, r22
-    uint8_t i = 0;
-    while (s[i] != 0x00)
- 2dc:	60 81       	ld	r22, Z
- 2de:	66 23       	and	r22, r22
- 2e0:	71 f0       	breq	.+28     	; 0x2fe <LCD_print+0x2e>
- 2e2:	8f 01       	movw	r16, r30
- 2e4:	7c 01       	movw	r14, r24
-/*
-function to write string to LCD
-*/
-void LCD_print(LiquidCrystalDevice_t *device, char *s)
-{
-    uint8_t i = 0;
- 2e6:	c0 e0       	ldi	r28, 0x00	; 0
-    while (s[i] != 0x00)
-    {
-        LCD_write_byte(device, s[i], LCD_RS_PCF8974);
- 2e8:	41 e0       	ldi	r20, 0x01	; 1
- 2ea:	c7 01       	movw	r24, r14
- 2ec:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
-        i++;
- 2f0:	cf 5f       	subi	r28, 0xFF	; 255
-function to write string to LCD
-*/
-void LCD_print(LiquidCrystalDevice_t *device, char *s)
-{
-    uint8_t i = 0;
-    while (s[i] != 0x00)
- 2f2:	f8 01       	movw	r30, r16
- 2f4:	ec 0f       	add	r30, r28
- 2f6:	f1 1d       	adc	r31, r1
- 2f8:	60 81       	ld	r22, Z
- 2fa:	61 11       	cpse	r22, r1
- 2fc:	f5 cf       	rjmp	.-22     	; 0x2e8 <LCD_print+0x18>
-    {
-        LCD_write_byte(device, s[i], LCD_RS_PCF8974);
-        i++;
-    }
-}
- 2fe:	cf 91       	pop	r28
- 300:	1f 91       	pop	r17
- 302:	0f 91       	pop	r16
- 304:	ff 90       	pop	r15
- 306:	ef 90       	pop	r14
- 308:	08 95       	ret
-
-0000030a <LCD_init>:
-*/
-LiquidCrystalDevice_t LCD_init(uint8_t address,
-                               uint8_t columns,
-                               uint8_t rows,
-                               uint8_t dotSize)
-{
- 30a:	cf 93       	push	r28
- 30c:	df 93       	push	r29
- 30e:	cd b7       	in	r28, 0x3d	; 61
- 310:	de b7       	in	r29, 0x3e	; 62
- 312:	2e 97       	sbiw	r28, 0x0e	; 14
- 314:	0f b6       	in	r0, 0x3f	; 63
- 316:	f8 94       	cli
- 318:	de bf       	out	0x3e, r29	; 62
- 31a:	0f be       	out	0x3f, r0	; 63
- 31c:	cd bf       	out	0x3d, r28	; 61
-    LiquidCrystalDevice_t device;
-    device.address = address;
- 31e:	88 87       	std	Y+8, r24	; 0x08
-    device.columns = columns;
- 320:	69 87       	std	Y+9, r22	; 0x09
-    device.rows = rows;
- 322:	4a 87       	std	Y+10, r20	; 0x0a
-    // set display function to 4-bit mode, 1 line, and dotSize (either 5x8 or 5x10)
-    device.displayFunction = LCD_DATA_LENGTH_4BITS | LCD_DISPLAY_1LINE | dotSize;
- 324:	2c 87       	std	Y+12, r18	; 0x0c
-    // set display control
-    device.displayControl = LCD_DISPLAY_ON | LCD_CURSOR_ON | LCD_CURSOR_NOBLINK;
- 326:	86 e0       	ldi	r24, 0x06	; 6
- 328:	8d 87       	std	Y+13, r24	; 0x0d
-    // set LCD display mode
-    // set display mode to default text direction (for Roman languages)
-    device.displayMode = LCD_ENTRY_SHIFT_DECREMENT | LCD_ENTRY_LEFT;
- 32a:	82 e0       	ldi	r24, 0x02	; 2
- 32c:	8e 87       	std	Y+14, r24	; 0x0e
-
-    /*
-    2 line display
-    */
-    if (rows > 1)
- 32e:	42 30       	cpi	r20, 0x02	; 2
- 330:	08 f4       	brcc	.+2      	; 0x334 <LCD_init+0x2a>
- 332:	80 c0       	rjmp	.+256    	; 0x434 <__EEPROM_REGION_LENGTH__+0x34>
-    {
-        device.displayFunction |= LCD_DISPLAY_2LINES;
- 334:	28 60       	ori	r18, 0x08	; 8
- 336:	2c 87       	std	Y+12, r18	; 0x0c
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 338:	2f ef       	ldi	r18, 0xFF	; 255
- 33a:	80 e7       	ldi	r24, 0x70	; 112
- 33c:	92 e0       	ldi	r25, 0x02	; 2
- 33e:	21 50       	subi	r18, 0x01	; 1
- 340:	80 40       	sbci	r24, 0x00	; 0
- 342:	90 40       	sbci	r25, 0x00	; 0
- 344:	e1 f7       	brne	.-8      	; 0x33e <LCD_init+0x34>
- 346:	00 c0       	rjmp	.+0      	; 0x348 <LCD_init+0x3e>
- 348:	00 00       	nop
-
-    /*
-    commence initialization
-    */
-    _delay_ms(50);
-    LCD_write_4bits(&device, 0x03 << 4);
- 34a:	60 e3       	ldi	r22, 0x30	; 48
- 34c:	ce 01       	movw	r24, r28
- 34e:	08 96       	adiw	r24, 0x08	; 8
- 350:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write_4bits>
- 354:	8f e1       	ldi	r24, 0x1F	; 31
- 356:	9e e4       	ldi	r25, 0x4E	; 78
- 358:	01 97       	sbiw	r24, 0x01	; 1
- 35a:	f1 f7       	brne	.-4      	; 0x358 <LCD_init+0x4e>
- 35c:	00 c0       	rjmp	.+0      	; 0x35e <LCD_init+0x54>
- 35e:	00 00       	nop
-    _delay_ms(5);
-    LCD_write_4bits(&device, 0x03 << 4);
- 360:	60 e3       	ldi	r22, 0x30	; 48
- 362:	ce 01       	movw	r24, r28
- 364:	08 96       	adiw	r24, 0x08	; 8
- 366:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write_4bits>
- 36a:	8f e1       	ldi	r24, 0x1F	; 31
- 36c:	9e e4       	ldi	r25, 0x4E	; 78
- 36e:	01 97       	sbiw	r24, 0x01	; 1
- 370:	f1 f7       	brne	.-4      	; 0x36e <LCD_init+0x64>
- 372:	00 c0       	rjmp	.+0      	; 0x374 <LCD_init+0x6a>
- 374:	00 00       	nop
-    _delay_ms(5);
-    LCD_write_4bits(&device, 0x03 << 4);
- 376:	60 e3       	ldi	r22, 0x30	; 48
- 378:	ce 01       	movw	r24, r28
- 37a:	08 96       	adiw	r24, 0x08	; 8
- 37c:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write_4bits>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 380:	87 e5       	ldi	r24, 0x57	; 87
- 382:	92 e0       	ldi	r25, 0x02	; 2
- 384:	01 97       	sbiw	r24, 0x01	; 1
- 386:	f1 f7       	brne	.-4      	; 0x384 <LCD_init+0x7a>
- 388:	00 c0       	rjmp	.+0      	; 0x38a <LCD_init+0x80>
- 38a:	00 00       	nop
-    _delay_us(150);
-
-    LCD_write_4bits(&device, 0x02 << 4);
- 38c:	60 e2       	ldi	r22, 0x20	; 32
- 38e:	ce 01       	movw	r24, r28
- 390:	08 96       	adiw	r24, 0x08	; 8
- 392:	0e 94 61 00 	call	0xc2	; 0xc2 <LCD_write_4bits>
- 396:	87 e5       	ldi	r24, 0x57	; 87
- 398:	92 e0       	ldi	r25, 0x02	; 2
- 39a:	01 97       	sbiw	r24, 0x01	; 1
- 39c:	f1 f7       	brne	.-4      	; 0x39a <LCD_init+0x90>
- 39e:	00 c0       	rjmp	.+0      	; 0x3a0 <LCD_init+0x96>
- 3a0:	00 00       	nop
-    _delay_us(150);
-    LCD_send_command(&device, LCD_FUNCTIONSET | device.displayFunction);
- 3a2:	6c 85       	ldd	r22, Y+12	; 0x0c
- 3a4:	60 62       	ori	r22, 0x20	; 32
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 3a6:	40 e0       	ldi	r20, 0x00	; 0
- 3a8:	ce 01       	movw	r24, r28
- 3aa:	08 96       	adiw	r24, 0x08	; 8
- 3ac:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
-    {
-        device->displayControl |= LCD_DISPLAY_ON;
-    }
-    else
-    {
-        device->displayControl &= ~LCD_DISPLAY_ON;
- 3b0:	6d 85       	ldd	r22, Y+13	; 0x0d
- 3b2:	6b 7f       	andi	r22, 0xFB	; 251
- 3b4:	6d 87       	std	Y+13, r22	; 0x0d
-    }
-    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
- 3b6:	68 60       	ori	r22, 0x08	; 8
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 3b8:	40 e0       	ldi	r20, 0x00	; 0
- 3ba:	ce 01       	movw	r24, r28
- 3bc:	08 96       	adiw	r24, 0x08	; 8
- 3be:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 3c2:	40 e0       	ldi	r20, 0x00	; 0
- 3c4:	61 e0       	ldi	r22, 0x01	; 1
- 3c6:	ce 01       	movw	r24, r28
- 3c8:	08 96       	adiw	r24, 0x08	; 8
- 3ca:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 3ce:	8f e3       	ldi	r24, 0x3F	; 63
- 3d0:	9f e1       	ldi	r25, 0x1F	; 31
- 3d2:	01 97       	sbiw	r24, 0x01	; 1
- 3d4:	f1 f7       	brne	.-4      	; 0x3d2 <LCD_init+0xc8>
- 3d6:	00 c0       	rjmp	.+0      	; 0x3d8 <LCD_init+0xce>
- 3d8:	00 00       	nop
-    _delay_us(150);
-    LCD_send_command(&device, LCD_FUNCTIONSET | device.displayFunction);
-
-    LCD_set_display_state(&device, LCD_DISPLAY_OFF);
-    LCD_clear(&device);
-    LCD_send_command(&device, LCD_ENTRYMODESET | device.displayMode);
- 3da:	6e 85       	ldd	r22, Y+14	; 0x0e
- 3dc:	64 60       	ori	r22, 0x04	; 4
-D7 D6 D5 D4 BL E RW RS
-*/
-void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
-{
-    // mode is 0 because when sending a command, RW is 0 and RS is 0.
-    LCD_write_byte(device, command, 0);
- 3de:	40 e0       	ldi	r20, 0x00	; 0
- 3e0:	ce 01       	movw	r24, r28
- 3e2:	08 96       	adiw	r24, 0x08	; 8
- 3e4:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 3e8:	40 e0       	ldi	r20, 0x00	; 0
- 3ea:	62 e0       	ldi	r22, 0x02	; 2
- 3ec:	ce 01       	movw	r24, r28
- 3ee:	08 96       	adiw	r24, 0x08	; 8
- 3f0:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 3f4:	8f e3       	ldi	r24, 0x3F	; 63
- 3f6:	9f e1       	ldi	r25, 0x1F	; 31
- 3f8:	01 97       	sbiw	r24, 0x01	; 1
- 3fa:	f1 f7       	brne	.-4      	; 0x3f8 <LCD_init+0xee>
- 3fc:	00 c0       	rjmp	.+0      	; 0x3fe <LCD_init+0xf4>
- 3fe:	00 00       	nop
-
-    LCD_set_display_state(&device, LCD_DISPLAY_OFF);
-    LCD_clear(&device);
-    LCD_send_command(&device, LCD_ENTRYMODESET | device.displayMode);
-    LCD_return_home(&device);
-    return device;
- 400:	87 e0       	ldi	r24, 0x07	; 7
- 402:	fe 01       	movw	r30, r28
- 404:	38 96       	adiw	r30, 0x08	; 8
- 406:	de 01       	movw	r26, r28
- 408:	11 96       	adiw	r26, 0x01	; 1
- 40a:	01 90       	ld	r0, Z+
- 40c:	0d 92       	st	X+, r0
- 40e:	8a 95       	dec	r24
- 410:	e1 f7       	brne	.-8      	; 0x40a <__EEPROM_REGION_LENGTH__+0xa>
- 412:	29 81       	ldd	r18, Y+1	; 0x01
- 414:	3a 81       	ldd	r19, Y+2	; 0x02
- 416:	4b 81       	ldd	r20, Y+3	; 0x03
- 418:	5c 81       	ldd	r21, Y+4	; 0x04
- 41a:	6d 81       	ldd	r22, Y+5	; 0x05
- 41c:	7e 81       	ldd	r23, Y+6	; 0x06
-}
- 41e:	8f 81       	ldd	r24, Y+7	; 0x07
- 420:	90 e0       	ldi	r25, 0x00	; 0
- 422:	2e 96       	adiw	r28, 0x0e	; 14
- 424:	0f b6       	in	r0, 0x3f	; 63
- 426:	f8 94       	cli
- 428:	de bf       	out	0x3e, r29	; 62
- 42a:	0f be       	out	0x3f, r0	; 63
- 42c:	cd bf       	out	0x3d, r28	; 61
- 42e:	df 91       	pop	r29
- 430:	cf 91       	pop	r28
- 432:	08 95       	ret
-    }
-
-    /*
-    5x10 character font
-    */
-    if (dotSize > LCD_CHARACTER_FONT_5X8 && rows == 1)
- 434:	22 23       	and	r18, r18
- 436:	09 f4       	brne	.+2      	; 0x43a <__EEPROM_REGION_LENGTH__+0x3a>
- 438:	7f cf       	rjmp	.-258    	; 0x338 <LCD_init+0x2e>
- 43a:	41 30       	cpi	r20, 0x01	; 1
- 43c:	09 f0       	breq	.+2      	; 0x440 <__EEPROM_REGION_LENGTH__+0x40>
- 43e:	7c cf       	rjmp	.-264    	; 0x338 <LCD_init+0x2e>
-    {
-        device.displayFunction |= LCD_CHARACTER_FONT_5X10;
- 440:	24 60       	ori	r18, 0x04	; 4
- 442:	2c 87       	std	Y+12, r18	; 0x0c
- 444:	79 cf       	rjmp	.-270    	; 0x338 <LCD_init+0x2e>
-
-00000446 <LCD_transmitI2C>:
-function to transmit data to the LCD via i2c
-*/
-void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
-{
-    // LCD backlight setting is preserved in the lowest function call.
-    i2c_master_send_byte(device->address, value | device->backlight);
- 446:	fc 01       	movw	r30, r24
- 448:	23 81       	ldd	r18, Z+3	; 0x03
- 44a:	62 2b       	or	r22, r18
- 44c:	80 81       	ld	r24, Z
- 44e:	0c 94 88 02 	jmp	0x510	; 0x510 <i2c_master_send_byte>
-
-00000452 <ioinit>:
-}
-// ----------------------------------------------------------------
+000000a6 <ioinit>:
+#define ERROR_LED_PORT PORTD
+#define ERROR_LED_DDR DDRD
 
 void ioinit(void)
 {
     ERROR_LED_DDR |= _BV(ERROR_LED_1_PIN);
- 452:	54 9a       	sbi	0x0a, 4	; 10
+  a6:	54 9a       	sbi	0x0a, 4	; 10
     ERROR_LED_DDR |= _BV(ERROR_LED_2_PIN);
- 454:	55 9a       	sbi	0x0a, 5	; 10
+  a8:	55 9a       	sbi	0x0a, 5	; 10
     ERROR_LED_DDR |= _BV(ERROR_LED_3_PIN);
- 456:	56 9a       	sbi	0x0a, 6	; 10
+  aa:	56 9a       	sbi	0x0a, 6	; 10
     ERROR_LED_PORT &= ~_BV(ERROR_LED_1_PIN);
- 458:	5c 98       	cbi	0x0b, 4	; 11
+  ac:	5c 98       	cbi	0x0b, 4	; 11
     ERROR_LED_PORT &= ~_BV(ERROR_LED_2_PIN);
- 45a:	5d 98       	cbi	0x0b, 5	; 11
+  ae:	5d 98       	cbi	0x0b, 5	; 11
     ERROR_LED_PORT &= ~_BV(ERROR_LED_3_PIN);
- 45c:	5e 98       	cbi	0x0b, 6	; 11
+  b0:	5e 98       	cbi	0x0b, 6	; 11
 }
- 45e:	08 95       	ret
+  b2:	08 95       	ret
 
-00000460 <i2c_master_start>:
+000000b4 <i2c_master_start>:
 uint8_t i2c_master_start(uint8_t addr, uint8_t mode)
 {
     uint8_t twst;
 
     // reset control register
     TWCR = 0;
- 460:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  b4:	10 92 bc 00 	sts	0x00BC, r1	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // transmit start condition
     TWCR = _BV(TWINT) | _BV(TWSTA) | _BV(TWEN);
- 464:	94 ea       	ldi	r25, 0xA4	; 164
- 466:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  b8:	94 ea       	ldi	r25, 0xA4	; 164
+  ba:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // wait for start condition to be sent
     while (!(TWCR & _BV(TWINT)))
- 46a:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 46e:	97 ff       	sbrs	r25, 7
- 470:	fc cf       	rjmp	.-8      	; 0x46a <i2c_master_start+0xa>
+  be:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  c2:	97 ff       	sbrs	r25, 7
+  c4:	fc cf       	rjmp	.-8      	; 0xbe <i2c_master_start+0xa>
         ;
 
     // check if the start condition was successfully transmitted
     // check value of TWI status register
     // #define TW_STATUS (TWSR & TW_STATUS_MASK)
     twst = TW_STATUS & I2C_PRESCALER_MASK;
- 472:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
- 476:	98 7f       	andi	r25, 0xF8	; 248
+  c6:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  ca:	98 7f       	andi	r25, 0xF8	; 248
     if (twst != TW_START && twst != TW_REP_START)
- 478:	98 30       	cpi	r25, 0x08	; 8
- 47a:	11 f0       	breq	.+4      	; 0x480 <i2c_master_start+0x20>
- 47c:	90 31       	cpi	r25, 0x10	; 16
- 47e:	a1 f4       	brne	.+40     	; 0x4a8 <i2c_master_start+0x48>
+  cc:	98 30       	cpi	r25, 0x08	; 8
+  ce:	11 f0       	breq	.+4      	; 0xd4 <i2c_master_start+0x20>
+  d0:	90 31       	cpi	r25, 0x10	; 16
+  d2:	a1 f4       	brne	.+40     	; 0xfc <i2c_master_start+0x48>
     }
 
     // load slave address to TWDR with specified mode
     // mode is 1 for read, 0 for write
     // TWDR = (PCF8574_ADDR << 1) + TW_WRITE;
     TWDR = (addr << 1) | mode;
- 480:	88 0f       	add	r24, r24
- 482:	68 2b       	or	r22, r24
- 484:	60 93 bb 00 	sts	0x00BB, r22	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+  d4:	88 0f       	add	r24, r24
+  d6:	68 2b       	or	r22, r24
+  d8:	60 93 bb 00 	sts	0x00BB, r22	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 
     // start transmission of address
     // Clear TWINT bit in TWCR
     TWCR = _BV(TWINT) | _BV(TWEN);
- 488:	84 e8       	ldi	r24, 0x84	; 132
- 48a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  dc:	84 e8       	ldi	r24, 0x84	; 132
+  de:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     // wait for end of transmission
     // Wait for TWINT flag set. This
     // indicates that the SLA+W has
     // been transmitted, and
     // ACK/NACK has been received.
     while (!(TWCR & _BV(TWINT)))
- 48e:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 492:	87 ff       	sbrs	r24, 7
- 494:	fc cf       	rjmp	.-8      	; 0x48e <i2c_master_start+0x2e>
+  e2:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  e6:	87 ff       	sbrs	r24, 7
+  e8:	fc cf       	rjmp	.-8      	; 0xe2 <i2c_master_start+0x2e>
 
     // Check value of TWI status
     // register. Mask prescaler bits. If
     // status different from
     // MT_SLA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
- 496:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
- 49a:	88 7f       	andi	r24, 0xF8	; 248
+  ea:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+  ee:	88 7f       	andi	r24, 0xF8	; 248
     if (twst != TW_MT_SLA_ACK && twst != TW_MR_SLA_ACK)
- 49c:	88 31       	cpi	r24, 0x18	; 24
- 49e:	11 f0       	breq	.+4      	; 0x4a4 <i2c_master_start+0x44>
- 4a0:	80 34       	cpi	r24, 0x40	; 64
- 4a2:	21 f4       	brne	.+8      	; 0x4ac <i2c_master_start+0x4c>
+  f0:	88 31       	cpi	r24, 0x18	; 24
+  f2:	11 f0       	breq	.+4      	; 0xf8 <i2c_master_start+0x44>
+  f4:	80 34       	cpi	r24, 0x40	; 64
+  f6:	21 f4       	brne	.+8      	; 0x100 <i2c_master_start+0x4c>
     {
         return I2C_STATUS_ERROR_WRITE_OR_READ_NOT_ACK;
     }
 
     return I2C_STATUS_SUCCESS;
- 4a4:	80 e0       	ldi	r24, 0x00	; 0
+  f8:	80 e0       	ldi	r24, 0x00	; 0
 }
- 4a6:	08 95       	ret
+  fa:	08 95       	ret
     // check value of TWI status register
     // #define TW_STATUS (TWSR & TW_STATUS_MASK)
     twst = TW_STATUS & I2C_PRESCALER_MASK;
     if (twst != TW_START && twst != TW_REP_START)
     {
         return I2C_STATUS_ERROR_START_NOT_ACCEPTED;
- 4a8:	8a e0       	ldi	r24, 0x0A	; 10
- 4aa:	08 95       	ret
+  fc:	8a e0       	ldi	r24, 0x0A	; 10
+  fe:	08 95       	ret
     // status different from
     // MT_SLA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
     if (twst != TW_MT_SLA_ACK && twst != TW_MR_SLA_ACK)
     {
         return I2C_STATUS_ERROR_WRITE_OR_READ_NOT_ACK;
- 4ac:	84 e1       	ldi	r24, 0x14	; 20
- 4ae:	08 95       	ret
+ 100:	84 e1       	ldi	r24, 0x14	; 20
+ 102:	08 95       	ret
 
-000004b0 <i2c_master_write>:
+00000104 <i2c_master_write>:
 uint8_t i2c_master_write(uint8_t data)
 {
     uint8_t twst;
 
     // Load DATA into TWDR register.
     TWDR = data;
- 4b0:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 104:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 
     // clear TWINT bit in TWCR to
     // start transmission of data
     TWCR = _BV(TWINT) | _BV(TWEN);
- 4b4:	84 e8       	ldi	r24, 0x84	; 132
- 4b6:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 108:	84 e8       	ldi	r24, 0x84	; 132
+ 10a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     // wait for end of transmission
     // Wait for TWINT flag set. This
     // indicates that the DATA has
     // been transmitted, and
     // ACK/NACK has been received.
     while (!(TWCR & _BV(TWINT)))
- 4ba:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 4be:	87 ff       	sbrs	r24, 7
- 4c0:	fc cf       	rjmp	.-8      	; 0x4ba <i2c_master_write+0xa>
+ 10e:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 112:	87 ff       	sbrs	r24, 7
+ 114:	fc cf       	rjmp	.-8      	; 0x10e <i2c_master_write+0xa>
 
     // Check value of TWI status
     // register. Mask prescaler bits. If
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
- 4c2:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
- 4c6:	88 7f       	andi	r24, 0xF8	; 248
+ 116:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 11a:	88 7f       	andi	r24, 0xF8	; 248
     if (twst != TW_MT_DATA_ACK)
- 4c8:	88 32       	cpi	r24, 0x28	; 40
- 4ca:	11 f4       	brne	.+4      	; 0x4d0 <i2c_master_write+0x20>
+ 11c:	88 32       	cpi	r24, 0x28	; 40
+ 11e:	11 f4       	brne	.+4      	; 0x124 <i2c_master_write+0x20>
     {
         return I2C_STATUS_ERROR_WRITE_NOT_ACK;
     }
     return I2C_STATUS_SUCCESS;
- 4cc:	80 e0       	ldi	r24, 0x00	; 0
- 4ce:	08 95       	ret
+ 120:	80 e0       	ldi	r24, 0x00	; 0
+ 122:	08 95       	ret
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
     if (twst != TW_MT_DATA_ACK)
     {
         return I2C_STATUS_ERROR_WRITE_NOT_ACK;
- 4d0:	85 e1       	ldi	r24, 0x15	; 21
+ 124:	85 e1       	ldi	r24, 0x15	; 21
     }
     return I2C_STATUS_SUCCESS;
 }
- 4d2:	08 95       	ret
+ 126:	08 95       	ret
 
-000004d4 <i2c_master_read_ACK>:
+00000128 <i2c_master_read_ACK>:
 {
     // setup i2c bus to read
     // TWINT - reset TWI
     // TWEN - enable TWI
     // TWEA - TWI enable ACK
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWEA);
- 4d4:	84 ec       	ldi	r24, 0xC4	; 196
- 4d6:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 128:	84 ec       	ldi	r24, 0xC4	; 196
+ 12a:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // wait for end of transmission
     while (!(TWCR & _BV(TWINT)))
- 4da:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 4de:	87 ff       	sbrs	r24, 7
- 4e0:	fc cf       	rjmp	.-8      	; 0x4da <i2c_master_read_ACK+0x6>
+ 12e:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 132:	87 ff       	sbrs	r24, 7
+ 134:	fc cf       	rjmp	.-8      	; 0x12e <i2c_master_read_ACK+0x6>
         ;
 
     return TWDR;
- 4e2:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 136:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 }
- 4e6:	08 95       	ret
+ 13a:	08 95       	ret
 
-000004e8 <i2c_master_read_NACK>:
+0000013c <i2c_master_read_NACK>:
 {
     // setup i2c bus to read
     // TWINT - reset TWI
     // TWEN - enable TWI
     // NACK
     TWCR = _BV(TWINT) | _BV(TWEN);
- 4e8:	84 e8       	ldi	r24, 0x84	; 132
- 4ea:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 13c:	84 e8       	ldi	r24, 0x84	; 132
+ 13e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // wait for end of transmission
     while (!(TWCR & _BV(TWINT)))
- 4ee:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 4f2:	87 ff       	sbrs	r24, 7
- 4f4:	fc cf       	rjmp	.-8      	; 0x4ee <i2c_master_read_NACK+0x6>
+ 142:	80 91 bc 00 	lds	r24, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 146:	87 ff       	sbrs	r24, 7
+ 148:	fc cf       	rjmp	.-8      	; 0x142 <i2c_master_read_NACK+0x6>
         ;
 
     return TWDR;
- 4f6:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 14a:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 }
- 4fa:	08 95       	ret
+ 14e:	08 95       	ret
 
-000004fc <i2c_master_stop>:
+00000150 <i2c_master_stop>:
 function to send i2c stop
 */
 void i2c_master_stop(void)
 {
     // Transmit STOP condition
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWSTO);
- 4fc:	84 e9       	ldi	r24, 0x94	; 148
- 4fe:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 150:	84 e9       	ldi	r24, 0x94	; 148
+ 152:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 }
- 502:	08 95       	ret
+ 156:	08 95       	ret
 
-00000504 <i2c_master_init>:
+00000158 <i2c_master_init>:
 function to initialize i2c
 */
 void i2c_master_init(uint16_t frequency)
 {
     // reset TWI status register
     TWSR = 0;
- 504:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 158:	10 92 b9 00 	sts	0x00B9, r1	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
     scl = f_cpu / (16 + 2 * TWBR * prescaler)
     16 + 2 * TWBR * prescaler = f_cpu / scl
     2 * TWBR * prescaler = f_cpu / scl - 16
     TWBR = (f_cpu / scl - 16) / 2 / prescaler
     */
     TWBR = (F_CPU / frequency - 16) / 2 / I2C_SCL_FREQUENCY_PRESCALER;
- 508:	88 ef       	ldi	r24, 0xF8	; 248
- 50a:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7f80b8>
+ 15c:	88 ef       	ldi	r24, 0xF8	; 248
+ 15e:	80 93 b8 00 	sts	0x00B8, r24	; 0x8000b8 <__TEXT_REGION_LENGTH__+0x7f80b8>
 }
- 50e:	08 95       	ret
+ 162:	08 95       	ret
 
-00000510 <i2c_master_send_byte>:
+00000164 <i2c_master_send_byte>:
 
 /*
 function to send one byte via i2c
 */
 uint8_t i2c_master_send_byte(uint8_t address, uint8_t data)
 {
- 510:	cf 93       	push	r28
- 512:	c6 2f       	mov	r28, r22
+ 164:	cf 93       	push	r28
+ 166:	c6 2f       	mov	r28, r22
     // send i2c start
     uint8_t status = i2c_master_start(address, I2C_WRITE);
- 514:	60 e0       	ldi	r22, 0x00	; 0
- 516:	0e 94 30 02 	call	0x460	; 0x460 <i2c_master_start>
+ 168:	60 e0       	ldi	r22, 0x00	; 0
+ 16a:	0e 94 5a 00 	call	0xb4	; 0xb4 <i2c_master_start>
     // check status for error
     if (status)
- 51a:	81 11       	cpse	r24, r1
- 51c:	11 c0       	rjmp	.+34     	; 0x540 <i2c_master_send_byte+0x30>
+ 16e:	81 11       	cpse	r24, r1
+ 170:	11 c0       	rjmp	.+34     	; 0x194 <i2c_master_send_byte+0x30>
 uint8_t i2c_master_write(uint8_t data)
 {
     uint8_t twst;
 
     // Load DATA into TWDR register.
     TWDR = data;
- 51e:	c0 93 bb 00 	sts	0x00BB, r28	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 172:	c0 93 bb 00 	sts	0x00BB, r28	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 
     // clear TWINT bit in TWCR to
     // start transmission of data
     TWCR = _BV(TWINT) | _BV(TWEN);
- 522:	94 e8       	ldi	r25, 0x84	; 132
- 524:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 176:	94 e8       	ldi	r25, 0x84	; 132
+ 178:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     // wait for end of transmission
     // Wait for TWINT flag set. This
     // indicates that the DATA has
     // been transmitted, and
     // ACK/NACK has been received.
     while (!(TWCR & _BV(TWINT)))
- 528:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 52c:	97 ff       	sbrs	r25, 7
- 52e:	fc cf       	rjmp	.-8      	; 0x528 <i2c_master_send_byte+0x18>
+ 17c:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 180:	97 ff       	sbrs	r25, 7
+ 182:	fc cf       	rjmp	.-8      	; 0x17c <i2c_master_send_byte+0x18>
 
     // Check value of TWI status
     // register. Mask prescaler bits. If
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
- 530:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
- 534:	98 7f       	andi	r25, 0xF8	; 248
+ 184:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 188:	98 7f       	andi	r25, 0xF8	; 248
     if (twst != TW_MT_DATA_ACK)
- 536:	98 32       	cpi	r25, 0x28	; 40
- 538:	29 f4       	brne	.+10     	; 0x544 <i2c_master_send_byte+0x34>
+ 18a:	98 32       	cpi	r25, 0x28	; 40
+ 18c:	29 f4       	brne	.+10     	; 0x198 <i2c_master_send_byte+0x34>
 function to send i2c stop
 */
 void i2c_master_stop(void)
 {
     // Transmit STOP condition
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWSTO);
- 53a:	94 e9       	ldi	r25, 0x94	; 148
- 53c:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 18e:	94 e9       	ldi	r25, 0x94	; 148
+ 190:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     if (status)
         return status;
     // send i2c stop
     i2c_master_stop();
     return I2C_STATUS_SUCCESS;
 }
- 540:	cf 91       	pop	r28
- 542:	08 95       	ret
+ 194:	cf 91       	pop	r28
+ 196:	08 95       	ret
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
     if (twst != TW_MT_DATA_ACK)
     {
         return I2C_STATUS_ERROR_WRITE_NOT_ACK;
- 544:	85 e1       	ldi	r24, 0x15	; 21
+ 198:	85 e1       	ldi	r24, 0x15	; 21
     if (status)
         return status;
     // send i2c stop
     i2c_master_stop();
     return I2C_STATUS_SUCCESS;
 }
- 546:	cf 91       	pop	r28
- 548:	08 95       	ret
+ 19a:	cf 91       	pop	r28
+ 19c:	08 95       	ret
 
-0000054a <i2c_master_send>:
+0000019e <i2c_master_send>:
 
 /*
 function to send n bytes via i2c
 */
 uint8_t i2c_master_send(uint8_t address, uint8_t *data, uint16_t length)
 {
- 54a:	0f 93       	push	r16
- 54c:	1f 93       	push	r17
- 54e:	cf 93       	push	r28
- 550:	df 93       	push	r29
- 552:	8b 01       	movw	r16, r22
- 554:	ea 01       	movw	r28, r20
+ 19e:	0f 93       	push	r16
+ 1a0:	1f 93       	push	r17
+ 1a2:	cf 93       	push	r28
+ 1a4:	df 93       	push	r29
+ 1a6:	8b 01       	movw	r16, r22
+ 1a8:	ea 01       	movw	r28, r20
     // send i2c start
     uint8_t status = i2c_master_start(address, I2C_WRITE);
- 556:	60 e0       	ldi	r22, 0x00	; 0
- 558:	0e 94 30 02 	call	0x460	; 0x460 <i2c_master_start>
+ 1aa:	60 e0       	ldi	r22, 0x00	; 0
+ 1ac:	0e 94 5a 00 	call	0xb4	; 0xb4 <i2c_master_start>
     // check status for error
     if (status)
- 55c:	81 11       	cpse	r24, r1
- 55e:	1a c0       	rjmp	.+52     	; 0x594 <i2c_master_send+0x4a>
+ 1b0:	81 11       	cpse	r24, r1
+ 1b2:	1a c0       	rjmp	.+52     	; 0x1e8 <i2c_master_send+0x4a>
         return status;
     // send bytes
     for (uint16_t i = 0; i < length; i++)
- 560:	20 97       	sbiw	r28, 0x00	; 0
- 562:	a9 f0       	breq	.+42     	; 0x58e <i2c_master_send+0x44>
- 564:	f8 01       	movw	r30, r16
- 566:	c0 0f       	add	r28, r16
- 568:	d1 1f       	adc	r29, r17
+ 1b4:	20 97       	sbiw	r28, 0x00	; 0
+ 1b6:	a9 f0       	breq	.+42     	; 0x1e2 <i2c_master_send+0x44>
+ 1b8:	f8 01       	movw	r30, r16
+ 1ba:	c0 0f       	add	r28, r16
+ 1bc:	d1 1f       	adc	r29, r17
     // Load DATA into TWDR register.
     TWDR = data;
 
     // clear TWINT bit in TWCR to
     // start transmission of data
     TWCR = _BV(TWINT) | _BV(TWEN);
- 56a:	24 e8       	ldi	r18, 0x84	; 132
+ 1be:	24 e8       	ldi	r18, 0x84	; 132
         return status;
     // send bytes
     for (uint16_t i = 0; i < length; i++)
     {
         // write byte to i2c slave
         status = i2c_master_write(data[i]);
- 56c:	91 91       	ld	r25, Z+
+ 1c0:	91 91       	ld	r25, Z+
 uint8_t i2c_master_write(uint8_t data)
 {
     uint8_t twst;
 
     // Load DATA into TWDR register.
     TWDR = data;
- 56e:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 1c2:	90 93 bb 00 	sts	0x00BB, r25	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
 
     // clear TWINT bit in TWCR to
     // start transmission of data
     TWCR = _BV(TWINT) | _BV(TWEN);
- 572:	20 93 bc 00 	sts	0x00BC, r18	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 1c6:	20 93 bc 00 	sts	0x00BC, r18	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     // wait for end of transmission
     // Wait for TWINT flag set. This
     // indicates that the DATA has
     // been transmitted, and
     // ACK/NACK has been received.
     while (!(TWCR & _BV(TWINT)))
- 576:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 57a:	97 ff       	sbrs	r25, 7
- 57c:	fc cf       	rjmp	.-8      	; 0x576 <i2c_master_send+0x2c>
+ 1ca:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 1ce:	97 ff       	sbrs	r25, 7
+ 1d0:	fc cf       	rjmp	.-8      	; 0x1ca <i2c_master_send+0x2c>
 
     // Check value of TWI status
     // register. Mask prescaler bits. If
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
- 57e:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
- 582:	98 7f       	andi	r25, 0xF8	; 248
+ 1d2:	90 91 b9 00 	lds	r25, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 1d6:	98 7f       	andi	r25, 0xF8	; 248
     if (twst != TW_MT_DATA_ACK)
- 584:	98 32       	cpi	r25, 0x28	; 40
- 586:	59 f4       	brne	.+22     	; 0x59e <i2c_master_send+0x54>
+ 1d8:	98 32       	cpi	r25, 0x28	; 40
+ 1da:	59 f4       	brne	.+22     	; 0x1f2 <i2c_master_send+0x54>
     uint8_t status = i2c_master_start(address, I2C_WRITE);
     // check status for error
     if (status)
         return status;
     // send bytes
     for (uint16_t i = 0; i < length; i++)
- 588:	ec 17       	cp	r30, r28
- 58a:	fd 07       	cpc	r31, r29
- 58c:	79 f7       	brne	.-34     	; 0x56c <i2c_master_send+0x22>
+ 1dc:	ec 17       	cp	r30, r28
+ 1de:	fd 07       	cpc	r31, r29
+ 1e0:	79 f7       	brne	.-34     	; 0x1c0 <i2c_master_send+0x22>
 function to send i2c stop
 */
 void i2c_master_stop(void)
 {
     // Transmit STOP condition
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWSTO);
- 58e:	94 e9       	ldi	r25, 0x94	; 148
- 590:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 1e2:	94 e9       	ldi	r25, 0x94	; 148
+ 1e4:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
         if (status)
             return status;
     } // send i2c stop
     i2c_master_stop();
     return I2C_STATUS_SUCCESS;
 }
- 594:	df 91       	pop	r29
- 596:	cf 91       	pop	r28
- 598:	1f 91       	pop	r17
- 59a:	0f 91       	pop	r16
- 59c:	08 95       	ret
+ 1e8:	df 91       	pop	r29
+ 1ea:	cf 91       	pop	r28
+ 1ec:	1f 91       	pop	r17
+ 1ee:	0f 91       	pop	r16
+ 1f0:	08 95       	ret
     // status different from
     // MT_DATA_ACK go to ERROR
     twst = TW_STATUS & I2C_PRESCALER_MASK;
     if (twst != TW_MT_DATA_ACK)
     {
         return I2C_STATUS_ERROR_WRITE_NOT_ACK;
- 59e:	85 e1       	ldi	r24, 0x15	; 21
+ 1f2:	85 e1       	ldi	r24, 0x15	; 21
         if (status)
             return status;
     } // send i2c stop
     i2c_master_stop();
     return I2C_STATUS_SUCCESS;
 }
- 5a0:	df 91       	pop	r29
- 5a2:	cf 91       	pop	r28
- 5a4:	1f 91       	pop	r17
- 5a6:	0f 91       	pop	r16
- 5a8:	08 95       	ret
+ 1f4:	df 91       	pop	r29
+ 1f6:	cf 91       	pop	r28
+ 1f8:	1f 91       	pop	r17
+ 1fa:	0f 91       	pop	r16
+ 1fc:	08 95       	ret
 
-000005aa <i2c_master_receive>:
+000001fe <i2c_master_receive>:
 
 /*
 function to receive n bytes via i2c
 */
 uint8_t i2c_master_receive(uint8_t address, uint8_t *data, uint16_t length)
 {
- 5aa:	0f 93       	push	r16
- 5ac:	1f 93       	push	r17
- 5ae:	cf 93       	push	r28
- 5b0:	df 93       	push	r29
- 5b2:	8b 01       	movw	r16, r22
- 5b4:	ea 01       	movw	r28, r20
+ 1fe:	0f 93       	push	r16
+ 200:	1f 93       	push	r17
+ 202:	cf 93       	push	r28
+ 204:	df 93       	push	r29
+ 206:	8b 01       	movw	r16, r22
+ 208:	ea 01       	movw	r28, r20
     // send i2c start
     uint8_t status = i2c_master_start(address, I2C_READ);
- 5b6:	61 e0       	ldi	r22, 0x01	; 1
- 5b8:	0e 94 30 02 	call	0x460	; 0x460 <i2c_master_start>
+ 20a:	61 e0       	ldi	r22, 0x01	; 1
+ 20c:	0e 94 5a 00 	call	0xb4	; 0xb4 <i2c_master_start>
     // check status for error
     if (status)
- 5bc:	81 11       	cpse	r24, r1
- 5be:	27 c0       	rjmp	.+78     	; 0x60e <i2c_master_receive+0x64>
+ 210:	81 11       	cpse	r24, r1
+ 212:	27 c0       	rjmp	.+78     	; 0x262 <i2c_master_receive+0x64>
         return status;
     // send bytes
     for (uint16_t i = 0; i < (length - 1); i++)
- 5c0:	be 01       	movw	r22, r28
- 5c2:	61 50       	subi	r22, 0x01	; 1
- 5c4:	71 09       	sbc	r23, r1
- 5c6:	a9 f0       	breq	.+42     	; 0x5f2 <i2c_master_receive+0x48>
- 5c8:	f8 01       	movw	r30, r16
- 5ca:	a8 01       	movw	r20, r16
- 5cc:	4c 0f       	add	r20, r28
- 5ce:	5d 1f       	adc	r21, r29
- 5d0:	41 50       	subi	r20, 0x01	; 1
- 5d2:	51 09       	sbc	r21, r1
+ 214:	be 01       	movw	r22, r28
+ 216:	61 50       	subi	r22, 0x01	; 1
+ 218:	71 09       	sbc	r23, r1
+ 21a:	a9 f0       	breq	.+42     	; 0x246 <i2c_master_receive+0x48>
+ 21c:	f8 01       	movw	r30, r16
+ 21e:	a8 01       	movw	r20, r16
+ 220:	4c 0f       	add	r20, r28
+ 222:	5d 1f       	adc	r21, r29
+ 224:	41 50       	subi	r20, 0x01	; 1
+ 226:	51 09       	sbc	r21, r1
 {
     // setup i2c bus to read
     // TWINT - reset TWI
     // TWEN - enable TWI
     // TWEA - TWI enable ACK
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWEA);
- 5d4:	24 ec       	ldi	r18, 0xC4	; 196
- 5d6:	20 93 bc 00 	sts	0x00BC, r18	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 228:	24 ec       	ldi	r18, 0xC4	; 196
+ 22a:	20 93 bc 00 	sts	0x00BC, r18	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // wait for end of transmission
     while (!(TWCR & _BV(TWINT)))
- 5da:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 5de:	97 ff       	sbrs	r25, 7
- 5e0:	fc cf       	rjmp	.-8      	; 0x5da <i2c_master_receive+0x30>
+ 22e:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 232:	97 ff       	sbrs	r25, 7
+ 234:	fc cf       	rjmp	.-8      	; 0x22e <i2c_master_receive+0x30>
         ;
 
     return TWDR;
- 5e2:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 236:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
         return status;
     // send bytes
     for (uint16_t i = 0; i < (length - 1); i++)
     {
         // read byte from i2c slave
         data[i] = i2c_master_read_ACK();
- 5e6:	91 93       	st	Z+, r25
+ 23a:	91 93       	st	Z+, r25
     uint8_t status = i2c_master_start(address, I2C_READ);
     // check status for error
     if (status)
         return status;
     // send bytes
     for (uint16_t i = 0; i < (length - 1); i++)
- 5e8:	e4 17       	cp	r30, r20
- 5ea:	f5 07       	cpc	r31, r21
- 5ec:	a1 f7       	brne	.-24     	; 0x5d6 <i2c_master_receive+0x2c>
- 5ee:	06 0f       	add	r16, r22
- 5f0:	17 1f       	adc	r17, r23
+ 23c:	e4 17       	cp	r30, r20
+ 23e:	f5 07       	cpc	r31, r21
+ 240:	a1 f7       	brne	.-24     	; 0x22a <i2c_master_receive+0x2c>
+ 242:	06 0f       	add	r16, r22
+ 244:	17 1f       	adc	r17, r23
 {
     // setup i2c bus to read
     // TWINT - reset TWI
     // TWEN - enable TWI
     // NACK
     TWCR = _BV(TWINT) | _BV(TWEN);
- 5f2:	94 e8       	ldi	r25, 0x84	; 132
- 5f4:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 246:	94 e8       	ldi	r25, 0x84	; 132
+ 248:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
 
     // wait for end of transmission
     while (!(TWCR & _BV(TWINT)))
- 5f8:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
- 5fc:	97 ff       	sbrs	r25, 7
- 5fe:	fc cf       	rjmp	.-8      	; 0x5f8 <i2c_master_receive+0x4e>
+ 24c:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 250:	97 ff       	sbrs	r25, 7
+ 252:	fc cf       	rjmp	.-8      	; 0x24c <i2c_master_receive+0x4e>
         ;
 
     return TWDR;
- 600:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 254:	90 91 bb 00 	lds	r25, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
     {
         // read byte from i2c slave
         data[i] = i2c_master_read_ACK();
     }
     // read the last byte then return NACK to slave
     data[length - 1] = i2c_master_read_NACK();
- 604:	f8 01       	movw	r30, r16
- 606:	90 83       	st	Z, r25
+ 258:	f8 01       	movw	r30, r16
+ 25a:	90 83       	st	Z, r25
 function to send i2c stop
 */
 void i2c_master_stop(void)
 {
     // Transmit STOP condition
     TWCR = _BV(TWINT) | _BV(TWEN) | _BV(TWSTO);
- 608:	94 e9       	ldi	r25, 0x94	; 148
- 60a:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+ 25c:	94 e9       	ldi	r25, 0x94	; 148
+ 25e:	90 93 bc 00 	sts	0x00BC, r25	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
     // read the last byte then return NACK to slave
     data[length - 1] = i2c_master_read_NACK();
     // send i2c stop
     i2c_master_stop();
     return I2C_STATUS_SUCCESS;
 }
- 60e:	df 91       	pop	r29
- 610:	cf 91       	pop	r28
- 612:	1f 91       	pop	r17
- 614:	0f 91       	pop	r16
- 616:	08 95       	ret
+ 262:	df 91       	pop	r29
+ 264:	cf 91       	pop	r28
+ 266:	1f 91       	pop	r17
+ 268:	0f 91       	pop	r16
+ 26a:	08 95       	ret
 
-00000618 <i2c_master_get_error_message>:
- 618:	87 31       	cpi	r24, 0x17	; 23
- 61a:	48 f4       	brcc	.+18     	; 0x62e <i2c_master_get_error_message+0x16>
- 61c:	e8 2f       	mov	r30, r24
- 61e:	f0 e0       	ldi	r31, 0x00	; 0
- 620:	ee 0f       	add	r30, r30
- 622:	ff 1f       	adc	r31, r31
- 624:	e0 50       	subi	r30, 0x00	; 0
- 626:	ff 4f       	sbci	r31, 0xFF	; 255
- 628:	80 81       	ld	r24, Z
- 62a:	91 81       	ldd	r25, Z+1	; 0x01
- 62c:	08 95       	ret
- 62e:	80 e5       	ldi	r24, 0x50	; 80
- 630:	91 e0       	ldi	r25, 0x01	; 1
- 632:	08 95       	ret
+0000026c <i2c_master_get_error_message>:
 
-00000634 <main>:
- 634:	cf 93       	push	r28
- 636:	df 93       	push	r29
- 638:	cd b7       	in	r28, 0x3d	; 61
- 63a:	de b7       	in	r29, 0x3e	; 62
- 63c:	67 97       	sbiw	r28, 0x17	; 23
- 63e:	0f b6       	in	r0, 0x3f	; 63
- 640:	f8 94       	cli
- 642:	de bf       	out	0x3e, r29	; 62
- 644:	0f be       	out	0x3f, r0	; 63
- 646:	cd bf       	out	0x3d, r28	; 61
- 648:	0e 94 29 02 	call	0x452	; 0x452 <ioinit>
- 64c:	80 e8       	ldi	r24, 0x80	; 128
- 64e:	9a e1       	ldi	r25, 0x1A	; 26
- 650:	0e 94 82 02 	call	0x504	; 0x504 <i2c_master_init>
- 654:	20 e0       	ldi	r18, 0x00	; 0
- 656:	42 e0       	ldi	r20, 0x02	; 2
- 658:	60 e1       	ldi	r22, 0x10	; 16
- 65a:	8f e3       	ldi	r24, 0x3F	; 63
- 65c:	0e 94 85 01 	call	0x30a	; 0x30a <LCD_init>
- 660:	29 8b       	std	Y+17, r18	; 0x11
- 662:	3a 8b       	std	Y+18, r19	; 0x12
- 664:	4b 8b       	std	Y+19, r20	; 0x13
- 666:	5c 8b       	std	Y+20, r21	; 0x14
- 668:	6d 8b       	std	Y+21, r22	; 0x15
- 66a:	7e 8b       	std	Y+22, r23	; 0x16
- 66c:	8f 8b       	std	Y+23, r24	; 0x17
- 66e:	2f ef       	ldi	r18, 0xFF	; 255
- 670:	83 ed       	ldi	r24, 0xD3	; 211
- 672:	90 e3       	ldi	r25, 0x30	; 48
- 674:	21 50       	subi	r18, 0x01	; 1
- 676:	80 40       	sbci	r24, 0x00	; 0
- 678:	90 40       	sbci	r25, 0x00	; 0
- 67a:	e1 f7       	brne	.-8      	; 0x674 <main+0x40>
- 67c:	00 c0       	rjmp	.+0      	; 0x67e <main+0x4a>
- 67e:	00 00       	nop
- 680:	40 e0       	ldi	r20, 0x00	; 0
- 682:	61 e0       	ldi	r22, 0x01	; 1
- 684:	ce 01       	movw	r24, r28
- 686:	41 96       	adiw	r24, 0x11	; 17
- 688:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 68c:	8f e3       	ldi	r24, 0x3F	; 63
- 68e:	9f e1       	ldi	r25, 0x1F	; 31
- 690:	01 97       	sbiw	r24, 0x01	; 1
- 692:	f1 f7       	brne	.-4      	; 0x690 <main+0x5c>
- 694:	00 c0       	rjmp	.+0      	; 0x696 <main+0x62>
+/*
+function to get status code (error codes) of the i2c bus
+*/
+const char *i2c_master_get_error_message(uint8_t errorCode)
+{
+ 26c:	87 31       	cpi	r24, 0x17	; 23
+ 26e:	48 f4       	brcc	.+18     	; 0x282 <i2c_master_get_error_message+0x16>
+ 270:	e8 2f       	mov	r30, r24
+ 272:	f0 e0       	ldi	r31, 0x00	; 0
+ 274:	ee 0f       	add	r30, r30
+ 276:	ff 1f       	adc	r31, r31
+ 278:	e0 50       	subi	r30, 0x00	; 0
+ 27a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 27c:	80 81       	ld	r24, Z
+ 27e:	91 81       	ldd	r25, Z+1	; 0x01
+ 280:	08 95       	ret
+ 282:	89 e5       	ldi	r24, 0x59	; 89
+ 284:	91 e0       	ldi	r25, 0x01	; 1
+    case I2C_STATUS_SUCCESS:
+        return "i2c ok.";
+    default:
+        return "Unknown i2c error code.";
+    }
+}
+ 286:	08 95       	ret
+
+00000288 <LCD_set_backlight>:
+*/
+void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
+{
+    if (bl == LCD_BACKLIGHT_ON)
+    {
+        device->backlight = LCD_BACKLIGHT_ON;
+ 288:	fc 01       	movw	r30, r24
+/*
+function to set backlight of LCD
+*/
+void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
+{
+    if (bl == LCD_BACKLIGHT_ON)
+ 28a:	68 30       	cpi	r22, 0x08	; 8
+ 28c:	31 f0       	breq	.+12     	; 0x29a <LCD_set_backlight+0x12>
+    {
+        device->backlight = LCD_BACKLIGHT_ON;
+    }
+    else
+    {
+        device->backlight = LCD_BACKLIGHT_OFF;
+ 28e:	13 82       	std	Z+3, r1	; 0x03
+ 290:	60 e0       	ldi	r22, 0x00	; 0
+function to transmit data to the LCD via i2c
+*/
+void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    // LCD backlight setting is preserved in the lowest function call.
+    i2c_master_send_byte(device->address, value | device->backlight);
+ 292:	fc 01       	movw	r30, r24
+ 294:	80 81       	ld	r24, Z
+ 296:	0c 94 b2 00 	jmp	0x164	; 0x164 <i2c_master_send_byte>
+*/
+void LCD_set_backlight(LiquidCrystalDevice_t *device, uint8_t bl)
+{
+    if (bl == LCD_BACKLIGHT_ON)
+    {
+        device->backlight = LCD_BACKLIGHT_ON;
+ 29a:	63 83       	std	Z+3, r22	; 0x03
+function to transmit data to the LCD via i2c
+*/
+void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    // LCD backlight setting is preserved in the lowest function call.
+    i2c_master_send_byte(device->address, value | device->backlight);
+ 29c:	fc 01       	movw	r30, r24
+ 29e:	80 81       	ld	r24, Z
+ 2a0:	0c 94 b2 00 	jmp	0x164	; 0x164 <i2c_master_send_byte>
+
+000002a4 <LCD_write_4bits>:
+/*
+function to write 4 bits of data to the LCD
+The LCD operates in 4-bit mode with the PCF8974.
+*/
+void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value)
+{
+ 2a4:	0f 93       	push	r16
+ 2a6:	1f 93       	push	r17
+ 2a8:	cf 93       	push	r28
+ 2aa:	8c 01       	movw	r16, r24
+ 2ac:	c6 2f       	mov	r28, r22
+function to transmit data to the LCD via i2c
+*/
+void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    // LCD backlight setting is preserved in the lowest function call.
+    i2c_master_send_byte(device->address, value | device->backlight);
+ 2ae:	fc 01       	movw	r30, r24
+ 2b0:	63 81       	ldd	r22, Z+3	; 0x03
+ 2b2:	6c 2b       	or	r22, r28
+ 2b4:	80 81       	ld	r24, Z
+ 2b6:	0e 94 b2 00 	call	0x164	; 0x164 <i2c_master_send_byte>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 2ba:	f2 e4       	ldi	r31, 0x42	; 66
+ 2bc:	fa 95       	dec	r31
+ 2be:	f1 f7       	brne	.-4      	; 0x2bc <LCD_write_4bits+0x18>
+ 2c0:	00 c0       	rjmp	.+0      	; 0x2c2 <LCD_write_4bits+0x1e>
+*/
+void LCD_write_4bits(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    LCD_transmitI2C(device, value);
+    _delay_us(200);
+    LCD_transmitI2C(device, value | LCD_E_PCF8974);
+ 2c2:	6c 2f       	mov	r22, r28
+ 2c4:	64 60       	ori	r22, 0x04	; 4
+function to transmit data to the LCD via i2c
+*/
+void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    // LCD backlight setting is preserved in the lowest function call.
+    i2c_master_send_byte(device->address, value | device->backlight);
+ 2c6:	f8 01       	movw	r30, r16
+ 2c8:	83 81       	ldd	r24, Z+3	; 0x03
+ 2ca:	68 2b       	or	r22, r24
+ 2cc:	80 81       	ld	r24, Z
+ 2ce:	0e 94 b2 00 	call	0x164	; 0x164 <i2c_master_send_byte>
+ 2d2:	f2 e4       	ldi	r31, 0x42	; 66
+ 2d4:	fa 95       	dec	r31
+ 2d6:	f1 f7       	brne	.-4      	; 0x2d4 <LCD_write_4bits+0x30>
+ 2d8:	00 c0       	rjmp	.+0      	; 0x2da <LCD_write_4bits+0x36>
+{
+    LCD_transmitI2C(device, value);
+    _delay_us(200);
+    LCD_transmitI2C(device, value | LCD_E_PCF8974);
+    _delay_us(200);
+    LCD_transmitI2C(device, value & ~LCD_E_PCF8974);
+ 2da:	cb 7f       	andi	r28, 0xFB	; 251
+function to transmit data to the LCD via i2c
+*/
+void LCD_transmitI2C(LiquidCrystalDevice_t *device, uint8_t value)
+{
+    // LCD backlight setting is preserved in the lowest function call.
+    i2c_master_send_byte(device->address, value | device->backlight);
+ 2dc:	f8 01       	movw	r30, r16
+ 2de:	63 81       	ldd	r22, Z+3	; 0x03
+ 2e0:	6c 2b       	or	r22, r28
+ 2e2:	80 81       	ld	r24, Z
+ 2e4:	0e 94 b2 00 	call	0x164	; 0x164 <i2c_master_send_byte>
+ 2e8:	f2 e4       	ldi	r31, 0x42	; 66
+ 2ea:	fa 95       	dec	r31
+ 2ec:	f1 f7       	brne	.-4      	; 0x2ea <LCD_write_4bits+0x46>
+ 2ee:	00 c0       	rjmp	.+0      	; 0x2f0 <LCD_write_4bits+0x4c>
+    _delay_us(200);
+    LCD_transmitI2C(device, value | LCD_E_PCF8974);
+    _delay_us(200);
+    LCD_transmitI2C(device, value & ~LCD_E_PCF8974);
+    _delay_us(200);
+}
+ 2f0:	cf 91       	pop	r28
+ 2f2:	1f 91       	pop	r17
+ 2f4:	0f 91       	pop	r16
+ 2f6:	08 95       	ret
+
+000002f8 <LCD_write_byte>:
+function to send byte to LCD
+PCF8574 to LCD pinout
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_write_byte(LiquidCrystalDevice_t *device, uint8_t value, uint8_t mode)
+{
+ 2f8:	0f 93       	push	r16
+ 2fa:	1f 93       	push	r17
+ 2fc:	cf 93       	push	r28
+ 2fe:	df 93       	push	r29
+ 300:	8c 01       	movw	r16, r24
+ 302:	d6 2f       	mov	r29, r22
+ 304:	c4 2f       	mov	r28, r20
+    uint8_t highnib = value & 0xf0;
+ 306:	60 7f       	andi	r22, 0xF0	; 240
+    uint8_t lownib = (value << 4) & 0xf0;
+
+    LCD_write_4bits(device, highnib | mode);
+ 308:	64 2b       	or	r22, r20
+ 30a:	0e 94 52 01 	call	0x2a4	; 0x2a4 <LCD_write_4bits>
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_write_byte(LiquidCrystalDevice_t *device, uint8_t value, uint8_t mode)
+{
+    uint8_t highnib = value & 0xf0;
+    uint8_t lownib = (value << 4) & 0xf0;
+ 30e:	80 e1       	ldi	r24, 0x10	; 16
+ 310:	d8 9f       	mul	r29, r24
+ 312:	b0 01       	movw	r22, r0
+ 314:	11 24       	eor	r1, r1
+
+    LCD_write_4bits(device, highnib | mode);
+    LCD_write_4bits(device, lownib | mode);
+ 316:	6c 2b       	or	r22, r28
+ 318:	c8 01       	movw	r24, r16
+}
+ 31a:	df 91       	pop	r29
+ 31c:	cf 91       	pop	r28
+ 31e:	1f 91       	pop	r17
+ 320:	0f 91       	pop	r16
+{
+    uint8_t highnib = value & 0xf0;
+    uint8_t lownib = (value << 4) & 0xf0;
+
+    LCD_write_4bits(device, highnib | mode);
+    LCD_write_4bits(device, lownib | mode);
+ 322:	0c 94 52 01 	jmp	0x2a4	; 0x2a4 <LCD_write_4bits>
+
+00000326 <LCD_send_command>:
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 326:	40 e0       	ldi	r20, 0x00	; 0
+ 328:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+0000032c <LCD_clear>:
+ 32c:	40 e0       	ldi	r20, 0x00	; 0
+ 32e:	61 e0       	ldi	r22, 0x01	; 1
+ 330:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 334:	83 ef       	ldi	r24, 0xF3	; 243
+ 336:	91 e0       	ldi	r25, 0x01	; 1
+ 338:	01 97       	sbiw	r24, 0x01	; 1
+ 33a:	f1 f7       	brne	.-4      	; 0x338 <LCD_clear+0xc>
+ 33c:	00 c0       	rjmp	.+0      	; 0x33e <LCD_clear+0x12>
+ 33e:	00 00       	nop
+*/
+void LCD_clear(LiquidCrystalDevice_t *device)
+{
+    LCD_send_command(device, LCD_CLEAR_DISPLAY);
+    _delay_us(2000);
+}
+ 340:	08 95       	ret
+
+00000342 <LCD_set_cursor>:
+
+/*
+function to set LCD cursor
+*/
+void LCD_set_cursor(LiquidCrystalDevice_t *device, uint8_t row, uint8_t column)
+{
+ 342:	cf 93       	push	r28
+ 344:	df 93       	push	r29
+ 346:	00 d0       	rcall	.+0      	; 0x348 <LCD_set_cursor+0x6>
+ 348:	00 d0       	rcall	.+0      	; 0x34a <LCD_set_cursor+0x8>
+ 34a:	cd b7       	in	r28, 0x3d	; 61
+ 34c:	de b7       	in	r29, 0x3e	; 62
+    // addresses of the start of each row on the HD44780
+    uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
+ 34e:	19 82       	std	Y+1, r1	; 0x01
+ 350:	20 e4       	ldi	r18, 0x40	; 64
+ 352:	2a 83       	std	Y+2, r18	; 0x02
+ 354:	24 e1       	ldi	r18, 0x14	; 20
+ 356:	2b 83       	std	Y+3, r18	; 0x03
+ 358:	24 e5       	ldi	r18, 0x54	; 84
+ 35a:	2c 83       	std	Y+4, r18	; 0x04
+    LCD_send_command(device, LCD_SETDDRAMADDR | (row_offsets[row] + column));
+ 35c:	fe 01       	movw	r30, r28
+ 35e:	e6 0f       	add	r30, r22
+ 360:	f1 1d       	adc	r31, r1
+ 362:	61 81       	ldd	r22, Z+1	; 0x01
+ 364:	64 0f       	add	r22, r20
+ 366:	60 68       	ori	r22, 0x80	; 128
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 368:	40 e0       	ldi	r20, 0x00	; 0
+void LCD_set_cursor(LiquidCrystalDevice_t *device, uint8_t row, uint8_t column)
+{
+    // addresses of the start of each row on the HD44780
+    uint8_t row_offsets[] = {0x00, 0x40, 0x14, 0x54};
+    LCD_send_command(device, LCD_SETDDRAMADDR | (row_offsets[row] + column));
+}
+ 36a:	0f 90       	pop	r0
+ 36c:	0f 90       	pop	r0
+ 36e:	0f 90       	pop	r0
+ 370:	0f 90       	pop	r0
+ 372:	df 91       	pop	r29
+ 374:	cf 91       	pop	r28
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 376:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+0000037a <LCD_return_home>:
+ 37a:	40 e0       	ldi	r20, 0x00	; 0
+ 37c:	62 e0       	ldi	r22, 0x02	; 2
+ 37e:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 382:	83 ef       	ldi	r24, 0xF3	; 243
+ 384:	91 e0       	ldi	r25, 0x01	; 1
+ 386:	01 97       	sbiw	r24, 0x01	; 1
+ 388:	f1 f7       	brne	.-4      	; 0x386 <LCD_return_home+0xc>
+ 38a:	00 c0       	rjmp	.+0      	; 0x38c <LCD_return_home+0x12>
+ 38c:	00 00       	nop
+*/
+void LCD_return_home(LiquidCrystalDevice_t *device)
+{
+    LCD_send_command(device, LCD_RETURN_HOME);
+    _delay_us(2000);
+}
+ 38e:	08 95       	ret
+
+00000390 <LCD_set_display_state>:
+
+/*
+function to set LCD display on/off
+*/
+void LCD_set_display_state(LiquidCrystalDevice_t *device, uint8_t displayState)
+{
+ 390:	fc 01       	movw	r30, r24
+ 392:	95 81       	ldd	r25, Z+5	; 0x05
+    if (displayState == LCD_DISPLAY_ON)
+ 394:	64 30       	cpi	r22, 0x04	; 4
+ 396:	41 f0       	breq	.+16     	; 0x3a8 <LCD_set_display_state+0x18>
+    {
+        device->displayControl |= LCD_DISPLAY_ON;
+    }
+    else
+    {
+        device->displayControl &= ~LCD_DISPLAY_ON;
+ 398:	69 2f       	mov	r22, r25
+ 39a:	6b 7f       	andi	r22, 0xFB	; 251
+ 39c:	65 83       	std	Z+5, r22	; 0x05
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 39e:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 3a0:	40 e0       	ldi	r20, 0x00	; 0
+ 3a2:	cf 01       	movw	r24, r30
+ 3a4:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+*/
+void LCD_set_display_state(LiquidCrystalDevice_t *device, uint8_t displayState)
+{
+    if (displayState == LCD_DISPLAY_ON)
+    {
+        device->displayControl |= LCD_DISPLAY_ON;
+ 3a8:	69 2f       	mov	r22, r25
+ 3aa:	64 60       	ori	r22, 0x04	; 4
+ 3ac:	65 83       	std	Z+5, r22	; 0x05
+    }
+    else
+    {
+        device->displayControl &= ~LCD_DISPLAY_ON;
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 3ae:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 3b0:	40 e0       	ldi	r20, 0x00	; 0
+ 3b2:	cf 01       	movw	r24, r30
+ 3b4:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+000003b8 <LCD_set_cursor_state>:
+
+/*
+function to set LCD cursor on/off
+*/
+void LCD_set_cursor_state(LiquidCrystalDevice_t *device, uint8_t cursor)
+{
+ 3b8:	fc 01       	movw	r30, r24
+ 3ba:	95 81       	ldd	r25, Z+5	; 0x05
+    if (cursor == LCD_CURSOR_ON)
+ 3bc:	62 30       	cpi	r22, 0x02	; 2
+ 3be:	41 f0       	breq	.+16     	; 0x3d0 <LCD_set_cursor_state+0x18>
+    {
+        device->displayControl |= LCD_CURSOR_ON;
+    }
+    else
+    {
+        device->displayControl &= ~LCD_CURSOR_ON;
+ 3c0:	69 2f       	mov	r22, r25
+ 3c2:	6d 7f       	andi	r22, 0xFD	; 253
+ 3c4:	65 83       	std	Z+5, r22	; 0x05
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 3c6:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 3c8:	40 e0       	ldi	r20, 0x00	; 0
+ 3ca:	cf 01       	movw	r24, r30
+ 3cc:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+*/
+void LCD_set_cursor_state(LiquidCrystalDevice_t *device, uint8_t cursor)
+{
+    if (cursor == LCD_CURSOR_ON)
+    {
+        device->displayControl |= LCD_CURSOR_ON;
+ 3d0:	69 2f       	mov	r22, r25
+ 3d2:	62 60       	ori	r22, 0x02	; 2
+ 3d4:	65 83       	std	Z+5, r22	; 0x05
+    }
+    else
+    {
+        device->displayControl &= ~LCD_CURSOR_ON;
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 3d6:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 3d8:	40 e0       	ldi	r20, 0x00	; 0
+ 3da:	cf 01       	movw	r24, r30
+ 3dc:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+000003e0 <LCD_set_cursor_blink>:
+
+/*
+function to set LCD cursor blink on/off
+*/
+void LCD_set_cursor_blink(LiquidCrystalDevice_t *device, uint8_t blink)
+{
+ 3e0:	fc 01       	movw	r30, r24
+ 3e2:	95 81       	ldd	r25, Z+5	; 0x05
+    if (blink == LCD_CURSOR_BLINK)
+ 3e4:	61 30       	cpi	r22, 0x01	; 1
+ 3e6:	41 f0       	breq	.+16     	; 0x3f8 <LCD_set_cursor_blink+0x18>
+    {
+        device->displayControl |= LCD_CURSOR_BLINK;
+    }
+    else
+    {
+        device->displayControl &= ~LCD_CURSOR_BLINK;
+ 3e8:	69 2f       	mov	r22, r25
+ 3ea:	6e 7f       	andi	r22, 0xFE	; 254
+ 3ec:	65 83       	std	Z+5, r22	; 0x05
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 3ee:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 3f0:	40 e0       	ldi	r20, 0x00	; 0
+ 3f2:	cf 01       	movw	r24, r30
+ 3f4:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+*/
+void LCD_set_cursor_blink(LiquidCrystalDevice_t *device, uint8_t blink)
+{
+    if (blink == LCD_CURSOR_BLINK)
+    {
+        device->displayControl |= LCD_CURSOR_BLINK;
+ 3f8:	69 2f       	mov	r22, r25
+ 3fa:	61 60       	ori	r22, 0x01	; 1
+ 3fc:	65 83       	std	Z+5, r22	; 0x05
+    }
+    else
+    {
+        device->displayControl &= ~LCD_CURSOR_BLINK;
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 3fe:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 400:	40 e0       	ldi	r20, 0x00	; 0
+ 402:	cf 01       	movw	r24, r30
+ 404:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+00000408 <LCD_scroll>:
+function to scroll LCD left/right
+direction is either LCD_SHIFT_LEFT or LCD_SHIFT_RIGHT.
+*/
+void LCD_scroll(LiquidCrystalDevice_t *device, uint8_t direction)
+{
+    LCD_send_command(device, LCD_CURSORSHIFT | LCD_DISPLAY_SHIFT | direction);
+ 408:	68 61       	ori	r22, 0x18	; 24
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 40a:	40 e0       	ldi	r20, 0x00	; 0
+ 40c:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+00000410 <LCD_set_scroll_dir>:
+
+/*
+function to set LCD scroll direction to either LTR or RTL
+*/
+void LCD_set_scroll_dir(LiquidCrystalDevice_t *device, uint8_t direction)
+{
+ 410:	fc 01       	movw	r30, r24
+ 412:	96 81       	ldd	r25, Z+6	; 0x06
+    if (direction == LCD_ENTRY_LEFT)
+ 414:	62 30       	cpi	r22, 0x02	; 2
+ 416:	41 f0       	breq	.+16     	; 0x428 <LCD_set_scroll_dir+0x18>
+    {
+        device->displayMode |= LCD_ENTRY_LEFT;
+    }
+    else
+    {
+        device->displayMode &= ~LCD_ENTRY_LEFT;
+ 418:	69 2f       	mov	r22, r25
+ 41a:	6d 7f       	andi	r22, 0xFD	; 253
+ 41c:	66 83       	std	Z+6, r22	; 0x06
+    }
+    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
+ 41e:	64 60       	ori	r22, 0x04	; 4
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 420:	40 e0       	ldi	r20, 0x00	; 0
+ 422:	cf 01       	movw	r24, r30
+ 424:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+*/
+void LCD_set_scroll_dir(LiquidCrystalDevice_t *device, uint8_t direction)
+{
+    if (direction == LCD_ENTRY_LEFT)
+    {
+        device->displayMode |= LCD_ENTRY_LEFT;
+ 428:	69 2f       	mov	r22, r25
+ 42a:	62 60       	ori	r22, 0x02	; 2
+ 42c:	66 83       	std	Z+6, r22	; 0x06
+    }
+    else
+    {
+        device->displayMode &= ~LCD_ENTRY_LEFT;
+    }
+    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
+ 42e:	64 60       	ori	r22, 0x04	; 4
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 430:	40 e0       	ldi	r20, 0x00	; 0
+ 432:	cf 01       	movw	r24, r30
+ 434:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+00000438 <LCD_set_autoscroll>:
+
+/*
+function to set LCD autoscroll on/off
+*/
+void LCD_set_autoscroll(LiquidCrystalDevice_t *device, uint8_t autoscroll)
+{
+ 438:	fc 01       	movw	r30, r24
+ 43a:	96 81       	ldd	r25, Z+6	; 0x06
+    if (autoscroll == LCD_ENTRY_SHIFT_INCREMENT)
+ 43c:	61 30       	cpi	r22, 0x01	; 1
+ 43e:	41 f0       	breq	.+16     	; 0x450 <LCD_set_autoscroll+0x18>
+    {
+        device->displayMode |= LCD_ENTRY_SHIFT_INCREMENT;
+    }
+    else
+    {
+        device->displayMode &= ~LCD_ENTRY_SHIFT_INCREMENT;
+ 440:	69 2f       	mov	r22, r25
+ 442:	6e 7f       	andi	r22, 0xFE	; 254
+ 444:	66 83       	std	Z+6, r22	; 0x06
+    }
+    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
+ 446:	64 60       	ori	r22, 0x04	; 4
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 448:	40 e0       	ldi	r20, 0x00	; 0
+ 44a:	cf 01       	movw	r24, r30
+ 44c:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+*/
+void LCD_set_autoscroll(LiquidCrystalDevice_t *device, uint8_t autoscroll)
+{
+    if (autoscroll == LCD_ENTRY_SHIFT_INCREMENT)
+    {
+        device->displayMode |= LCD_ENTRY_SHIFT_INCREMENT;
+ 450:	69 2f       	mov	r22, r25
+ 452:	61 60       	ori	r22, 0x01	; 1
+ 454:	66 83       	std	Z+6, r22	; 0x06
+    }
+    else
+    {
+        device->displayMode &= ~LCD_ENTRY_SHIFT_INCREMENT;
+    }
+    LCD_send_command(device, LCD_ENTRYMODESET | device->displayMode);
+ 456:	64 60       	ori	r22, 0x04	; 4
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 458:	40 e0       	ldi	r20, 0x00	; 0
+ 45a:	cf 01       	movw	r24, r30
+ 45c:	0c 94 7c 01 	jmp	0x2f8	; 0x2f8 <LCD_write_byte>
+
+00000460 <LCD_create_custom_char>:
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_create_custom_char(LiquidCrystalDevice_t *device,
+                            uint8_t slot,
+                            uint8_t charmap[8])
+{
+ 460:	ef 92       	push	r14
+ 462:	ff 92       	push	r15
+ 464:	0f 93       	push	r16
+ 466:	1f 93       	push	r17
+ 468:	cf 93       	push	r28
+ 46a:	df 93       	push	r29
+ 46c:	8c 01       	movw	r16, r24
+ 46e:	7a 01       	movw	r14, r20
+    uint8_t i = 0;
+    // only 8 locations for custom characters 0-7
+    slot &= 0x7;
+ 470:	67 70       	andi	r22, 0x07	; 7
+    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
+ 472:	66 0f       	add	r22, r22
+ 474:	66 0f       	add	r22, r22
+ 476:	66 0f       	add	r22, r22
+ 478:	60 64       	ori	r22, 0x40	; 64
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 47a:	40 e0       	ldi	r20, 0x00	; 0
+ 47c:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 480:	e7 01       	movw	r28, r14
+ 482:	88 e0       	ldi	r24, 0x08	; 8
+ 484:	e8 0e       	add	r14, r24
+ 486:	f1 1c       	adc	r15, r1
+    slot &= 0x7;
+    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
+
+    for (i = 0; i < 8; i++)
+    {
+        LCD_write_byte(device, charmap[i], LCD_RS_PCF8974);
+ 488:	69 91       	ld	r22, Y+
+ 48a:	41 e0       	ldi	r20, 0x01	; 1
+ 48c:	c8 01       	movw	r24, r16
+ 48e:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+    uint8_t i = 0;
+    // only 8 locations for custom characters 0-7
+    slot &= 0x7;
+    LCD_send_command(device, LCD_SETCGRAMADDR | (slot << 3));
+
+    for (i = 0; i < 8; i++)
+ 492:	ce 15       	cp	r28, r14
+ 494:	df 05       	cpc	r29, r15
+ 496:	c1 f7       	brne	.-16     	; 0x488 <LCD_create_custom_char+0x28>
+    {
+        LCD_write_byte(device, charmap[i], LCD_RS_PCF8974);
+    }
+}
+ 498:	df 91       	pop	r29
+ 49a:	cf 91       	pop	r28
+ 49c:	1f 91       	pop	r17
+ 49e:	0f 91       	pop	r16
+ 4a0:	ff 90       	pop	r15
+ 4a2:	ef 90       	pop	r14
+ 4a4:	08 95       	ret
+
+000004a6 <LCD_print>:
+
+/*
+function to write string to LCD
+*/
+void LCD_print(LiquidCrystalDevice_t *device, char *s)
+{
+ 4a6:	ef 92       	push	r14
+ 4a8:	ff 92       	push	r15
+ 4aa:	0f 93       	push	r16
+ 4ac:	1f 93       	push	r17
+ 4ae:	cf 93       	push	r28
+ 4b0:	fb 01       	movw	r30, r22
+    uint8_t i = 0;
+    while (s[i] != 0x00)
+ 4b2:	60 81       	ld	r22, Z
+ 4b4:	66 23       	and	r22, r22
+ 4b6:	71 f0       	breq	.+28     	; 0x4d4 <LCD_print+0x2e>
+ 4b8:	8f 01       	movw	r16, r30
+ 4ba:	7c 01       	movw	r14, r24
+/*
+function to write string to LCD
+*/
+void LCD_print(LiquidCrystalDevice_t *device, char *s)
+{
+    uint8_t i = 0;
+ 4bc:	c0 e0       	ldi	r28, 0x00	; 0
+    while (s[i] != 0x00)
+    {
+        LCD_write_byte(device, s[i], LCD_RS_PCF8974);
+ 4be:	41 e0       	ldi	r20, 0x01	; 1
+ 4c0:	c7 01       	movw	r24, r14
+ 4c2:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+        i++;
+ 4c6:	cf 5f       	subi	r28, 0xFF	; 255
+function to write string to LCD
+*/
+void LCD_print(LiquidCrystalDevice_t *device, char *s)
+{
+    uint8_t i = 0;
+    while (s[i] != 0x00)
+ 4c8:	f8 01       	movw	r30, r16
+ 4ca:	ec 0f       	add	r30, r28
+ 4cc:	f1 1d       	adc	r31, r1
+ 4ce:	60 81       	ld	r22, Z
+ 4d0:	61 11       	cpse	r22, r1
+ 4d2:	f5 cf       	rjmp	.-22     	; 0x4be <LCD_print+0x18>
+    {
+        LCD_write_byte(device, s[i], LCD_RS_PCF8974);
+        i++;
+    }
+}
+ 4d4:	cf 91       	pop	r28
+ 4d6:	1f 91       	pop	r17
+ 4d8:	0f 91       	pop	r16
+ 4da:	ff 90       	pop	r15
+ 4dc:	ef 90       	pop	r14
+ 4de:	08 95       	ret
+
+000004e0 <LCD_init>:
+*/
+LiquidCrystalDevice_t LCD_init(uint8_t address,
+                               uint8_t columns,
+                               uint8_t rows,
+                               uint8_t dotSize)
+{
+ 4e0:	cf 93       	push	r28
+ 4e2:	df 93       	push	r29
+ 4e4:	cd b7       	in	r28, 0x3d	; 61
+ 4e6:	de b7       	in	r29, 0x3e	; 62
+ 4e8:	2e 97       	sbiw	r28, 0x0e	; 14
+ 4ea:	0f b6       	in	r0, 0x3f	; 63
+ 4ec:	f8 94       	cli
+ 4ee:	de bf       	out	0x3e, r29	; 62
+ 4f0:	0f be       	out	0x3f, r0	; 63
+ 4f2:	cd bf       	out	0x3d, r28	; 61
+    LiquidCrystalDevice_t device;
+    device.address = address;
+ 4f4:	88 87       	std	Y+8, r24	; 0x08
+    device.columns = columns;
+ 4f6:	69 87       	std	Y+9, r22	; 0x09
+    device.rows = rows;
+ 4f8:	4a 87       	std	Y+10, r20	; 0x0a
+    // set display function to 4-bit mode, 1 line, and dotSize (either 5x8 or 5x10)
+    device.displayFunction = LCD_DATA_LENGTH_4BITS | LCD_DISPLAY_1LINE | dotSize;
+ 4fa:	2c 87       	std	Y+12, r18	; 0x0c
+    // set display control
+    device.displayControl = LCD_DISPLAY_ON | LCD_CURSOR_ON | LCD_CURSOR_NOBLINK;
+ 4fc:	86 e0       	ldi	r24, 0x06	; 6
+ 4fe:	8d 87       	std	Y+13, r24	; 0x0d
+    // set LCD display mode
+    // set display mode to default text direction (for Roman languages)
+    device.displayMode = LCD_ENTRY_SHIFT_DECREMENT | LCD_ENTRY_LEFT;
+ 500:	82 e0       	ldi	r24, 0x02	; 2
+ 502:	8e 87       	std	Y+14, r24	; 0x0e
+
+    /*
+    2 line display
+    */
+    if (rows > 1)
+ 504:	42 30       	cpi	r20, 0x02	; 2
+ 506:	08 f4       	brcc	.+2      	; 0x50a <LCD_init+0x2a>
+ 508:	77 c0       	rjmp	.+238    	; 0x5f8 <LCD_init+0x118>
+    {
+        device.displayFunction |= LCD_DISPLAY_2LINES;
+ 50a:	28 60       	ori	r18, 0x08	; 8
+ 50c:	2c 87       	std	Y+12, r18	; 0x0c
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 50e:	83 ed       	ldi	r24, 0xD3	; 211
+ 510:	90 e3       	ldi	r25, 0x30	; 48
+ 512:	01 97       	sbiw	r24, 0x01	; 1
+ 514:	f1 f7       	brne	.-4      	; 0x512 <LCD_init+0x32>
+ 516:	00 c0       	rjmp	.+0      	; 0x518 <LCD_init+0x38>
+ 518:	00 00       	nop
+
+    /*
+    commence initialization
+    */
+    _delay_ms(50);
+    LCD_write_4bits(&device, 0x03 << 4);
+ 51a:	60 e3       	ldi	r22, 0x30	; 48
+ 51c:	ce 01       	movw	r24, r28
+ 51e:	08 96       	adiw	r24, 0x08	; 8
+ 520:	0e 94 52 01 	call	0x2a4	; 0x2a4 <LCD_write_4bits>
+ 524:	81 ee       	ldi	r24, 0xE1	; 225
+ 526:	94 e0       	ldi	r25, 0x04	; 4
+ 528:	01 97       	sbiw	r24, 0x01	; 1
+ 52a:	f1 f7       	brne	.-4      	; 0x528 <LCD_init+0x48>
+ 52c:	00 c0       	rjmp	.+0      	; 0x52e <LCD_init+0x4e>
+ 52e:	00 00       	nop
+    _delay_ms(5);
+    LCD_write_4bits(&device, 0x03 << 4);
+ 530:	60 e3       	ldi	r22, 0x30	; 48
+ 532:	ce 01       	movw	r24, r28
+ 534:	08 96       	adiw	r24, 0x08	; 8
+ 536:	0e 94 52 01 	call	0x2a4	; 0x2a4 <LCD_write_4bits>
+ 53a:	81 ee       	ldi	r24, 0xE1	; 225
+ 53c:	94 e0       	ldi	r25, 0x04	; 4
+ 53e:	01 97       	sbiw	r24, 0x01	; 1
+ 540:	f1 f7       	brne	.-4      	; 0x53e <LCD_init+0x5e>
+ 542:	00 c0       	rjmp	.+0      	; 0x544 <LCD_init+0x64>
+ 544:	00 00       	nop
+    _delay_ms(5);
+    LCD_write_4bits(&device, 0x03 << 4);
+ 546:	60 e3       	ldi	r22, 0x30	; 48
+ 548:	ce 01       	movw	r24, r28
+ 54a:	08 96       	adiw	r24, 0x08	; 8
+ 54c:	0e 94 52 01 	call	0x2a4	; 0x2a4 <LCD_write_4bits>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 550:	92 e3       	ldi	r25, 0x32	; 50
+ 552:	9a 95       	dec	r25
+ 554:	f1 f7       	brne	.-4      	; 0x552 <LCD_init+0x72>
+    _delay_us(150);
+
+    LCD_write_4bits(&device, 0x02 << 4);
+ 556:	60 e2       	ldi	r22, 0x20	; 32
+ 558:	ce 01       	movw	r24, r28
+ 55a:	08 96       	adiw	r24, 0x08	; 8
+ 55c:	0e 94 52 01 	call	0x2a4	; 0x2a4 <LCD_write_4bits>
+ 560:	82 e3       	ldi	r24, 0x32	; 50
+ 562:	8a 95       	dec	r24
+ 564:	f1 f7       	brne	.-4      	; 0x562 <LCD_init+0x82>
+    _delay_us(150);
+    LCD_send_command(&device, LCD_FUNCTIONSET | device.displayFunction);
+ 566:	6c 85       	ldd	r22, Y+12	; 0x0c
+ 568:	60 62       	ori	r22, 0x20	; 32
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 56a:	40 e0       	ldi	r20, 0x00	; 0
+ 56c:	ce 01       	movw	r24, r28
+ 56e:	08 96       	adiw	r24, 0x08	; 8
+ 570:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+    {
+        device->displayControl |= LCD_DISPLAY_ON;
+    }
+    else
+    {
+        device->displayControl &= ~LCD_DISPLAY_ON;
+ 574:	6d 85       	ldd	r22, Y+13	; 0x0d
+ 576:	6b 7f       	andi	r22, 0xFB	; 251
+ 578:	6d 87       	std	Y+13, r22	; 0x0d
+    }
+    LCD_send_command(device, LCD_DISPLAYCONTROL | device->displayControl);
+ 57a:	68 60       	ori	r22, 0x08	; 8
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 57c:	40 e0       	ldi	r20, 0x00	; 0
+ 57e:	ce 01       	movw	r24, r28
+ 580:	08 96       	adiw	r24, 0x08	; 8
+ 582:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 586:	40 e0       	ldi	r20, 0x00	; 0
+ 588:	61 e0       	ldi	r22, 0x01	; 1
+ 58a:	ce 01       	movw	r24, r28
+ 58c:	08 96       	adiw	r24, 0x08	; 8
+ 58e:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 592:	83 ef       	ldi	r24, 0xF3	; 243
+ 594:	91 e0       	ldi	r25, 0x01	; 1
+ 596:	01 97       	sbiw	r24, 0x01	; 1
+ 598:	f1 f7       	brne	.-4      	; 0x596 <LCD_init+0xb6>
+ 59a:	00 c0       	rjmp	.+0      	; 0x59c <LCD_init+0xbc>
+ 59c:	00 00       	nop
+    _delay_us(150);
+    LCD_send_command(&device, LCD_FUNCTIONSET | device.displayFunction);
+
+    LCD_set_display_state(&device, LCD_DISPLAY_OFF);
+    LCD_clear(&device);
+    LCD_send_command(&device, LCD_ENTRYMODESET | device.displayMode);
+ 59e:	6e 85       	ldd	r22, Y+14	; 0x0e
+ 5a0:	64 60       	ori	r22, 0x04	; 4
+D7 D6 D5 D4 BL E RW RS
+*/
+void LCD_send_command(LiquidCrystalDevice_t *device, uint8_t command)
+{
+    // mode is 0 because when sending a command, RW is 0 and RS is 0.
+    LCD_write_byte(device, command, 0);
+ 5a2:	40 e0       	ldi	r20, 0x00	; 0
+ 5a4:	ce 01       	movw	r24, r28
+ 5a6:	08 96       	adiw	r24, 0x08	; 8
+ 5a8:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 5ac:	40 e0       	ldi	r20, 0x00	; 0
+ 5ae:	62 e0       	ldi	r22, 0x02	; 2
+ 5b0:	ce 01       	movw	r24, r28
+ 5b2:	08 96       	adiw	r24, 0x08	; 8
+ 5b4:	0e 94 7c 01 	call	0x2f8	; 0x2f8 <LCD_write_byte>
+ 5b8:	83 ef       	ldi	r24, 0xF3	; 243
+ 5ba:	91 e0       	ldi	r25, 0x01	; 1
+ 5bc:	01 97       	sbiw	r24, 0x01	; 1
+ 5be:	f1 f7       	brne	.-4      	; 0x5bc <LCD_init+0xdc>
+ 5c0:	00 c0       	rjmp	.+0      	; 0x5c2 <LCD_init+0xe2>
+ 5c2:	00 00       	nop
+
+    LCD_set_display_state(&device, LCD_DISPLAY_OFF);
+    LCD_clear(&device);
+    LCD_send_command(&device, LCD_ENTRYMODESET | device.displayMode);
+    LCD_return_home(&device);
+    return device;
+ 5c4:	87 e0       	ldi	r24, 0x07	; 7
+ 5c6:	fe 01       	movw	r30, r28
+ 5c8:	38 96       	adiw	r30, 0x08	; 8
+ 5ca:	de 01       	movw	r26, r28
+ 5cc:	11 96       	adiw	r26, 0x01	; 1
+ 5ce:	01 90       	ld	r0, Z+
+ 5d0:	0d 92       	st	X+, r0
+ 5d2:	8a 95       	dec	r24
+ 5d4:	e1 f7       	brne	.-8      	; 0x5ce <LCD_init+0xee>
+ 5d6:	29 81       	ldd	r18, Y+1	; 0x01
+ 5d8:	3a 81       	ldd	r19, Y+2	; 0x02
+ 5da:	4b 81       	ldd	r20, Y+3	; 0x03
+ 5dc:	5c 81       	ldd	r21, Y+4	; 0x04
+ 5de:	6d 81       	ldd	r22, Y+5	; 0x05
+ 5e0:	7e 81       	ldd	r23, Y+6	; 0x06
+}
+ 5e2:	8f 81       	ldd	r24, Y+7	; 0x07
+ 5e4:	90 e0       	ldi	r25, 0x00	; 0
+ 5e6:	2e 96       	adiw	r28, 0x0e	; 14
+ 5e8:	0f b6       	in	r0, 0x3f	; 63
+ 5ea:	f8 94       	cli
+ 5ec:	de bf       	out	0x3e, r29	; 62
+ 5ee:	0f be       	out	0x3f, r0	; 63
+ 5f0:	cd bf       	out	0x3d, r28	; 61
+ 5f2:	df 91       	pop	r29
+ 5f4:	cf 91       	pop	r28
+ 5f6:	08 95       	ret
+    }
+
+    /*
+    5x10 character font
+    */
+    if (dotSize > LCD_CHARACTER_FONT_5X8 && rows == 1)
+ 5f8:	22 23       	and	r18, r18
+ 5fa:	09 f4       	brne	.+2      	; 0x5fe <LCD_init+0x11e>
+ 5fc:	88 cf       	rjmp	.-240    	; 0x50e <LCD_init+0x2e>
+ 5fe:	41 30       	cpi	r20, 0x01	; 1
+ 600:	09 f0       	breq	.+2      	; 0x604 <LCD_init+0x124>
+ 602:	85 cf       	rjmp	.-246    	; 0x50e <LCD_init+0x2e>
+    {
+        device.displayFunction |= LCD_CHARACTER_FONT_5X10;
+ 604:	24 60       	ori	r18, 0x04	; 4
+ 606:	2c 87       	std	Y+12, r18	; 0x0c
+ 608:	82 cf       	rjmp	.-252    	; 0x50e <LCD_init+0x2e>
+
+0000060a <LCD_transmitI2C>:
+ 60a:	fc 01       	movw	r30, r24
+ 60c:	23 81       	ldd	r18, Z+3	; 0x03
+ 60e:	62 2b       	or	r22, r18
+ 610:	80 81       	ld	r24, Z
+ 612:	0c 94 b2 00 	jmp	0x164	; 0x164 <i2c_master_send_byte>
+
+00000616 <main>:
+
+int main(void)
+{
+ 616:	cf 93       	push	r28
+ 618:	df 93       	push	r29
+ 61a:	cd b7       	in	r28, 0x3d	; 61
+ 61c:	de b7       	in	r29, 0x3e	; 62
+ 61e:	67 97       	sbiw	r28, 0x17	; 23
+ 620:	0f b6       	in	r0, 0x3f	; 63
+ 622:	f8 94       	cli
+ 624:	de bf       	out	0x3e, r29	; 62
+ 626:	0f be       	out	0x3f, r0	; 63
+ 628:	cd bf       	out	0x3d, r28	; 61
+    ioinit();
+ 62a:	0e 94 53 00 	call	0xa6	; 0xa6 <ioinit>
+    char str[16];
+    i2c_master_init(I2C_SCL_FREQUENCY_400K);
+ 62e:	80 e8       	ldi	r24, 0x80	; 128
+ 630:	9a e1       	ldi	r25, 0x1A	; 26
+ 632:	0e 94 ac 00 	call	0x158	; 0x158 <i2c_master_init>
+    // i2c_master_send_byte(PCF8574_ADDR, 0x08);
+    // _delay_ms(5000);
+    // i2c_master_send_byte(PCF8574_ADDR, 0);
+    LiquidCrystalDevice_t lcd;
+    lcd = LCD_init(PCF8574_ADDR, 16, 2, LCD_CHARACTER_FONT_5X8);
+ 636:	20 e0       	ldi	r18, 0x00	; 0
+ 638:	42 e0       	ldi	r20, 0x02	; 2
+ 63a:	60 e1       	ldi	r22, 0x10	; 16
+ 63c:	8f e3       	ldi	r24, 0x3F	; 63
+ 63e:	0e 94 70 02 	call	0x4e0	; 0x4e0 <LCD_init>
+ 642:	29 8b       	std	Y+17, r18	; 0x11
+ 644:	3a 8b       	std	Y+18, r19	; 0x12
+ 646:	4b 8b       	std	Y+19, r20	; 0x13
+ 648:	5c 8b       	std	Y+20, r21	; 0x14
+ 64a:	6d 8b       	std	Y+21, r22	; 0x15
+ 64c:	7e 8b       	std	Y+22, r23	; 0x16
+ 64e:	8f 8b       	std	Y+23, r24	; 0x17
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 650:	2f ef       	ldi	r18, 0xFF	; 255
+ 652:	83 ed       	ldi	r24, 0xD3	; 211
+ 654:	90 e3       	ldi	r25, 0x30	; 48
+ 656:	21 50       	subi	r18, 0x01	; 1
+ 658:	80 40       	sbci	r24, 0x00	; 0
+ 65a:	90 40       	sbci	r25, 0x00	; 0
+ 65c:	e1 f7       	brne	.-8      	; 0x656 <main+0x40>
+ 65e:	00 c0       	rjmp	.+0      	; 0x660 <main+0x4a>
+ 660:	00 00       	nop
+    _delay_ms(1000);
+    LCD_clear(&lcd);
+ 662:	ce 01       	movw	r24, r28
+ 664:	41 96       	adiw	r24, 0x11	; 17
+ 666:	0e 94 96 01 	call	0x32c	; 0x32c <LCD_clear>
+ 66a:	2f ef       	ldi	r18, 0xFF	; 255
+ 66c:	89 e6       	ldi	r24, 0x69	; 105
+ 66e:	98 e1       	ldi	r25, 0x18	; 24
+ 670:	21 50       	subi	r18, 0x01	; 1
+ 672:	80 40       	sbci	r24, 0x00	; 0
+ 674:	90 40       	sbci	r25, 0x00	; 0
+ 676:	e1 f7       	brne	.-8      	; 0x670 <main+0x5a>
+ 678:	00 c0       	rjmp	.+0      	; 0x67a <main+0x64>
+ 67a:	00 00       	nop
+    _delay_ms(500);
+    LCD_set_backlight(&lcd, LCD_BACKLIGHT_OFF);
+ 67c:	60 e0       	ldi	r22, 0x00	; 0
+ 67e:	ce 01       	movw	r24, r28
+ 680:	41 96       	adiw	r24, 0x11	; 17
+ 682:	0e 94 44 01 	call	0x288	; 0x288 <LCD_set_backlight>
+ 686:	2f ef       	ldi	r18, 0xFF	; 255
+ 688:	89 e6       	ldi	r24, 0x69	; 105
+ 68a:	98 e1       	ldi	r25, 0x18	; 24
+ 68c:	21 50       	subi	r18, 0x01	; 1
+ 68e:	80 40       	sbci	r24, 0x00	; 0
+ 690:	90 40       	sbci	r25, 0x00	; 0
+ 692:	e1 f7       	brne	.-8      	; 0x68c <main+0x76>
+ 694:	00 c0       	rjmp	.+0      	; 0x696 <main+0x80>
  696:	00 00       	nop
- 698:	9f ef       	ldi	r25, 0xFF	; 255
- 69a:	29 e6       	ldi	r18, 0x69	; 105
- 69c:	88 e1       	ldi	r24, 0x18	; 24
- 69e:	91 50       	subi	r25, 0x01	; 1
- 6a0:	20 40       	sbci	r18, 0x00	; 0
- 6a2:	80 40       	sbci	r24, 0x00	; 0
- 6a4:	e1 f7       	brne	.-8      	; 0x69e <main+0x6a>
- 6a6:	00 c0       	rjmp	.+0      	; 0x6a8 <main+0x74>
- 6a8:	00 00       	nop
- 6aa:	1c 8a       	std	Y+20, r1	; 0x14
- 6ac:	60 e0       	ldi	r22, 0x00	; 0
- 6ae:	89 89       	ldd	r24, Y+17	; 0x11
- 6b0:	0e 94 88 02 	call	0x510	; 0x510 <i2c_master_send_byte>
- 6b4:	9f ef       	ldi	r25, 0xFF	; 255
- 6b6:	29 e6       	ldi	r18, 0x69	; 105
- 6b8:	88 e1       	ldi	r24, 0x18	; 24
- 6ba:	91 50       	subi	r25, 0x01	; 1
- 6bc:	20 40       	sbci	r18, 0x00	; 0
- 6be:	80 40       	sbci	r24, 0x00	; 0
- 6c0:	e1 f7       	brne	.-8      	; 0x6ba <main+0x86>
- 6c2:	00 c0       	rjmp	.+0      	; 0x6c4 <main+0x90>
- 6c4:	00 00       	nop
- 6c6:	88 e0       	ldi	r24, 0x08	; 8
- 6c8:	8c 8b       	std	Y+20, r24	; 0x14
- 6ca:	68 e0       	ldi	r22, 0x08	; 8
- 6cc:	89 89       	ldd	r24, Y+17	; 0x11
- 6ce:	0e 94 88 02 	call	0x510	; 0x510 <i2c_master_send_byte>
- 6d2:	9f ef       	ldi	r25, 0xFF	; 255
- 6d4:	29 e6       	ldi	r18, 0x69	; 105
- 6d6:	88 e1       	ldi	r24, 0x18	; 24
- 6d8:	91 50       	subi	r25, 0x01	; 1
- 6da:	20 40       	sbci	r18, 0x00	; 0
- 6dc:	80 40       	sbci	r24, 0x00	; 0
- 6de:	e1 f7       	brne	.-8      	; 0x6d8 <main+0xa4>
- 6e0:	00 c0       	rjmp	.+0      	; 0x6e2 <main+0xae>
- 6e2:	00 00       	nop
- 6e4:	6e 89       	ldd	r22, Y+22	; 0x16
- 6e6:	96 2f       	mov	r25, r22
- 6e8:	94 60       	ori	r25, 0x04	; 4
- 6ea:	9e 8b       	std	Y+22, r25	; 0x16
- 6ec:	6c 60       	ori	r22, 0x0C	; 12
- 6ee:	40 e0       	ldi	r20, 0x00	; 0
- 6f0:	ce 01       	movw	r24, r28
- 6f2:	41 96       	adiw	r24, 0x11	; 17
- 6f4:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 6f8:	40 e0       	ldi	r20, 0x00	; 0
- 6fa:	62 e0       	ldi	r22, 0x02	; 2
- 6fc:	ce 01       	movw	r24, r28
- 6fe:	41 96       	adiw	r24, 0x11	; 17
- 700:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 704:	8f e3       	ldi	r24, 0x3F	; 63
- 706:	9f e1       	ldi	r25, 0x1F	; 31
- 708:	01 97       	sbiw	r24, 0x01	; 1
- 70a:	f1 f7       	brne	.-4      	; 0x708 <main+0xd4>
- 70c:	00 c0       	rjmp	.+0      	; 0x70e <main+0xda>
- 70e:	00 00       	nop
- 710:	6e 89       	ldd	r22, Y+22	; 0x16
- 712:	96 2f       	mov	r25, r22
- 714:	92 60       	ori	r25, 0x02	; 2
- 716:	9e 8b       	std	Y+22, r25	; 0x16
- 718:	6a 60       	ori	r22, 0x0A	; 10
- 71a:	40 e0       	ldi	r20, 0x00	; 0
- 71c:	ce 01       	movw	r24, r28
- 71e:	41 96       	adiw	r24, 0x11	; 17
- 720:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 724:	6e 89       	ldd	r22, Y+22	; 0x16
- 726:	96 2f       	mov	r25, r22
- 728:	91 60       	ori	r25, 0x01	; 1
- 72a:	9e 8b       	std	Y+22, r25	; 0x16
- 72c:	69 60       	ori	r22, 0x09	; 9
- 72e:	40 e0       	ldi	r20, 0x00	; 0
- 730:	ce 01       	movw	r24, r28
- 732:	41 96       	adiw	r24, 0x11	; 17
- 734:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 738:	9f ef       	ldi	r25, 0xFF	; 255
- 73a:	29 e6       	ldi	r18, 0x69	; 105
- 73c:	88 e1       	ldi	r24, 0x18	; 24
- 73e:	91 50       	subi	r25, 0x01	; 1
- 740:	20 40       	sbci	r18, 0x00	; 0
- 742:	80 40       	sbci	r24, 0x00	; 0
- 744:	e1 f7       	brne	.-8      	; 0x73e <main+0x10a>
- 746:	00 c0       	rjmp	.+0      	; 0x748 <main+0x114>
- 748:	00 00       	nop
- 74a:	80 e1       	ldi	r24, 0x10	; 16
- 74c:	ee e2       	ldi	r30, 0x2E	; 46
- 74e:	f1 e0       	ldi	r31, 0x01	; 1
- 750:	de 01       	movw	r26, r28
- 752:	11 96       	adiw	r26, 0x01	; 1
- 754:	01 90       	ld	r0, Z+
- 756:	0d 92       	st	X+, r0
- 758:	8a 95       	dec	r24
- 75a:	e1 f7       	brne	.-8      	; 0x754 <main+0x120>
- 75c:	69 81       	ldd	r22, Y+1	; 0x01
- 75e:	66 23       	and	r22, r22
- 760:	81 f0       	breq	.+32     	; 0x782 <main+0x14e>
- 762:	10 e0       	ldi	r17, 0x00	; 0
- 764:	41 e0       	ldi	r20, 0x01	; 1
- 766:	ce 01       	movw	r24, r28
- 768:	41 96       	adiw	r24, 0x11	; 17
- 76a:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 76e:	1f 5f       	subi	r17, 0xFF	; 255
- 770:	e1 e0       	ldi	r30, 0x01	; 1
- 772:	f0 e0       	ldi	r31, 0x00	; 0
- 774:	ec 0f       	add	r30, r28
- 776:	fd 1f       	adc	r31, r29
- 778:	e1 0f       	add	r30, r17
- 77a:	f1 1d       	adc	r31, r1
- 77c:	60 81       	ld	r22, Z
- 77e:	61 11       	cpse	r22, r1
- 780:	f1 cf       	rjmp	.-30     	; 0x764 <main+0x130>
- 782:	9f ef       	ldi	r25, 0xFF	; 255
- 784:	29 e6       	ldi	r18, 0x69	; 105
- 786:	88 e1       	ldi	r24, 0x18	; 24
- 788:	91 50       	subi	r25, 0x01	; 1
- 78a:	20 40       	sbci	r18, 0x00	; 0
- 78c:	80 40       	sbci	r24, 0x00	; 0
- 78e:	e1 f7       	brne	.-8      	; 0x788 <main+0x154>
- 790:	00 c0       	rjmp	.+0      	; 0x792 <main+0x15e>
- 792:	00 00       	nop
- 794:	40 e0       	ldi	r20, 0x00	; 0
- 796:	60 ec       	ldi	r22, 0xC0	; 192
- 798:	ce 01       	movw	r24, r28
- 79a:	41 96       	adiw	r24, 0x11	; 17
- 79c:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 7a0:	80 e1       	ldi	r24, 0x10	; 16
- 7a2:	ef e3       	ldi	r30, 0x3F	; 63
- 7a4:	f1 e0       	ldi	r31, 0x01	; 1
- 7a6:	de 01       	movw	r26, r28
- 7a8:	11 96       	adiw	r26, 0x01	; 1
- 7aa:	01 90       	ld	r0, Z+
- 7ac:	0d 92       	st	X+, r0
- 7ae:	8a 95       	dec	r24
- 7b0:	e1 f7       	brne	.-8      	; 0x7aa <main+0x176>
- 7b2:	69 81       	ldd	r22, Y+1	; 0x01
- 7b4:	66 23       	and	r22, r22
- 7b6:	81 f0       	breq	.+32     	; 0x7d8 <main+0x1a4>
- 7b8:	10 e0       	ldi	r17, 0x00	; 0
- 7ba:	41 e0       	ldi	r20, 0x01	; 1
- 7bc:	ce 01       	movw	r24, r28
- 7be:	41 96       	adiw	r24, 0x11	; 17
- 7c0:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 7c4:	1f 5f       	subi	r17, 0xFF	; 255
- 7c6:	e1 e0       	ldi	r30, 0x01	; 1
- 7c8:	f0 e0       	ldi	r31, 0x00	; 0
- 7ca:	ec 0f       	add	r30, r28
- 7cc:	fd 1f       	adc	r31, r29
- 7ce:	e1 0f       	add	r30, r17
- 7d0:	f1 1d       	adc	r31, r1
- 7d2:	60 81       	ld	r22, Z
- 7d4:	61 11       	cpse	r22, r1
- 7d6:	f1 cf       	rjmp	.-30     	; 0x7ba <main+0x186>
- 7d8:	80 e1       	ldi	r24, 0x10	; 16
- 7da:	ee e2       	ldi	r30, 0x2E	; 46
- 7dc:	f1 e0       	ldi	r31, 0x01	; 1
- 7de:	de 01       	movw	r26, r28
- 7e0:	11 96       	adiw	r26, 0x01	; 1
- 7e2:	01 90       	ld	r0, Z+
- 7e4:	0d 92       	st	X+, r0
- 7e6:	8a 95       	dec	r24
- 7e8:	e1 f7       	brne	.-8      	; 0x7e2 <main+0x1ae>
- 7ea:	69 81       	ldd	r22, Y+1	; 0x01
- 7ec:	66 23       	and	r22, r22
- 7ee:	81 f0       	breq	.+32     	; 0x810 <__DATA_REGION_LENGTH__+0x10>
- 7f0:	10 e0       	ldi	r17, 0x00	; 0
- 7f2:	41 e0       	ldi	r20, 0x01	; 1
- 7f4:	ce 01       	movw	r24, r28
- 7f6:	41 96       	adiw	r24, 0x11	; 17
- 7f8:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 7fc:	1f 5f       	subi	r17, 0xFF	; 255
- 7fe:	e1 e0       	ldi	r30, 0x01	; 1
- 800:	f0 e0       	ldi	r31, 0x00	; 0
- 802:	ec 0f       	add	r30, r28
- 804:	fd 1f       	adc	r31, r29
- 806:	e1 0f       	add	r30, r17
- 808:	f1 1d       	adc	r31, r1
- 80a:	60 81       	ld	r22, Z
- 80c:	61 11       	cpse	r22, r1
- 80e:	f1 cf       	rjmp	.-30     	; 0x7f2 <main+0x1be>
- 810:	9f ef       	ldi	r25, 0xFF	; 255
- 812:	23 ed       	ldi	r18, 0xD3	; 211
- 814:	80 e3       	ldi	r24, 0x30	; 48
- 816:	91 50       	subi	r25, 0x01	; 1
- 818:	20 40       	sbci	r18, 0x00	; 0
- 81a:	80 40       	sbci	r24, 0x00	; 0
- 81c:	e1 f7       	brne	.-8      	; 0x816 <__DATA_REGION_LENGTH__+0x16>
- 81e:	00 c0       	rjmp	.+0      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
- 820:	00 00       	nop
- 822:	40 e0       	ldi	r20, 0x00	; 0
- 824:	60 ec       	ldi	r22, 0xC0	; 192
- 826:	ce 01       	movw	r24, r28
- 828:	41 96       	adiw	r24, 0x11	; 17
- 82a:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 82e:	80 e1       	ldi	r24, 0x10	; 16
- 830:	ef e3       	ldi	r30, 0x3F	; 63
- 832:	f1 e0       	ldi	r31, 0x01	; 1
- 834:	de 01       	movw	r26, r28
- 836:	11 96       	adiw	r26, 0x01	; 1
- 838:	01 90       	ld	r0, Z+
- 83a:	0d 92       	st	X+, r0
- 83c:	8a 95       	dec	r24
- 83e:	e1 f7       	brne	.-8      	; 0x838 <__DATA_REGION_LENGTH__+0x38>
- 840:	69 81       	ldd	r22, Y+1	; 0x01
- 842:	66 23       	and	r22, r22
- 844:	81 f0       	breq	.+32     	; 0x866 <__DATA_REGION_LENGTH__+0x66>
- 846:	10 e0       	ldi	r17, 0x00	; 0
- 848:	41 e0       	ldi	r20, 0x01	; 1
- 84a:	ce 01       	movw	r24, r28
- 84c:	41 96       	adiw	r24, 0x11	; 17
- 84e:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 852:	1f 5f       	subi	r17, 0xFF	; 255
- 854:	e1 e0       	ldi	r30, 0x01	; 1
- 856:	f0 e0       	ldi	r31, 0x00	; 0
- 858:	ec 0f       	add	r30, r28
- 85a:	fd 1f       	adc	r31, r29
- 85c:	e1 0f       	add	r30, r17
- 85e:	f1 1d       	adc	r31, r1
- 860:	60 81       	ld	r22, Z
- 862:	61 11       	cpse	r22, r1
- 864:	f1 cf       	rjmp	.-30     	; 0x848 <__DATA_REGION_LENGTH__+0x48>
- 866:	9f ef       	ldi	r25, 0xFF	; 255
- 868:	23 ed       	ldi	r18, 0xD3	; 211
- 86a:	80 e3       	ldi	r24, 0x30	; 48
- 86c:	91 50       	subi	r25, 0x01	; 1
- 86e:	20 40       	sbci	r18, 0x00	; 0
- 870:	80 40       	sbci	r24, 0x00	; 0
- 872:	e1 f7       	brne	.-8      	; 0x86c <__DATA_REGION_LENGTH__+0x6c>
- 874:	00 c0       	rjmp	.+0      	; 0x876 <__DATA_REGION_LENGTH__+0x76>
- 876:	00 00       	nop
- 878:	40 e0       	ldi	r20, 0x00	; 0
- 87a:	61 e0       	ldi	r22, 0x01	; 1
- 87c:	ce 01       	movw	r24, r28
- 87e:	41 96       	adiw	r24, 0x11	; 17
- 880:	0e 94 91 00 	call	0x122	; 0x122 <LCD_write_byte>
- 884:	8f e3       	ldi	r24, 0x3F	; 63
- 886:	9f e1       	ldi	r25, 0x1F	; 31
- 888:	01 97       	sbiw	r24, 0x01	; 1
- 88a:	f1 f7       	brne	.-4      	; 0x888 <__DATA_REGION_LENGTH__+0x88>
- 88c:	00 c0       	rjmp	.+0      	; 0x88e <__DATA_REGION_LENGTH__+0x8e>
- 88e:	00 00       	nop
- 890:	9f ef       	ldi	r25, 0xFF	; 255
- 892:	23 ed       	ldi	r18, 0xD3	; 211
- 894:	80 e3       	ldi	r24, 0x30	; 48
- 896:	91 50       	subi	r25, 0x01	; 1
- 898:	20 40       	sbci	r18, 0x00	; 0
- 89a:	80 40       	sbci	r24, 0x00	; 0
- 89c:	e1 f7       	brne	.-8      	; 0x896 <__DATA_REGION_LENGTH__+0x96>
- 89e:	00 c0       	rjmp	.+0      	; 0x8a0 <__DATA_REGION_LENGTH__+0xa0>
- 8a0:	00 00       	nop
- 8a2:	9a cf       	rjmp	.-204    	; 0x7d8 <main+0x1a4>
+    _delay_ms(500);
+    LCD_set_backlight(&lcd, LCD_BACKLIGHT_ON);
+ 698:	68 e0       	ldi	r22, 0x08	; 8
+ 69a:	ce 01       	movw	r24, r28
+ 69c:	41 96       	adiw	r24, 0x11	; 17
+ 69e:	0e 94 44 01 	call	0x288	; 0x288 <LCD_set_backlight>
+ 6a2:	2f ef       	ldi	r18, 0xFF	; 255
+ 6a4:	89 e6       	ldi	r24, 0x69	; 105
+ 6a6:	98 e1       	ldi	r25, 0x18	; 24
+ 6a8:	21 50       	subi	r18, 0x01	; 1
+ 6aa:	80 40       	sbci	r24, 0x00	; 0
+ 6ac:	90 40       	sbci	r25, 0x00	; 0
+ 6ae:	e1 f7       	brne	.-8      	; 0x6a8 <main+0x92>
+ 6b0:	00 c0       	rjmp	.+0      	; 0x6b2 <main+0x9c>
+ 6b2:	00 00       	nop
+    _delay_ms(500);
+    LCD_set_display_state(&lcd, LCD_DISPLAY_ON);
+ 6b4:	64 e0       	ldi	r22, 0x04	; 4
+ 6b6:	ce 01       	movw	r24, r28
+ 6b8:	41 96       	adiw	r24, 0x11	; 17
+ 6ba:	0e 94 c8 01 	call	0x390	; 0x390 <LCD_set_display_state>
 
-000008a4 <_exit>:
- 8a4:	f8 94       	cli
+    LCD_return_home(&lcd);
+ 6be:	ce 01       	movw	r24, r28
+ 6c0:	41 96       	adiw	r24, 0x11	; 17
+ 6c2:	0e 94 bd 01 	call	0x37a	; 0x37a <LCD_return_home>
+    LCD_set_cursor_state(&lcd, LCD_CURSOR_ON);
+ 6c6:	62 e0       	ldi	r22, 0x02	; 2
+ 6c8:	ce 01       	movw	r24, r28
+ 6ca:	41 96       	adiw	r24, 0x11	; 17
+ 6cc:	0e 94 dc 01 	call	0x3b8	; 0x3b8 <LCD_set_cursor_state>
+    LCD_set_cursor_blink(&lcd, LCD_CURSOR_BLINK);
+ 6d0:	61 e0       	ldi	r22, 0x01	; 1
+ 6d2:	ce 01       	movw	r24, r28
+ 6d4:	41 96       	adiw	r24, 0x11	; 17
+ 6d6:	0e 94 f0 01 	call	0x3e0	; 0x3e0 <LCD_set_cursor_blink>
+ 6da:	2f ef       	ldi	r18, 0xFF	; 255
+ 6dc:	89 e6       	ldi	r24, 0x69	; 105
+ 6de:	98 e1       	ldi	r25, 0x18	; 24
+ 6e0:	21 50       	subi	r18, 0x01	; 1
+ 6e2:	80 40       	sbci	r24, 0x00	; 0
+ 6e4:	90 40       	sbci	r25, 0x00	; 0
+ 6e6:	e1 f7       	brne	.-8      	; 0x6e0 <main+0xca>
+ 6e8:	00 c0       	rjmp	.+0      	; 0x6ea <main+0xd4>
+ 6ea:	00 00       	nop
+    _delay_ms(500);
+    strncpy(str, "Hello world i2c0", 16);
+ 6ec:	80 e1       	ldi	r24, 0x10	; 16
+ 6ee:	ee e2       	ldi	r30, 0x2E	; 46
+ 6f0:	f1 e0       	ldi	r31, 0x01	; 1
+ 6f2:	de 01       	movw	r26, r28
+ 6f4:	11 96       	adiw	r26, 0x01	; 1
+ 6f6:	01 90       	ld	r0, Z+
+ 6f8:	0d 92       	st	X+, r0
+ 6fa:	8a 95       	dec	r24
+ 6fc:	e1 f7       	brne	.-8      	; 0x6f6 <main+0xe0>
+    LCD_print(&lcd, str);
+ 6fe:	be 01       	movw	r22, r28
+ 700:	6f 5f       	subi	r22, 0xFF	; 255
+ 702:	7f 4f       	sbci	r23, 0xFF	; 255
+ 704:	ce 01       	movw	r24, r28
+ 706:	41 96       	adiw	r24, 0x11	; 17
+ 708:	0e 94 53 02 	call	0x4a6	; 0x4a6 <LCD_print>
+ 70c:	2f ef       	ldi	r18, 0xFF	; 255
+ 70e:	89 e6       	ldi	r24, 0x69	; 105
+ 710:	98 e1       	ldi	r25, 0x18	; 24
+ 712:	21 50       	subi	r18, 0x01	; 1
+ 714:	80 40       	sbci	r24, 0x00	; 0
+ 716:	90 40       	sbci	r25, 0x00	; 0
+ 718:	e1 f7       	brne	.-8      	; 0x712 <main+0xfc>
+ 71a:	00 c0       	rjmp	.+0      	; 0x71c <main+0x106>
+ 71c:	00 00       	nop
+    _delay_ms(500);
 
-000008a6 <__stop_program>:
- 8a6:	ff cf       	rjmp	.-2      	; 0x8a6 <__stop_program>
+    LCD_set_cursor(&lcd, 1, 0);
+ 71e:	40 e0       	ldi	r20, 0x00	; 0
+ 720:	61 e0       	ldi	r22, 0x01	; 1
+ 722:	ce 01       	movw	r24, r28
+ 724:	41 96       	adiw	r24, 0x11	; 17
+ 726:	0e 94 a1 01 	call	0x342	; 0x342 <LCD_set_cursor>
+    strncpy(str, "Hello world i2c1", 16);
+ 72a:	80 e1       	ldi	r24, 0x10	; 16
+ 72c:	ef e3       	ldi	r30, 0x3F	; 63
+ 72e:	f1 e0       	ldi	r31, 0x01	; 1
+ 730:	de 01       	movw	r26, r28
+ 732:	11 96       	adiw	r26, 0x01	; 1
+ 734:	01 90       	ld	r0, Z+
+ 736:	0d 92       	st	X+, r0
+ 738:	8a 95       	dec	r24
+ 73a:	e1 f7       	brne	.-8      	; 0x734 <main+0x11e>
+    LCD_print(&lcd, str);
+ 73c:	be 01       	movw	r22, r28
+ 73e:	6f 5f       	subi	r22, 0xFF	; 255
+ 740:	7f 4f       	sbci	r23, 0xFF	; 255
+ 742:	ce 01       	movw	r24, r28
+ 744:	41 96       	adiw	r24, 0x11	; 17
+ 746:	0e 94 53 02 	call	0x4a6	; 0x4a6 <LCD_print>
+    {
+        // LCD_set_backlight(&lcd, LCD_BACKLIGHT_OFF);
+        // _delay_ms(500);
+        // LCD_set_backlight(&lcd, LCD_BACKLIGHT_ON);
+        // _delay_ms(500);
+        strncpy(str, "LCD i2c0", 16);
+ 74a:	40 e1       	ldi	r20, 0x10	; 16
+ 74c:	50 e0       	ldi	r21, 0x00	; 0
+ 74e:	60 e5       	ldi	r22, 0x50	; 80
+ 750:	71 e0       	ldi	r23, 0x01	; 1
+ 752:	ce 01       	movw	r24, r28
+ 754:	01 96       	adiw	r24, 0x01	; 1
+ 756:	0e 94 ea 03 	call	0x7d4	; 0x7d4 <strncpy>
+        LCD_print(&lcd, str);
+ 75a:	be 01       	movw	r22, r28
+ 75c:	6f 5f       	subi	r22, 0xFF	; 255
+ 75e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 760:	ce 01       	movw	r24, r28
+ 762:	41 96       	adiw	r24, 0x11	; 17
+ 764:	0e 94 53 02 	call	0x4a6	; 0x4a6 <LCD_print>
+ 768:	2f ef       	ldi	r18, 0xFF	; 255
+ 76a:	83 ed       	ldi	r24, 0xD3	; 211
+ 76c:	90 e3       	ldi	r25, 0x30	; 48
+ 76e:	21 50       	subi	r18, 0x01	; 1
+ 770:	80 40       	sbci	r24, 0x00	; 0
+ 772:	90 40       	sbci	r25, 0x00	; 0
+ 774:	e1 f7       	brne	.-8      	; 0x76e <main+0x158>
+ 776:	00 c0       	rjmp	.+0      	; 0x778 <main+0x162>
+ 778:	00 00       	nop
+        _delay_ms(1000);
+
+        LCD_set_cursor(&lcd, 1, 0);
+ 77a:	40 e0       	ldi	r20, 0x00	; 0
+ 77c:	61 e0       	ldi	r22, 0x01	; 1
+ 77e:	ce 01       	movw	r24, r28
+ 780:	41 96       	adiw	r24, 0x11	; 17
+ 782:	0e 94 a1 01 	call	0x342	; 0x342 <LCD_set_cursor>
+        strncpy(str, "Hello world i2c1", 16);
+ 786:	80 e1       	ldi	r24, 0x10	; 16
+ 788:	ef e3       	ldi	r30, 0x3F	; 63
+ 78a:	f1 e0       	ldi	r31, 0x01	; 1
+ 78c:	de 01       	movw	r26, r28
+ 78e:	11 96       	adiw	r26, 0x01	; 1
+ 790:	01 90       	ld	r0, Z+
+ 792:	0d 92       	st	X+, r0
+ 794:	8a 95       	dec	r24
+ 796:	e1 f7       	brne	.-8      	; 0x790 <main+0x17a>
+        LCD_print(&lcd, str);
+ 798:	be 01       	movw	r22, r28
+ 79a:	6f 5f       	subi	r22, 0xFF	; 255
+ 79c:	7f 4f       	sbci	r23, 0xFF	; 255
+ 79e:	ce 01       	movw	r24, r28
+ 7a0:	41 96       	adiw	r24, 0x11	; 17
+ 7a2:	0e 94 53 02 	call	0x4a6	; 0x4a6 <LCD_print>
+ 7a6:	2f ef       	ldi	r18, 0xFF	; 255
+ 7a8:	83 ed       	ldi	r24, 0xD3	; 211
+ 7aa:	90 e3       	ldi	r25, 0x30	; 48
+ 7ac:	21 50       	subi	r18, 0x01	; 1
+ 7ae:	80 40       	sbci	r24, 0x00	; 0
+ 7b0:	90 40       	sbci	r25, 0x00	; 0
+ 7b2:	e1 f7       	brne	.-8      	; 0x7ac <main+0x196>
+ 7b4:	00 c0       	rjmp	.+0      	; 0x7b6 <main+0x1a0>
+ 7b6:	00 00       	nop
+        _delay_ms(1000);
+        LCD_clear(&lcd);
+ 7b8:	ce 01       	movw	r24, r28
+ 7ba:	41 96       	adiw	r24, 0x11	; 17
+ 7bc:	0e 94 96 01 	call	0x32c	; 0x32c <LCD_clear>
+ 7c0:	2f ef       	ldi	r18, 0xFF	; 255
+ 7c2:	83 ed       	ldi	r24, 0xD3	; 211
+ 7c4:	90 e3       	ldi	r25, 0x30	; 48
+ 7c6:	21 50       	subi	r18, 0x01	; 1
+ 7c8:	80 40       	sbci	r24, 0x00	; 0
+ 7ca:	90 40       	sbci	r25, 0x00	; 0
+ 7cc:	e1 f7       	brne	.-8      	; 0x7c6 <main+0x1b0>
+ 7ce:	00 c0       	rjmp	.+0      	; 0x7d0 <main+0x1ba>
+ 7d0:	00 00       	nop
+ 7d2:	bb cf       	rjmp	.-138    	; 0x74a <main+0x134>
+
+000007d4 <strncpy>:
+ 7d4:	fb 01       	movw	r30, r22
+ 7d6:	dc 01       	movw	r26, r24
+ 7d8:	41 50       	subi	r20, 0x01	; 1
+ 7da:	50 40       	sbci	r21, 0x00	; 0
+ 7dc:	48 f0       	brcs	.+18     	; 0x7f0 <strncpy+0x1c>
+ 7de:	01 90       	ld	r0, Z+
+ 7e0:	0d 92       	st	X+, r0
+ 7e2:	00 20       	and	r0, r0
+ 7e4:	c9 f7       	brne	.-14     	; 0x7d8 <strncpy+0x4>
+ 7e6:	01 c0       	rjmp	.+2      	; 0x7ea <strncpy+0x16>
+ 7e8:	1d 92       	st	X+, r1
+ 7ea:	41 50       	subi	r20, 0x01	; 1
+ 7ec:	50 40       	sbci	r21, 0x00	; 0
+ 7ee:	e0 f7       	brcc	.-8      	; 0x7e8 <strncpy+0x14>
+ 7f0:	08 95       	ret
+
+000007f2 <_exit>:
+ 7f2:	f8 94       	cli
+
+000007f4 <__stop_program>:
+ 7f4:	ff cf       	rjmp	.-2      	; 0x7f4 <__stop_program>
