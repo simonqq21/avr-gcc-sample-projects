@@ -389,8 +389,8 @@ void timer0_setup(void)
     TCCR0A |= _BV(WGM01);
     // prescaler 64
     // 16000000/64 = 250000
-    TCCR0B |= _BV(CS02);
-    // TCCR0B |= _BV(CS01) | _BV(CS00);
+    // TCCR0B |= _BV(CS02);
+    TCCR0B |= _BV(CS01) | _BV(CS00);
     // 250000 / 1000 Hz - 1 = 249
     OCR0A = 249;
     // enable output compare interrupt 0A
@@ -417,10 +417,10 @@ int main(void)
 
     while (1)
     {
+        keypad_char = Keypad_getKeyISR();
         if (Keypad_keyPressedISR())
         {
             // keypad_char = 'X';
-            keypad_char = Keypad_getKeyISR();
             if (keypad_char != prev_keypad_char)
             {
                 prev_keypad_char = keypad_char;
@@ -431,7 +431,11 @@ int main(void)
         }
         else
         {
-            LCD_clear(&lcd);
+            if (keypad_char != prev_keypad_char)
+            {
+                prev_keypad_char = keypad_char;
+                LCD_clear(&lcd);
+            }
         }
     }
     return 0;
