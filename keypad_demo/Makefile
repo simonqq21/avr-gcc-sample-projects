@@ -71,8 +71,13 @@ OBJDUMP		= avr-objdump
 all: $(PRG).elf lst text eeprom
 $(PRG).elf: $(PRG).o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(MAKE) size
 # dependency:
 # demo.o: demo.c iocompat.h
+
+size: 
+	@echo 
+	@avr-size -C --mcu=atmega328p demo.elf
 
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak 

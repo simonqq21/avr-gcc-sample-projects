@@ -4,26 +4,17 @@
 #include "timelib.h"
 
 /*
-millis and micros values
+ISR overflow counter
+Volatile because it's modified in an ISR
 */
-volatile uint32_t _millis;
-volatile uint8_t _millis_fract;
-volatile uint32_t _micros;
-volatile uint32_t overflows;
+volatile uint32_t overflows = 0;
 
 /*
 timer0 ISR
 */
 ISR(TIMER0_OVF_vect)
 {
-    _millis++;
     overflows++;
-    _millis_fract += MILLIS_FRACT_INC;
-    if (_millis_fract >= MILLIS_FRACT_MAX)
-    {
-        _millis_fract -= MILLIS_FRACT_MAX;
-        _millis++;
-    }
 }
 
 /*
@@ -31,11 +22,7 @@ return millis value
 */
 uint32_t millis()
 {
-    uint32_t m;
-    cli();
-    m = _millis;
-    sei();
-    return m;
+    return micros() / 1000;
 }
 
 /*
@@ -44,20 +31,52 @@ return micros values
 uint32_t micros()
 {
     uint32_t m;
+    uint8_t t;
+
+    // save interrupt settings
+    uint8_t sreg = SREG;
+    // disable interrupts to prevent race condition
     cli();
-    m = overflows * 1024 + TCNT0 * 4;
-    sei();
-    // if (TIFR0 & _BV(TOV0) && TCNT0 < 50)
-    //     overflows += 1;
-    return m;
+
+    m = overflows;
+    t = TCNT0;
+
+    /*
+        If an overflow just happened but the ISR hasn't run yet,
+        manually account for it.
+        TOV0 in TIFR0 is set if overflow happened but ISR
+        hasn't run yet.
+        */
+    if (TIFR0 & _BV(TOV0) && (t < 255))
+    {
+        m++;
+    }
+
+    // restore interrupts
+    SREG = sreg;
+
+    /*
+    compute microseconds
+    overflows * 128 us + current ticks * 0.5 us
+    */
+    return (m << 7) + t >> 1;
 }
 
+/*
+Configure Timer 0
+*/
 void init_millis_timer()
 {
-    /*
-    Configure Timer 0
-    */
-    TCCR0A = _BV(WGM01) | _BV(WGM00);
-    TCCR0B = _BV(CS01) | _BV(CS00);
-    TIMSK0 = _BV(TOIE0);
+    // 1. Normal Mode (WGM01, WGM00, WGM02 all 0)
+    TCCR0A = 0x00;
+    TCCR0B = 0x00;
+
+    // 2. Enable Overflow Interrupt
+    TIMSK0 |= (1 << TOIE0);
+
+    // 3. Set Prescaler to 8 and Start
+    // 16MHz / 8 = 2MHz (0.5us per tick)
+    TCCR0B |= (1 << CS01);
+
+    sei();
 }

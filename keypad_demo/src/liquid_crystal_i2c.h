@@ -1,6 +1,8 @@
 #ifndef LIQUID_CRYSTAL_I2C_H
 #define LIQUID_CRYSTAL_I2C_H
-
+#ifndef F_CPU
+#define F_CPU 16000000
+#endif
 #include "i2c_master.h"
 #include <util/delay.h>
 
