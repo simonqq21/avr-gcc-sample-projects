@@ -42,27 +42,41 @@ unsigned debounceB(unsigned char sample)
 {
     unsigned char delta, changes;
 
-    // Set delta to changes from last sample
-    // sample is the raw input value
-    // debouncedBState is the stable, "debounced" value
+    /**
+     *     Set delta to changes from last sample
+     *     sample is the raw input value
+     *     debouncedBState is the stable, "debounced" value
+     */
     delta = sample ^ debouncedBState;
 
-    // Increment two byte counter
+    /**
+     * Increment two byte counter
+     */
     debounceB1 = debounceB1 ^ debounceB0;
     debounceB0 = ~debounceB0;
 
-    // reset any unchanged bits
-    // if delta[i] is 0, there is no difference between sample[i] and debouncedBState[i]
-    // if delta[i] is 1, there is a difference between the raw sample[i] and stable,
-    //      "debounced" debouncedBState[i]
+    /**
+     *     if delta[i] is 0, there is no difference between sample[i] and debouncedBState[i]
+     *     if delta[i] is 1, there is a difference between the raw sample[i] and stable,
+     *     debounceB0[i] is 0 if delta is 0
+     *     debounceB0[i] is unchanged if delta is 1
+     *
+     *     If no difference, reset 2 byte counter.
+     *     If there is a difference, 2 byte counter was incremented previously.
+     */
     debounceB0 &= delta;
     debounceB1 &= delta;
 
-    // update state & calculate returned change set
-    // check if the 2 bit counter has overflowed (counted up to 4) and delta is 1
+    /**
+     *     check if the 2 bit counter has overflowed (counted up to 4) and delta is 1
+     * if debounceB0 = 0 and debounceB1 = 0 and delta = 1, changes is 1.
+     *
+     */
     changes = ~(~delta | debounceB0 | debounceB1);
-    // update the debounced state;
-    // flip the debouncedBState[i] if changes[i] is 1
+    /**
+     *     update the debounced state;
+     *     flip the debouncedBState[i] if changes[i] is 1
+     */
     debouncedBState ^= changes;
 
     return changes;
@@ -101,10 +115,6 @@ debounceB1 = 1 & 1 = 1
 changes = ~(~1 | 0 | 1) = 0
 debouncedBState = 1 ^ 0 = 1
 return 0
-
-
-
-
 */
 
 // timer 0 overflow interrupt handler

@@ -12,19 +12,25 @@ uint8_t uart_rx_buff_head, uart_rx_buff_tail, uart_tx_buff_head, uart_tx_buff_ta
 uint8_t c;
 uint8_t newline;
 
-void init_uart(void)
+void init_uart(unsigned int ubrr)
 {
-    /*
-Configure UART
-*/
-    UCSR0A |= _BV(U2X0);
-    UCSR0B |= _BV(RXCIE0) | _BV(RXEN0) | _BV(TXEN0);
-    // UCSR0B |= ;
+    // set baud rate
+    UBRR0H = (unsigned char)(ubrr >> 8);
+    UBRR0L = (unsigned char)ubrr;
+    // UBRR0 = 207;
+    // double UART transmission speed
+    // UCSR0A |= _BV(U2X0);
+    // enable UART RX complete interrupt
+    // UCSR0B |= _BV(RXCIE0);
+    // enable UART receiver and transmitter
+    UCSR0B |= _BV(RXEN0) | _BV(TXEN0);
+    // 8-bit frame size
     UCSR0C |= _BV(UCSZ01) | _BV(UCSZ00);
-    UBRR0L = 207;
+    // 2 stop bits
+    UCSR0C |= (1 << USBS0);
 }
 
-void increment_circular(uint8_t *int_ptr, int limit)
+void inc_ring_buf_ptr(uint8_t *int_ptr, int limit)
 {
     if ((*int_ptr) >= limit - 1)
     {
@@ -36,7 +42,7 @@ void increment_circular(uint8_t *int_ptr, int limit)
     }
 }
 
-int get_circular_difference(uint8_t head, uint8_t tail, uint8_t limit)
+int get_ring_buf_head_tail_gap(uint8_t head, uint8_t tail, uint8_t limit)
 {
     // if buffer tail less than buffer size and buffer head less than buffer size,
     // difference is size - tail + head
@@ -46,50 +52,68 @@ int get_circular_difference(uint8_t head, uint8_t tail, uint8_t limit)
         return limit - tail + head;
 }
 
-void putchr(char c)
+void printchar(unsigned char c)
 {
-    while (!(UCSR0A & _BV(UDRE0)))
+    // Wait for empty transmit buffer
+    while (!(UCSR0A & (1 << UDRE0)))
     {
     }
+    // Put data into buffer, sends the data
     UDR0 = c;
 }
 
-void printstr(const char *s)
+void printstr(const char *s, unsigned int len)
 {
-    while (*s)
+    while (len >= 0)
     {
-        if (*s == '\n')
-            putchr('\r');
-        putchr(*s++);
+        printchar(*s++);
+
+        len--;
     }
 }
 
-// static void strcpytoTXbuff(char *str)
-// {
-// str
-// }
+char getchar_blocking(void)
+{
+    // Wait for data to be received
+    while (!(UCSR0A & _BV(RXC0)))
+        ;
+    // Get and return received data from buffer
+    return UDR0;
+}
 
+void getchar_ISR(void)
+{
+    // grab character from UDR0
+    c = UDR0;
+    // if no errors, append it to ring buffer.
+    if (UCSR0A & _BV(FE0))
+    {
+        uart_rx_buff[uart_rx_buff_head] = c;
+        if (c == '\n')
+        {
+            newline = 1;
+        }
+        inc_ring_buf_ptr(&uart_rx_buff_head, UART_BUFF_SIZE);
+    }
+}
+
+void read_rx_buffer(char *s, unsigned int *len)
+{
+    while (uart_rx_buff_tail != uart_rx_buff_head)
+    {
+        *s++ = uart_rx_buff[uart_rx_buff_tail];
+        inc_ring_buf_ptr(&uart_rx_buff_tail, UART_BUFF_SIZE);
+        (*len)++;
+    }
+}
+
+// unsigned char dummy;
+// while (UCSRnA & (1<<RXCn)) dummy = UDRn;
 void printstrfromTXbuff(void)
 {
     while (uart_tx_buff_tail != uart_tx_buff_head)
     {
-        putchr(uart_tx_buff[uart_tx_buff_tail]);
-        increment_circular(&uart_tx_buff_tail, UART_BUFF_SIZE);
-    }
-}
-
-ISR(USART_RX_vect)
-{
-    c = UDR0;
-
-    if (!(UCSR0A & _BV(FE0)))
-    {
-        intflags.rx_int = 1;
-        uart_rx_buff[uart_rx_buff_head] = c;
-        if (uart_rx_buff[uart_rx_buff_head] == '\n')
-        {
-            newline = 1;
-        }
-        increment_circular(&uart_rx_buff_head, UART_BUFF_SIZE);
+        printchar(uart_tx_buff[uart_tx_buff_tail]);
+        inc_ring_buf_ptr(&uart_tx_buff_tail, UART_BUFF_SIZE);
     }
 }

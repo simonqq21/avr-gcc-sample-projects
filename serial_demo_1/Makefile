@@ -59,7 +59,8 @@ AVRDUDE_TARGET = m328pb
 
 OPTIMIZE	   = -O2
 DEFS		   =
-LIBS		   =
+LIBS		   = gpio.c millis_micros.c 
+# 
 # You should not have to change anything below here.
 CC			 = avr-gcc
 # Override is only needed by avr-lib build system.
@@ -121,7 +122,7 @@ pdf: $(PRG).pdf
 	$(FIG2DEV) -L png $< $@
 
 flash: $(PRG).hex
-	avrdude -p $(AVRDUDE_TARGET) -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:$(PRG).hex -F
+	avrdude -p $(AVRDUDE_TARGET) -V -c arduino -P /dev/ttyACM0 -b19200 -U flash:w:$(PRG).hex -F
 # avrdude -p m328pb -c arduino -P /dev/ttyUSB0 -b19200 -U flash:w:digital_input.hex -F
 
 

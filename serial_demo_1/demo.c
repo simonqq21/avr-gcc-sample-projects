@@ -1,117 +1,110 @@
 #ifndef __AVR_ATmega328P__
 #define __AVR_ATmega328P__
 #endif
-#include <avr/io.h>
-#include <avr/sleep.h>
-#include <avr/interrupt.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+// #include <avr/io.h>
+// #include <avr/sleep.h>
+#include <util/delay.h>
+// #include <avr/interrupt.h
+#include "gpio.h"
+#include "millis_micros.h"
+// #include <stdint.h>
+// #include <stdlib.h>
+// #include <stdio.h>
+// #include <string.h>
 #include "uart.h"
 
-#define LED_PIN PD3
-#define LED_PORT PORTD
-#define LED_DDR DDRD
+#define BAUD_RATE 9600
+#define MYUBRR F_CPU / 16 / BAUD_RATE - 1
 
-#define F_CPU 16000000UL
+#define LED_PIN PB5
+#define LED_PORT PORTB
+#define LED_DDR DDRB
 
-uint8_t led_brightness;
+Pin led_pin;
 
-/*
-****************************************************************
-millis and micros code
-*/
-#define MILLIS_FRACT_INC 24 >> 3
-#define MILLIS_FRACT_MAX 1000 >> 3
+// uint8_t led_brightness;
 
-volatile uint32_t millis_val;
-volatile uint8_t millis_fract;
-volatile uint32_t micros_val;
-volatile uint16_t overflows;
+volatile uint32_t t_millis;
 
 char buff[60];
 
-ISR(TIMER0_OVF_vect)
+ISR(TIMER0_COMPA_vect)
 {
-    millis_val++;
-    overflows++;
-    millis_fract += MILLIS_FRACT_INC;
-    if (millis_fract >= MILLIS_FRACT_MAX)
-    {
-        millis_fract -= MILLIS_FRACT_MAX;
-        millis_val++;
-    }
+    millis_timer_ISR_loop();
 }
 
-uint32_t millis()
-{
-    return millis_val;
-}
-
-uint32_t micros()
-{
-    uint16_t cur_overflows = overflows;
-    if (TIFR0 & _BV(TOV0) && TCNT0 < 50)
-        cur_overflows += 1;
-    return cur_overflows * 1024 + TCNT0 * 4;
-}
+// ISR(USART_RX_vect)
+// {
+//     getchar_ISR();
+// }
 
 void ioinit(void)
 {
-    /*
-    Configure IO
-    */
-    LED_DDR |= _BV(LED_PIN);
+    led_pin.ddr = &LED_DDR;
+    led_pin.port = &LED_PORT;
+    led_pin.pin_num = LED_PIN;
+    gpio_set_pin_output(&led_pin);
 
-    /*
-    Configure timer0 and PWM
-    */
-    TCCR0A |= _BV(COM0A1);
-    TCCR0A |= _BV(WGM00);
-    TCCR0B |= _BV(CS01) | _BV(CS00);
-    TIMSK0 |= _BV(TOIE0);
-
-    TCCR2A |= _BV(COM2B1);
-    TCCR2A |= _BV(WGM20);
-    TCCR2B |= _BV(CS22);
-
-    init_uart();
-
-    sei();
+    // TCCR2A |= _BV(COM2B1);
+    // TCCR2A |= _BV(WGM20);
+    // TCCR2B |= _BV(CS22);
 }
 
 int main()
 {
     ioinit();
-    printstr("helloworldA");
-    led_brightness = 5;
+    init_uart(MYUBRR);
+    millis_timer_init();
+
+    // Put data into buffer, sends the data
+    // cli();
+    printchar('a');
+    printchar('b');
+
+    printchar('c');
+    printchar('d');
+    printchar(0);
+    // sei();
+    // // gpio_set_pin_low(&led_pin);
+    // printchar('a');
+    // printchar('b');
+
+    // char *str = "helloworldA";
+    // printstr(str, 3);
+    // led_brightness = 5;
 
     while (1)
     {
-
-        if (newline)
-        {
-            newline = 0;
-            while (uart_rx_buff_tail != uart_rx_buff_head)
-            {
-                // putchr('0');
-                uart_rx_string[uart_rx_string_i] = uart_rx_buff[uart_rx_buff_tail];
-                uart_rx_string_i++;
-                increment_circular(&uart_rx_buff_tail, UART_BUFF_SIZE);
-            }
-
-            // process the complete string
-            printstr("uart_rx_string: ");
-            printstr(uart_rx_string);
-
-            led_brightness = strtoul(uart_rx_string, NULL, 10);
-            uart_rx_string_i = 0;
-            putchr('\n');
-
-            snprintf(buff, 60, "millis = %lu, micros = %lu\n", millis(), micros());
-            printstr(buff);
-        }
-
-        OCR2B = led_brightness;
+        gpio_set_pin_high(&led_pin);
+        _delay_ms(500);
+        gpio_set_pin_low(&led_pin);
+        _delay_ms(500);
     }
+
+    // if (newline)
+    // {
+    // newline = 0;
+    // while (uart_rx_buff_tail != uart_rx_buff_head)
+    // {
+    //     // putchr('0');
+    //     uart_rx_string[uart_rx_string_i] = uart_rx_buff[uart_rx_buff_tail];
+    //     uart_rx_string_i++;
+    //     inc_ring_buf_ptr(&uart_rx_buff_tail, UART_BUFF_SIZE);
+    // }
+
+    // // process the complete string
+    // printstr("uart_rx_string: ");
+    // printstr(uart_rx_string);
+
+    // led_brightness = strtoul(uart_rx_string, NULL, 10);
+    // uart_rx_string_i = 0;
+    // printchar('\n');
+
+    // snprintf(buff, 60, "millis = %lu, micros = %lu\n", millis(), micros());
+    // printstr(buff);
+
+    // OCR2B = led_brightness;
 }

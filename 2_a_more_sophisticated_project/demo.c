@@ -293,7 +293,7 @@ ioinit(void)
  * is empty.
  */
 static void
-putchr(char c)
+printchar(char c)
 {
     /*
     UCSR0A - USART Control and Status Register n A
@@ -317,8 +317,8 @@ printstr(const char *s)
     while (*s)
     {
         if (*s == '\n')
-            putchr('\r');
-        putchr(*s++);
+            printchar('\r');
+        printchar(*s++);
     }
 }
 
@@ -337,8 +337,8 @@ printstr_p(const char *s)
     for (c = pgm_read_byte(s); c; ++s, c = pgm_read_byte(s))
     {
         if (c == '\n')
-            putchr('\r');
-        putchr(c);
+            printchar('\r');
+        printchar(c);
     }
 }
 
@@ -368,7 +368,7 @@ set_pwm(int16_t new)
         // itoa converts a number to a string.
         itoa(new, s, 10);
         printstr(s);
-        putchr(' ');
+        printchar(' ');
         // reset the timeout before writing the latest PWM value to the EEPROM.
         pwm_backup_tmr = EE_UPDATE_TIME;
     }
