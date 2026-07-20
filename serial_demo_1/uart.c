@@ -21,7 +21,7 @@ void init_uart(unsigned int ubrr)
     // double UART transmission speed
     // UCSR0A |= _BV(U2X0);
     // enable UART RX complete interrupt
-    // UCSR0B |= _BV(RXCIE0);
+    UCSR0B |= _BV(RXCIE0);
     // enable UART receiver and transmitter
     UCSR0B |= _BV(RXEN0) | _BV(TXEN0);
     // 8-bit frame size
@@ -64,7 +64,7 @@ void printchar(unsigned char c)
 
 void printstr(const char *s, unsigned int len)
 {
-    while (len >= 0)
+    while (len > 0)
     {
         printchar(*s++);
 

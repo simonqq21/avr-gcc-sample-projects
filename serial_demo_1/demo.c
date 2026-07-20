@@ -13,7 +13,7 @@
 // #include <stdint.h>
 // #include <stdlib.h>
 // #include <stdio.h>
-// #include <string.h>
+#include <string.h>
 #include "uart.h"
 
 #define BAUD_RATE 9600
@@ -23,7 +23,9 @@
 #define LED_PORT PORTB
 #define LED_DDR DDRB
 
-Pin led_pin;
+#define DEBUG_LED_PIN PB1
+
+Pin led_pin, debug_led_pin;
 
 // uint8_t led_brightness;
 
@@ -31,15 +33,21 @@ volatile uint32_t t_millis;
 
 char buff[60];
 
+ISR(BADISR_vect)
+{
+    // user code here
+    gpio_set_pin_high(&debug_led_pin);
+}
+
 ISR(TIMER0_COMPA_vect)
 {
     millis_timer_ISR_loop();
 }
 
-// ISR(USART_RX_vect)
-// {
-//     getchar_ISR();
-// }
+ISR(USART_RX_vect)
+{
+    getchar_ISR();
+}
 
 void ioinit(void)
 {
@@ -47,6 +55,11 @@ void ioinit(void)
     led_pin.port = &LED_PORT;
     led_pin.pin_num = LED_PIN;
     gpio_set_pin_output(&led_pin);
+    debug_led_pin.ddr = &LED_DDR;
+    debug_led_pin.port = &LED_PORT;
+    debug_led_pin.pin_num = DEBUG_LED_PIN;
+    gpio_set_pin_output(&debug_led_pin);
+    gpio_set_pin_low(&debug_led_pin);
 
     // TCCR2A |= _BV(COM2B1);
     // TCCR2A |= _BV(WGM20);
@@ -66,14 +79,11 @@ int main()
 
     printchar('c');
     printchar('d');
-    printchar(0);
+    printchar('\n');
     // sei();
-    // // gpio_set_pin_low(&led_pin);
-    // printchar('a');
-    // printchar('b');
 
-    // char *str = "helloworldA";
-    // printstr(str, 3);
+    char *str = "helloworldA";
+    printstr(str, strlen(str));
     // led_brightness = 5;
 
     while (1)
