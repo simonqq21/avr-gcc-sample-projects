@@ -32,6 +32,10 @@ Pin led_pin, debug_led_pin;
 volatile uint32_t t_millis;
 
 char buff[60];
+char *str;
+float temperature;
+char temperature_str[5];
+int brightness;
 
 ISR(BADISR_vect)
 {
@@ -82,14 +86,23 @@ int main()
     printchar('\n');
     // sei();
 
-    char *str = "helloworldA";
+    str = "helloworldA\n";
+    printstr(str, strlen(str));
+
+    brightness = 20;
+    snprintf(str, 30, "brightness = %d\n", brightness);
+    printstr(str, strlen(str));
+
+    temperature = 30.50;
+    dtostrf(temperature, 5, 2, temperature_str);
+    snprintf(str, 30, "temperature = %s\n", temperature_str);
     printstr(str, strlen(str));
     // led_brightness = 5;
 
     while (1)
     {
         gpio_set_pin_high(&led_pin);
-        _delay_ms(500);
+        _delay_ms(200);
         gpio_set_pin_low(&led_pin);
         _delay_ms(500);
     }
